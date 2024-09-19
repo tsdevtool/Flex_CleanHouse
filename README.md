@@ -2,7 +2,16 @@
 
 Flex Team created CleanHouse an android app for booking and scheduling house cleaning services
 
-#Code_Admin
+# Code_App
+
+Access: cd UngDungDatDichVuDonDep
+addLib:implementation(fileTree(mapOf(
+"dir" to <"src zalopay lib">,
+"include" to listOf("_.aar", "_.jar"),
+"exclude" to listOf("")
+)))
+
+# Code_Admin
 
 Access: cd admin
 Run: npm start
