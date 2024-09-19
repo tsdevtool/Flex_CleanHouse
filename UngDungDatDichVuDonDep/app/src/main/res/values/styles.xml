@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Theme for MapCustomerActivity -->
+    <style name="MapTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/mapPrimary</item>
+        <item name="colorPrimaryDark">@color/mapPrimaryDark</item>
+        <item name="colorAccent">@color/mapAccent</item>
+    </style>
+</resources>
