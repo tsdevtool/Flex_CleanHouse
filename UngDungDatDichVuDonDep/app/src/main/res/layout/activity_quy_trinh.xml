@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NhanVien.QuyTrinh"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:padding="10dp"
+    android:fitsSystemWindows="true">
+
+    <!-- Search Bar -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Nhập từ khóa hoặc nội dung cần tìm"
+        android:iconifiedByDefault="false"
+        android:background="@drawable/search_bar_background"
+        android:padding="8dp"
+        android:elevation="4dp"
+        android:layout_marginTop="20dp"/>
+
+    <!-- Horizontal Scrollable Row -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:scrollbars="none">
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
+
+            <!-- Single Row -->
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp">
+
+                <LinearLayout
+                    android:id="@+id/layoutQuyTrinh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginEnd="8dp">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_process" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Quy trình xử lý đơn"
+                        android:textColor="@color/blue"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:paddingTop="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutVi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginEnd="8dp">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_wallet" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thu nhập và Ví"
+                        android:textColor="@android:color/black"
+                        android:gravity="center"
+                        android:paddingTop="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutChinhSach"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginEnd="8dp">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/heart" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chính sách phúc lợi"
+                        android:textColor="@android:color/black"
+                        android:gravity="center"
+                        android:paddingTop="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutHoptac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginEnd="8dp">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/partnership" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hợp tác cùng ShopeeFood"
+                        android:textColor="@android:color/black"
+                        android:gravity="center"
+                        android:paddingTop="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutTaiKhoan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/account" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tài khoản và Ứng dụng"
+                        android:textColor="@android:color/black"
+                        android:gravity="center"
+                        android:paddingTop="8dp" />
+                </LinearLayout>
+
+            </TableRow>
+        </TableLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>
