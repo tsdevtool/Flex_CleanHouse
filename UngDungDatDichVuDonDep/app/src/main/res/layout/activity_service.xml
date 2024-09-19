@@ -1,0 +1,156 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white"
+    tools:context=".Customer.ServiceActivity">
+
+    <!-- Address Section -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerHorizontal="true"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/dropdownIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp"
+            android:src="@drawable/baseline_location_pin_24" />
+    </RelativeLayout>
+
+    <!-- Duration Section -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thời lượng"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingBottom="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vui lòng ước tính diện tích cần dọn dẹp và chọn phương án phù hợp."
+        android:textColor="#F44336"
+        android:textSize="14sp"
+        android:paddingBottom="16dp" />
+
+    <RadioGroup
+        android:id="@+id/durationRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radioTwoHours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:buttonTint="@color/black"
+            android:background="?attr/selectableItemBackground"
+            android:drawablePadding="8dp" />
+
+
+        <RadioButton
+            android:id="@+id/radioThreeHours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:buttonTint="@color/black"
+            android:background="?attr/selectableItemBackground"
+            android:drawablePadding="8dp" />
+
+        <RadioButton
+            android:id="@+id/radioFourHours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:buttonTint="@color/black"
+            android:background="?attr/selectableItemBackground"
+            android:drawablePadding="8dp" />
+        <RadioButton
+            android:id="@+id/radioFiveHours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:buttonTint="@color/black"
+            android:background="?attr/selectableItemBackground"
+            android:drawablePadding="8dp" />
+        <RadioButton
+            android:id="@+id/radioSixHours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:buttonTint="@color/black"
+            android:background="?attr/selectableItemBackground"
+            android:drawablePadding="8dp" />
+        <RadioButton
+            android:id="@+id/radioSevenHours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:buttonTint="@color/black"
+            android:background="?attr/selectableItemBackground"
+            android:drawablePadding="8dp" />
+    </RadioGroup>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#2196F3"
+        android:padding="16dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/txtMoney"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="216,000 VND/2h"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/nextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tiếp theo"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:background="@android:color/transparent" />
+    </LinearLayout>
+
+</LinearLayout>
