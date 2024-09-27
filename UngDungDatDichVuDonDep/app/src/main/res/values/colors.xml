@@ -7,4 +7,5 @@
     <color name="mapPrimaryDark">#01579B</color> <!-- Dark Blue -->
     <color name="mapAccent">#FFC107</color> <!-- Amber -->
     <color name="orange">#FFA500</color>
+    <color name="gray">#D3D3D3</color> <!-- Màu gray trung bình -->
 </resources>
