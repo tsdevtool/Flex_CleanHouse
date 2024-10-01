@@ -1,160 +1,219 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".RegisterActivity"
-    android:orientation="vertical"
-    android:padding="20dp"
-    android:gravity="center">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/img"/>
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/backgorund_login"
-        android:padding="20dp"
-        android:gravity="center">
+        android:padding="24dp"
+        android:gravity="center_horizontal">
 
+        <!-- Logo Image -->
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/img"
+            android:layout_marginTop="32dp" />
+
+        <!-- App Title -->
+
+        <!-- Subtitle -->
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/subtitleTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Create an Account"
-            android:textSize="26sp"
-            android:gravity="center"
-            android:textStyle="bold"
-            />
-
+            android:textSize="20sp"
+            android:textColor="@color/gray"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Full Name:"
+            android:text="FullName"
             android:textSize="20sp"
             android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             />
+
+        <!-- Full Name Input -->
         <EditText
             android:id="@+id/txtFullName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your Full Name"
+            android:layout_height="56dp"
+            android:hint="@string/enter_your_full_name"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:inputType="textPersonName" />
 
-            />
-
+        <!-- Username or Email Label -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email:"
+            android:text="@string/username_or_email"
             android:textSize="20sp"
             android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             />
+
+        <!-- Username or Email Input -->
         <EditText
             android:id="@+id/txtEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your Email"
+            android:layout_height="56dp"
+            android:hint="Enter your username or email"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:inputType="textEmailAddress" />
 
-            />
-
+        <!-- Password Label -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Password:"
+            android:text="@string/password"
             android:textSize="20sp"
             android:layout_marginTop="10dp"
-            />
-        <EditText
-            android:id="@+id/txtPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your Passwprd"
-            android:inputType="textPassword"
-
+            android:textColor="@color/black"
+            android:textStyle="bold"
             />
 
+        <!-- Password Input -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Remember Me"
-                android:layout_weight="1"
-                />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Forgot Password?"
-                />
+            <!-- Password Input -->
+            <EditText
+                android:id="@+id/txtPassword"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:hint="Enter your password"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:inputType="textPassword" />
+
+            <!-- Eye Icon for Show/Hide Password -->
+            <ImageView
+                android:id="@+id/togglePasswordVisibility"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:padding="16dp"
+                android:src="@drawable/eye"
+                android:contentDescription="Toggle Password Visibility" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:text="Register"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            />
-
+        <!-- Terms and Conditions -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="10dp">
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical">
+
+            <CheckBox
+                android:id="@+id/termsCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I accept and agree to the "
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terms of Use"
+                android:textColor="@color/blue"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Register Button -->
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Register"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/blue"
+            android:layout_marginTop="16dp" />
+
+        <!-- OR Divider -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp">
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight="1"
-                android:background="#777777" />
+                android:background="@color/gray" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="OR"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:textColor="#777777" />
+                android:textColor="@color/gray"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight="1"
-                android:background="#777777" />
+                android:background="@color/gray" />
         </LinearLayout>
 
-        <Button
-
-            android:layout_width="wrap_content"
+        <!-- Google Sign-Up Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SIGN IN WITH GOOGLE"
-            android:textColor="#6750A3"
-            android:backgroundTint="#E4E6EA"
-            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@drawable/google_button_background"
+            android:layout_marginTop="16dp"
+            android:padding="8dp">
 
-            />
+            <!-- Google Logo -->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/logogoogle"
+                android:layout_marginStart="50dp" />
 
+            <!-- Text "Sign up with Google" -->
+            <TextView
+                android:id="@+id/googleSignUpButtonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign up with Google"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="30dp" />
+        </LinearLayout>
 
+        <!-- Login Text -->
         <TextView
-            android:id="@+id/txtLogin"
+            android:id="@+id/txtlogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="You do have an account yet?  Sign in"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"/>
+            android:text="@string/login_text"
+            android:textSize="10sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp" />
 
     </LinearLayout>
-
-
-</LinearLayout>
+</ScrollView>
