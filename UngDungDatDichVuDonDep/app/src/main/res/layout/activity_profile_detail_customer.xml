@@ -5,52 +5,59 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E8F1F6"
+    android:background="#4EB6F0"
     tools:context=".Customer.ProfileDetailCustomer">
 
     <!-- Profile Section -->
+
+    <!-- Menu Section -->
+
+    <!-- Bottom Navigation Bar -->
+
     <LinearLayout
         android:id="@+id/profile_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="left"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:gravity="left"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/profile_image"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_gravity="left"
-            android:background="@drawable/circle_background"
-          />
+            android:background="@drawable/circle_background" />
 
         <TextView
             android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="USERNAME"
-            android:textSize="18sp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="USERNAME"
             android:textColor="#333"
-            android:gravity="center"/>
+            android:textSize="18sp" />
     </LinearLayout>
 
-    <!-- Menu Section -->
     <LinearLayout
         android:id="@+id/menu_section"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
         android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/profile_section"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/navigation_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/navigation_bar">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_section"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -95,13 +102,15 @@
                 android:layout_marginStart="16dp"
                 android:text="bRewards"
                 android:textSize="16sp" />
+
             <ImageView
 
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/angleright"
-                android:layout_marginStart="200dp"/>
+                android:layout_marginStart="200dp"
+                android:src="@drawable/angleright" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -119,12 +128,14 @@
                 android:layout_marginStart="16dp"
                 android:text="Gói ưu đãi"
                 android:textSize="16sp" />
+
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="200dp"
-                android:src="@drawable/angleright"/>
+                android:src="@drawable/angleright" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -142,12 +153,14 @@
                 android:layout_marginStart="16dp"
                 android:text="Tasker yêu thích"
                 android:textSize="16sp" />
+
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="155dp"
-                android:src="@drawable/angleright"/>
+                android:src="@drawable/angleright" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -165,12 +178,14 @@
                 android:layout_marginStart="16dp"
                 android:text="Danh sách chặn"
                 android:textSize="16sp" />
+
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="160dp"
-                android:src="@drawable/angleright"/>
+                android:src="@drawable/angleright" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -188,12 +203,14 @@
                 android:layout_marginStart="16dp"
                 android:text="Hỗ trợ"
                 android:textSize="16sp" />
+
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="230dp"
-                android:src="@drawable/angleright"/>
+                android:src="@drawable/angleright" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -211,12 +228,14 @@
                 android:layout_marginStart="16dp"
                 android:text="Săn quà giới thiệu"
                 android:textSize="16sp" />
+
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="150dp"
-                android:src="@drawable/angleright"/>
+                android:src="@drawable/angleright" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -234,17 +253,17 @@
                 android:layout_marginStart="16dp"
                 android:text="Cài đặt"
                 android:textSize="16sp" />
+
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="230dp"
-                android:src="@drawable/angleright"/>
+                android:src="@drawable/angleright" />
         </LinearLayout>
 
 
     </LinearLayout>
 
-    <!-- Bottom Navigation Bar -->
     <LinearLayout
         android:id="@+id/navigation_bar"
         android:layout_width="match_parent"
