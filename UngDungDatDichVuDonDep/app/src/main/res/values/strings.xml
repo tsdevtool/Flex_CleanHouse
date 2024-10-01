@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">HappyHomes</string>
+    <string name="my_map_api_key">AIzaSyCMigCPqQ1wFomyAnYHGO7AismR7Ym9_WI</string>
+    <string name="x_c_nh_n">Xác nhận</string>
+    <string name="ch_o_m_ng_tr_l_i">Chào mừng trở lại</string>
+    <string name="email">Email:</string>
+    <string name="nh_p_email_c_a_b_n">Nhập Email của bạn</string>
+    <string name="m_t_kh_u">Mật khẩu:</string>
+    <string name="nh_p_m_t_kh_u_c_a_b_n">Nhập mật khẩu của bạn</string>
+    <string name="ghi_nh">Ghi nhớ</string>
+    <string name="qu_n_m_t_kh_u">Quên mật khẩu?</string>
+    <string name="ng_nh_p">ĐĂNG NHẬP</string>
+    <string name="ho_c">HOẶC</string>
+    <string name="ng_nh_p_v_i_google">ĐĂNG NHẬP VỚI GOOGLE</string>
+    <string name="b_n_ch_a_c_t_i_kho_n_ng_k">Bạn chưa có tài khoản? Đăng ký</string>
+    <string name="ti_p_theo">Tiếp theo</string>
+    <string name="b_n_c_y_u_c_u_g_th_m_h_y_nh_p_y_nh">Bạn có yêu cầu gì thêm, hãy nhập ở đây nhé</string>
+    <string name="ghi_ch_n_y_s_gi_p_tasker_l_m_nhanh_v_t_t_h_n">Ghi chú này sẽ giúp Tasker làm nhanh và tốt hơn.</string>
+    <string name="ghi_ch_cho_tasker">Ghi chú cho Tasker</string>
+    <string name="ch_n_gi_l_m">Chọn giờ làm</string>
+    <string name="ch_n_ng_y">CHỌN NGÀY</string>
+    <string name="ng_y_ch_n">Ngày đã chọn:</string>
+    <string name="th_i_gian_l_m_vi_c">Thời gian làm việc</string>
+    <string name="ch_n_th_i_gian_l_m_vi_c">Chọn thời gian làm việc</string>
+    <string name="ng_vi_c">Đăng việc</string>
+    <string name="ti_n_m_t">Tiền mặt</string>
+    <string name="ph_ng_th_c_thanh_to_n">Phương thức thanh toán</string>
+    <string name="ghi_ch">Ghi chú</string>
+    <string name="ng_y_l_m_vi_c_th_hai_12_08_2024_14_00">Ngày làm việc: thứ hai, 12/08/2024 - 14:00</string>
+    <string name="th_ng_tin_c_ng_vi_c">Thông tin công việc</string>
+    <string name="v_tr_l_m_vi_c">Vị trí làm việc</string>
+    <string name="x_c_nh_n_v_thanh_to_n">Xác nhận và thanh toán</string>
+</resources>

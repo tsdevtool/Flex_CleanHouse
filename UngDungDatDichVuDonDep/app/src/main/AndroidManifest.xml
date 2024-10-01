@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/icons_clean"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.HappyHomes"
+        tools:targetApi="31">
+        <activity
+            android:name=".NhanVien.ScheduleDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NhanVien.ScheduleAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".NhanVien.ScheduleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NhanVien.LichSuCongViecActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Customer.ProfileCustomerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Customer.payContificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NhanVien.HoSoNVActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NhanVien.HoTroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NhanVien.QuyTrinh"
+            android:exported="false" />
+        <activity
+            android:name=".NhanVien.HopTac"
+            android:exported="false" />
+        <activity
+            android:name=".NhanVien.ChinhSach"
+            android:exported="false" />
+        <activity
+            android:name=".NhanVien.ThuNhap"
+            android:exported="false" />
+        <activity
+            android:name=".NhanVien.TaiKhoan"
+            android:exported="false" />
+        <activity
+            android:name=".Customer.PayAndConfirmActivity"
+            android:exported="true"
+            android:label="Merchant Demo"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="app"
+                    android:scheme="demozpdk" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".NhanVien.NhanVienActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NhanVien.bottom_dialog"
+            android:exported="false" />
+        <activity
+            android:name=".Customer.Main_CustomerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Customer.ServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Customer.SelectTimeCustomerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Customer.MapCustomerActivity"
+            android:exported="false"
+            android:theme="@style/MapTheme" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/my_map_api_key" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+
+</manifest>

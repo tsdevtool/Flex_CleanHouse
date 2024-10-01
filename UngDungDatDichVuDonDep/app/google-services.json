@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "955476236687",
+    "firebase_url": "https://flexcleanhouse-default-rtdb.firebaseio.com",
+    "project_id": "flexcleanhouse",
+    "storage_bucket": "flexcleanhouse.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955476236687:android:c67ece04bd23b2ab2313fa",
+        "android_client_info": {
+          "package_name": "com.example.happyhomes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1Gj3hYxIcXLjvB38bNnJ-Qe76ICwk9zg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
