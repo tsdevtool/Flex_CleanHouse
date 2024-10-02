@@ -8,8 +8,6 @@
     android:background="@drawable/backgound"
     tools:context=".Customer.PayAndConfirmActivity">
 
-
-
     <!-- Back Button -->
     <ImageView
         android:id="@+id/ivBack"
@@ -20,8 +18,7 @@
         android:src="@drawable/backicon"
         android:contentDescription="Back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-         />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Header Title -->
     <TextView
@@ -32,9 +29,9 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
+        android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@id/ivBack"
-        app:layout_constraintTop_toTopOf="@id/ivBack"
-        android:layout_marginStart="16dp" />
+        app:layout_constraintTop_toTopOf="@id/ivBack" />
 
     <!-- Work Location Section -->
     <TextView
@@ -85,13 +82,13 @@
                 android:textColor="@android:color/black" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="20dp"
-            >
+            android:layout_marginTop="20dp">
 
             <ImageView
                 android:layout_width="24dp"
@@ -101,22 +98,23 @@
 
             <TextView
                 android:id="@+id/username2"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Trần Việt Đức"
                 android:textSize="16sp"
                 android:textColor="@android:color/black" />
+
             <Button
                 android:id="@+id/change_location_btn"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:backgroundTint="#4CAF50"
                 android:text="Thay đổi"
-                android:textColor="@android:color/white"
-                android:layout_marginStart="150dp"/>
+                android:textColor="@android:color/white" />
         </LinearLayout>
+
         <TextView
             android:id="@+id/username"
             android:layout_width="wrap_content"
@@ -126,7 +124,6 @@
             android:textColor="@android:color/darker_gray"
             android:layout_marginTop="-10dp"
             android:layout_marginStart="45dp"/>
-
 
     </LinearLayout>
 
@@ -147,15 +144,14 @@
     <!-- Payment Method Section -->
     <LinearLayout
         android:id="@+id/work_info_details"
-        android:layout_width="477dp"
-        android:layout_height="327dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_background"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/work_info_title">
 
@@ -196,7 +192,6 @@
             android:textSize="14sp" />
 
         <TextView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -227,7 +222,8 @@
         app:layout_constraintTop_toBottomOf="@id/work_info_details"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <RadioGroup android:id="@+id/payment_method_group"
+    <RadioGroup
+        android:id="@+id/payment_method_group"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -239,25 +235,31 @@
         android:layout_marginTop="8dp"
         android:layout_marginHorizontal="16dp"
         android:gravity="center">
+
         <RadioButton
             android:id="@+id/rdoTienMat"
-            android:layout_width="40dp"
-            android:layout_height="40dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_cash" />
-        <TextView android:layout_width="wrap_content"
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ti_n_m_t"
             android:textSize="16sp"
             android:textColor="@android:color/black"
             android:layout_marginStart="16dp" />
+
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="10dp"
             android:src="@drawable/zalopay" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -265,10 +267,11 @@
             android:textSize="16sp"
             android:textColor="@android:color/holo_orange_dark"
             android:layout_marginStart="16dp" />
+
         <RadioButton
             android:id="@+id/rdoZalo"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RadioGroup>
 
     <!-- Total Amount and Confirm Button -->
@@ -279,10 +282,11 @@
         android:orientation="horizontal"
         android:background="@android:color/white"
         android:gravity="center_vertical"
-        android:padding="16dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -296,11 +300,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="750.000đ"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            android:layout_marginStart="10dp"
-            />
+            android:layout_marginStart="10dp" />
 
         <Button
             android:id="@+id/btnPostJob"
@@ -310,8 +313,7 @@
             android:backgroundTint="#05990B"
             android:text="Xác nhận"
             android:textColor="@android:color/white"
-            android:textSize="25sp"
-            />
+            android:textSize="20sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

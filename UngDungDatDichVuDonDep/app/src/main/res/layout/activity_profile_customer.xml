@@ -95,7 +95,5 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <!-- Logout Button -->
-
 
 </LinearLayout>
