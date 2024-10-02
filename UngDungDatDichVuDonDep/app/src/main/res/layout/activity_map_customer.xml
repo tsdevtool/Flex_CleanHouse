@@ -9,33 +9,181 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     android:padding="10dp"
+    android:background="@drawable/anhnen"
     >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/mapSearch"
-        android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/btnback"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/icon_back"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.04"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.428" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Chọn vị trí làm việc"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="@drawable/border_background_vien"
+        android:paddingTop="10dp"
+        android:margin="10dp">
+
+        <TextView
+            android:id="@+id/txtServicename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Dọn dẹp nhà"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123 Nguyễn Đình Chiểu, Phường 2, ..."
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_gravity="center" />
+
+        <View
+            android:layout_width="300dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center"
+            android:background="#D9D8D8"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/> <!-- Thêm margin cho đường kẻ -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"> <!-- Thêm margin cho LinearLayout -->
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/icon_money_48"
+                android:layout_marginLeft="20dp" />
+
+            <TextView
+                android:id="@+id/txtPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="200.000đ"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="7dp" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/medal_award"
+                android:layout_marginLeft="10dp" />
+
+            <TextView
+                android:id="@+id/txtPoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="200 Points"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="7dp" />
+
+            <TextView
+                android:id="@+id/txtDatlai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="7dp"
+                android:text="Đặt lại"
+                android:textColor="#34A853"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="391dp"
+        android:layout_height="40dp"
+        app:cardCornerRadius="15dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/bg_search_view"
-        android:iconifiedByDefault="false"
-        android:queryHint="Search location"
-        android:elevation="4dp"
-        android:padding="8dp"/>
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_gravity="center">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/mapSearch"
+            android:layout_width="391dp"
+            android:layout_height="40dp"
+            android:iconifiedByDefault="false"
+            android:queryHint="Search location"
+            android:background="#FFFFFF"
+            app:searchIcon="@drawable/icons8_location_64"
+            app:iconifiedByDefault="false"
+            />
+
+    </androidx.cardview.widget.CardView>
+<androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="8dp"/>
-    <Button
-        android:id="@+id/btnConfirm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/x_c_nh_n"
-        android:backgroundTint="@color/blue"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:elevation="4dp"/>
+        android:layout_height="match_parent"
+    >
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnchonvitri"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#D4F6DD"
+            android:text="Chọn vị trí hiện tại"
+            android:textColor="@android:color/black"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>

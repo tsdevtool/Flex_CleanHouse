@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <shape xmlns:android="http://schemas.android.com/apk/res/android">
+        <solid android:color="@color/white"/> <!-- Màu nền của LinearLayout -->
+        <stroke
+            android:width="2dp"
+            android:color="#D9D8D8"/>
+        <corners android:radius="8dp"/> <!-- Bo góc nếu muốn -->
+    </shape>

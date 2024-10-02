@@ -6,78 +6,190 @@
     android:layout_height="match_parent"
     tools:context=".Customer.SelectTimeCustomerActivity"
     android:background="@android:color/white"
-    android:padding="16dp"
     android:orientation="vertical">
 
     <!-- Nội dung chính -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="250dp"
+        android:orientation="vertical"
+        android:background="@drawable/anhnen">
 
         <!-- Header -->
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_marginTop="20dp">
 
             <ImageView
-                android:id="@+id/ivBack"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_back_arrow"
-                android:contentDescription="Trở lại" />
+                android:id="@+id/btnback"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/icon_back"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.428" />
 
             <TextView
-                android:id="@+id/header_title"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ch_n_th_i_gian_l_m_vi_c"
+                android:layout_gravity="center"
+                android:text="Chọn diện tích dọn dẹp"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="126dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/border_background_vien"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/txtServicename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Dọn dẹp nhà"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_marginStart="16dp"
-                android:textColor="@android:color/black" />
-        </LinearLayout>
-
-        <!-- Address Section -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:paddingBottom="16dp">
+                android:layout_marginTop="5dp"/>
 
             <TextView
-                android:id="@+id/address"
+                android:id="@+id/txtLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerHorizontal="true"
-                android:text=""
+                android:layout_gravity="center"
+                android:text="123 Nguyễn Đình Chiểu, Phường 2, ..."
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="15sp" />
 
-            <ImageView
-                android:id="@+id/dropdownIcon"
-                android:layout_width="wrap_content"
+            <!-- Thêm margin cho đường kẻ -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="0dp"
-                android:src="@drawable/baseline_location_pin_24" />
-        </RelativeLayout>
+                android:layout_gravity="center"
+                android:gravity="center"
 
-        <!-- Time Selection -->
+                android:orientation="horizontal"> <!-- Thêm margin cho LinearLayout -->
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/icon_money_48" />
+
+                <TextView
+                    android:id="@+id/txtPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="5dp"
+                    android:text="750.000đ"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:paddingTop="16dp"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Vui lòng chọn thời gian làm việc và ghi chú cho Happy Homes"
+            android:textColor="#F44336"
+            android:textSize="15sp"
+            android:layout_gravity="center"
+            android:gravity="center" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/th_i_gian_l_m_vi_c"
-            android:textSize="18sp"
+            android:text="Chọn ngày giờ làm việc:"
+            android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
-            android:layout_marginTop="24dp" />
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/btndate_text_view_15space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ngày đã chọn: 25/09/2024               15h30"
+            android:textSize="18dp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"/>
 
-        <LinearLayout
+        <Button
+            android:id="@+id/btnselect_datetime"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#C3D9F7"
+            android:elevation="8dp"
+            android:text="Chọn ngày giờ làm việc"
+            android:textColor="@android:color/black"
+            android:textSize="12dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ghi chú cho Happy Homes:"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp" />
+        <EditText
+            android:id="@+id/edtNote"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:hint="Nhập ghi chú bạn muốn gửi đến Happy Homes ở đây nhé"
+            android:textSize="13sp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="@drawable/border_background_vien"
+            android:gravity="center" />
+        <Button
+            android:id="@+id/btnTieptuc"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#34A853"
+            android:text="Tiếp tục"
+            android:textColor="@android:color/white"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:layout_marginTop="140dp"/>
+
+    </LinearLayout>
+
+
+
+
+     <!--   <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -101,14 +213,14 @@
                 android:layout_marginStart="10dp" />
         </LinearLayout>
 
-        <!-- Date Buttons -->
+        &lt;!&ndash; Date Buttons &ndash;&gt;
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="8dp">
 
-            <!-- Repeat these LinearLayouts for each day button -->
+            &lt;!&ndash; Repeat these LinearLayouts for each day button &ndash;&gt;
             <LinearLayout
                 android:id="@+id/date_button"
                 android:layout_width="0dp"
@@ -129,12 +241,12 @@
                     android:layout_gravity="center" />
             </LinearLayout>
 
-            <!-- Add more date buttons here -->
-            <!-- Repeat the above LinearLayout for each day -->
+            &lt;!&ndash; Add more date buttons here &ndash;&gt;
+            &lt;!&ndash; Repeat the above LinearLayout for each day &ndash;&gt;
 
         </LinearLayout>
 
-        <!-- Time Picker -->
+        &lt;!&ndash; Time Picker &ndash;&gt;
         <LinearLayout
             android:id="@+id/time_picker_layout"
             android:layout_width="match_parent"
@@ -159,7 +271,7 @@
                 android:layout_marginStart="16dp"
                 android:textColor="@android:color/black" />
 
-            <!-- Time Selection -->
+            &lt;!&ndash; Time Selection &ndash;&gt;
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -178,7 +290,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Weekly Repeat Toggle -->
+        &lt;!&ndash; Weekly Repeat Toggle &ndash;&gt;
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -187,7 +299,7 @@
             android:gravity="center_vertical">
         </LinearLayout>
 
-        <!-- Notes Section -->
+        &lt;!&ndash; Notes Section &ndash;&gt;
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -204,22 +316,11 @@
             android:textSize="14sp"
             android:textColor="@android:color/darker_gray"
             android:layout_marginTop="8dp" />
+-->
 
-        <EditText
-            android:id="@+id/edtNote"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:hint="@string/b_n_c_y_u_c_u_g_th_m_h_y_nh_p_y_nh"
-            android:textSize="16sp"
-            android:padding="12dp"
-            android:background="@drawable/edit_text_background"
-            android:layout_marginTop="8dp"
-            android:gravity="top" />
-
-    </LinearLayout>
 
     <!-- Bottom Button with Price -->
-    <LinearLayout
+  <!--  <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -245,7 +346,7 @@
             android:text="@string/ti_p_theo"
             android:textColor="@android:color/white"
             android:textSize="18sp"
-            android:background="@android:color/transparent" />
-    </LinearLayout>
+            android:background="@android:color/transparent" />-->
+
 
 </LinearLayout>
