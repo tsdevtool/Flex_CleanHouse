@@ -79,4 +79,6 @@ dependencies {
     implementation("commons-codec:commons-codec:1.14")
     implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation ("com.google.firebase:firebase-auth:22.0.0")
+    implementation ("com.google.firebase:firebase-database:20.0.0")
 }

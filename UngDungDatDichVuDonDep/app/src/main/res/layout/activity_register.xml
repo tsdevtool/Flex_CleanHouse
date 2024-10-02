@@ -71,6 +71,25 @@
             android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:inputType="textEmailAddress" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phone"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
+
+        <!-- Username or Email Input -->
+        <EditText
+            android:id="@+id/txtPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Enter your Phone number"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:inputType="textEmailAddress" />
 
         <!-- Password Label -->
         <TextView

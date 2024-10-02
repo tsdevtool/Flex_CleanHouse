@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.happyhomes.Customer.Main_CustomerActivity;
 import com.example.happyhomes.Model.Customer;
 import com.example.happyhomes.Model.Employee;
+import com.example.happyhomes.Model.User;
 import com.example.happyhomes.NhanVien.NhanVienActivity;
 import com.example.happyhomes.databinding.ActivityLoginBinding;
 
@@ -29,88 +30,81 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
 
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
     ActivityLoginBinding binding;
 
-    public static final String DB_NAME="data_app_cleaning.db";
-    public static final String DB_FOLDER="databases";
-    public static final String TBL_NAME_CUS = "CUSTOMER";
-    public static final String TBL_NAME_EMP = "EMPLOYEE";
-
-    SQLiteDatabase db = null;
-    ArrayList<HashMap<String, String>> customers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        prepareDB();
-        openDB();
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference("users");
+
         EventLogin();
         Register();
         handlePasswordVisibility();
     }
 
-    private void openDB() {
-        db = openOrCreateDatabase(DB_NAME, MODE_PRIVATE, null);
-    }
     private void EventLogin() {
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean checklogin = false;
                 String emailLogin = binding.txtEmail.getText().toString();
                 String passLogin = binding.txtPassword.getText().toString();
-                //LOGIN CUSTOMER
-                Cursor customers = db.rawQuery("SELECT * FROM "+ TBL_NAME_CUS, null);
-                while (customers.moveToNext())
-                {
-                    if (customers.getString(3).equalsIgnoreCase(emailLogin) && customers.getString(5).equalsIgnoreCase(passLogin)) {
-                        Toast.makeText(LoginActivity.this, "Login SUCCESS", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, Main_CustomerActivity.class);
-                        intent.putExtra("Cusname", customers.getString(1));
-                        intent.putExtra("phone",customers.getString(2));
-                        intent.putExtra("CusId", customers.getInt(0));
-                        startActivity(intent);
-                        checklogin = true;
-                        break;
-                    }
-                }
-                //LOGIN EMPLOYEE
-                Cursor employees = db.rawQuery("SELECT * FROM "+ TBL_NAME_EMP, null);
-                while (employees.moveToNext())
-                {
-                    if (employees.getString(2).equalsIgnoreCase(emailLogin) && employees.getString(3).equalsIgnoreCase(passLogin)) {
-                        Toast.makeText(LoginActivity.this, "Login SUCCESS", Toast.LENGTH_SHORT).show();
-                        checklogin = true;
 
-                        // Lấy thông tin nhân viên
-                        Employee employee = new Employee(
-                                employees.getLong(0), // emId
-                                employees.getString(1), // emName
-                                employees.getString(2), // emEmail
-                                employees.getString(3) // password
-                        );
+                // Sign in with Firebase Authentication
+                mAuth.signInWithEmailAndPassword(emailLogin, passLogin)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                String userId = user.getUid();
 
-                        // Chuyển sang NhanVienActivity
-                        Intent intent = new Intent(LoginActivity.this, NhanVienActivity.class);
-                        intent.putExtra("Employee", employee);
-                        startActivity(intent);
-                        break;
-                    }
-                }
-                if(checklogin == false)
-                {
-                    Toast.makeText(LoginActivity.this, "Login FAIL", Toast.LENGTH_SHORT).show();
-                }
+                                // Retrieve user info from Realtime Database
+                                mDatabase.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        User loggedInUser = dataSnapshot.getValue(User.class);
+                                        if (loggedInUser != null) {
+                                            Toast.makeText(LoginActivity.this, "Login SUCCESS", Toast.LENGTH_SHORT).show();
+
+                                            // Pass phone number and other user details to the next activity
+                                            Intent intent = new Intent(LoginActivity.this, Main_CustomerActivity.class);
+                                            intent.putExtra("Cusname", loggedInUser.name); // This passes the username
+                                            intent.putExtra("email", loggedInUser.email);
+                                            intent.putExtra("CusId",loggedInUser.userId);
+                                            intent.putExtra("phoneNumber", loggedInUser.phoneNumber); // Ensure this is correctly passed
+                                            startActivity(intent);
+
+                                        } else {
+                                            Toast.makeText(LoginActivity.this, "Failed to retrieve user data.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                        Toast.makeText(LoginActivity.this, "Database error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Login Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
-
     }
 
     private void Register() {
@@ -121,74 +115,22 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
-    private void prepareDB() {
-        File dbfile = getDatabasePath(DB_NAME);
-        if(!dbfile.exists())
-        {
-            if(CopyDB())
-            {
-                Toast.makeText(this, "Open app SUCCESS", Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(this, "Open app FAIL", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-    }
-    //copy db vào ứng dụng
-    private boolean CopyDB()
-    {
-        String dbPath = getApplicationInfo().dataDir +"/"+DB_FOLDER+"/"+DB_NAME;
-        try {
-            InputStream inputStream=getAssets().open(DB_NAME);
-            File file= new File(getApplicationInfo().dataDir+"/"+DB_FOLDER+"/");
-            if(!file.exists()){
-                file.mkdir();
-            }
-            OutputStream outputStream= null;
-            if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O)
-            {
-                outputStream = Files.newOutputStream(Paths.get(dbPath));
-            }
-            byte[] buffer= new byte[1024];
-            int lenght;
-            while ((lenght=inputStream.read(buffer))>0){
-                outputStream.write(buffer,0,lenght);
-            }
-            outputStream.flush();
-            outputStream.close();
-            inputStream.close();
-            return  true;
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
-    }
     private void handlePasswordVisibility() {
-        // Mặc định mật khẩu sẽ bị ẩn
         binding.togglePasswordVisibility.setTag(false);
-
-        // Bắt sự kiện khi người dùng nhấn vào con mắt
         binding.togglePasswordVisibility.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean isPasswordVisible = (boolean) v.getTag();
                 if (isPasswordVisible) {
-                    // Nếu mật khẩu đang hiển thị, thì ẩn đi và đổi icon
                     binding.txtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    binding.togglePasswordVisibility.setImageResource(R.drawable.eye); // Icon con mắt đóng
+                    binding.togglePasswordVisibility.setImageResource(R.drawable.eye);
                 } else {
-                    // Nếu mật khẩu đang ẩn, thì hiển thị và đổi icon
                     binding.txtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                    binding.togglePasswordVisibility.setImageResource(R.drawable.view); // Icon con mắt mở
+                    binding.togglePasswordVisibility.setImageResource(R.drawable.view);
                 }
-                // Cập nhật tag để xác định trạng thái mới
                 v.setTag(!isPasswordVisible);
-
-                // Đặt con trỏ lại cuối văn bản sau khi thay đổi kiểu nhập
                 binding.txtPassword.setSelection(binding.txtPassword.getText().length());
             }
         });
