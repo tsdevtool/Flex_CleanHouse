@@ -1,6 +1,6 @@
 const Chat = () => {
   <>
-    <div className="container">
+    <div>
       <h1>Chat</h1>
     </div>
   </>;
