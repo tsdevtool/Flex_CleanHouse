@@ -167,7 +167,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public long addSchedule(Schedule schedule) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_CUS_ID, schedule.getCusId());
+//        values.put(COLUMN_CUS_ID, schedule.getCusId());
         values.put(COLUMN_DATE, schedule.getDateString()); // Convert Date to String
         values.put(COLUMN_START_TIME, schedule.getStartTimeString()); // Convert Time to String
         values.put(COLUMN_LOCATION, schedule.getLocation());
@@ -201,8 +201,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                     // Tạo đối tượng Schedule với các giá trị đã phân tích
                     Schedule schedule = new Schedule(
-                            cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SCHEDULE_ID)),
-                            cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_CUS_ID)),
+                       cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SCHEDULE_ID)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CUS_ID)),
                             date,
                             startTime,
                             cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_LOCATION)),
@@ -243,8 +243,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                     // Tạo đối tượng Schedule với các giá trị đã phân tích
                     Schedule schedule = new Schedule(
-                            cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SCHEDULE_ID)),
-                            cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_CUS_ID)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SCHEDULE_ID)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CUS_ID)),
                             date,
                             startTime,
                             cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_LOCATION)),
@@ -279,8 +279,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Date startTime = timeFormat.parse(timeString);
 
                     Schedule schedule = new Schedule(
-                            cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SCHEDULE_ID)),
-                            cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_CUS_ID)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SCHEDULE_ID)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CUS_ID)),
                             date,
                             startTime,
                             cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_LOCATION)),
@@ -332,8 +332,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Date startTime = timeFormat.parse(timeString);
 
                     Schedule schedule = new Schedule(
-                            cursor.getLong(cursor.getColumnIndexOrThrow("SCHEDULEID")),
-                            cursor.getLong(cursor.getColumnIndexOrThrow("CUSID")),
+                            cursor.getString(cursor.getColumnIndexOrThrow("SCHEDULEID")),
+                            cursor.getString(cursor.getColumnIndexOrThrow("CUSID")),
                             date,
                             startTime,
                             cursor.getString(cursor.getColumnIndexOrThrow("LOCATION")),
@@ -421,8 +421,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Date startTime = timeFormat.parse(timeString);
 
                     Schedule schedule = new Schedule(
-                            cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SCHEDULE_ID)),
-                            cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_CUS_ID)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SCHEDULE_ID)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CUS_ID)),
                             date,
                             startTime,
                             cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_LOCATION)),
@@ -506,8 +506,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Schedule schedule = null;
         if (cursor.moveToFirst()) {
             schedule = new Schedule(
-                    cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SCHEDULE_ID)),
-                    cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_CUS_ID)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SCHEDULE_ID)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CUS_ID)),
                     new Date(cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_DATE))),
                     new Date(cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_START_TIME))),
                     cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_LOCATION)),
@@ -546,8 +546,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 // Tạo đối tượng Schedule và thêm vào danh sách
                 Schedule schedule = new Schedule(
-                        cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SCHEDULE_ID)),
-                        cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_CUS_ID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SCHEDULE_ID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CUS_ID)),
                         date,
                         startTime,
                         cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_LOCATION)),

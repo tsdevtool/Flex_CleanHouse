@@ -71,7 +71,7 @@
                 android:layout_marginTop="5dp"/>
 
             <TextView
-                android:id="@+id/txtLocation"
+                android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -95,7 +95,7 @@
                     android:src="@drawable/icon_money_48" />
 
                 <TextView
-                    android:id="@+id/txtPrice"
+                    android:id="@+id/txtCost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
@@ -114,16 +114,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
-            android:paddingTop="16dp"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Vui lòng chọn thời gian làm việc và ghi chú cho Happy Homes"
-            android:textColor="#F44336"
-            android:textSize="15sp"
-            android:layout_gravity="center"
-            android:gravity="center" />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Chọn ngày giờ làm việc:"
@@ -131,19 +121,22 @@
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="20dp" />
+
+        <!-- Combined date and time TextView -->
         <TextView
-            android:id="@+id/dateTextView"
+            android:id="@+id/dateTimeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ngày đã chọn: 25/09/2024               15h30"
+            android:text="Ngày giờ đã chọn: "
             android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="20dp" />
 
+        <!-- Combined date and time selection button -->
         <Button
-            android:id="@+id/btnselect_datetime"
+            android:id="@+id/btnSelectDateTime"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -152,7 +145,7 @@
             android:text="Chọn ngày giờ làm việc"
             android:textColor="@android:color/black"
             android:textSize="12dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -172,181 +165,19 @@
             android:layout_margin="20dp"
             android:background="@drawable/border_background_vien"
             android:gravity="center" />
+
         <Button
             android:id="@+id/btnNext"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="140dp"
             android:backgroundTint="#34A853"
             android:text="Tiếp tục"
             android:textColor="@android:color/white"
             android:textSize="12dp"
-            android:textStyle="bold"
-            android:layout_marginTop="140dp"/>
-
-    </LinearLayout>
-
-
-
-
-     <!--   <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ng_y_ch_n"
-                android:textSize="16sp"
-                android:textColor="@android:color/darker_gray" />
-
-            <TextView
-                android:id="@+id/date_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="20sp"
-                android:textColor="@android:color/darker_gray"
-                android:layout_gravity="end"
-                android:layout_marginStart="10dp" />
-        </LinearLayout>
-
-        &lt;!&ndash; Date Buttons &ndash;&gt;
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
-
-            &lt;!&ndash; Repeat these LinearLayouts for each day button &ndash;&gt;
-            <LinearLayout
-                android:id="@+id/date_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_margin="4dp"
-                android:background="#21B1F3">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ch_n_ng_y"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center" />
-            </LinearLayout>
-
-            &lt;!&ndash; Add more date buttons here &ndash;&gt;
-            &lt;!&ndash; Repeat the above LinearLayout for each day &ndash;&gt;
-
-        </LinearLayout>
-
-        &lt;!&ndash; Time Picker &ndash;&gt;
-        <LinearLayout
-            android:id="@+id/time_picker_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/time_picker_background"
-            android:padding="12dp">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_time"
-                android:contentDescription="Time"
-                app:tint="@android:color/holo_orange_dark" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ch_n_gi_l_m"
-                android:textSize="20sp"
-                android:layout_marginStart="16dp"
-                android:textColor="@android:color/black" />
-
-            &lt;!&ndash; Time Selection &ndash;&gt;
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginStart="10dp">
-                <TextView
-                    android:id="@+id/hour_picker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="20sp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginEnd="4dp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        &lt;!&ndash; Weekly Repeat Toggle &ndash;&gt;
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp"
-            android:gravity="center_vertical">
-        </LinearLayout>
-
-        &lt;!&ndash; Notes Section &ndash;&gt;
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ghi_ch_cho_tasker"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="24dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ghi_ch_n_y_s_gi_p_tasker_l_m_nhanh_v_t_t_h_n"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="8dp" />
--->
-
-
-    <!-- Bottom Button with Price -->
-  <!--  <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:background="#2196F3"
-        android:padding="16dp">
-
-        <TextView
-            android:id="@+id/txtCost"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="216,000"
-            android:textSize="18sp"
-            android:textColor="@android:color/white"
             android:textStyle="bold" />
 
-
-        <Button
-            android:id="@+id/btnNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ti_p_theo"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:background="@android:color/transparent" />-->
-
+    </LinearLayout>
 
 </LinearLayout>
