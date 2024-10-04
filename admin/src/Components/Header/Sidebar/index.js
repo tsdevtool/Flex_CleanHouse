@@ -5,7 +5,6 @@ import { IoMdHome } from "react-icons/io";
 import { PiChatsFill } from "react-icons/pi";
 import "../../../App.css";
 import Logo from "../../../assets/images/logo-rebg.png";
-import { CiSearch } from "react-icons/ci";
 
 const Sidebar = () => {
   return (
@@ -34,7 +33,7 @@ const Sidebar = () => {
               </a>
             </li>
             <li className="mb-3 jus">
-              <a href="/home" className="flex items-center ml-4 p-2">
+              <a href="/employee" className="flex items-center ml-4 p-2">
                 <i className="fas fa-home mr-2">
                   <FaUserFriends />
                 </i>
