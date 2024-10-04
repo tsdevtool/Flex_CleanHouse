@@ -26,3 +26,7 @@ aside .logo{width: 8rem;color: white;margin-bottom: 15px;}
 .headerWrapper .timeNow p{font-size: 13px;}
 .headerWrapper .timeNow svg{font-size: 32px;}
 .headerWrapper .user{ margin-top: -7px;}
+
+/* Customer */
+table tr td .btn-action{border: 1px solid rgba(0, 0, 0, 0.3) !important; border-radius: 8px; font-weight: 600; font-size: 18px; color: #ffff; min-width: 85px; width: 80%;}
+table tr td .btn-action:hover{color: #fff !important;}

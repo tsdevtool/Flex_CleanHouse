@@ -8,11 +8,15 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import Sidebar from "./Components/Header/Sidebar";
+import Chat from "./Page/Chat";
+import Customers from "./Page/Customers";
 import Employees from "./Page/Employees";
 import Home from "./Page/Home";
 import LoginForm from "./Page/Login";
 import { useAuth } from "./Page/Login/AuthContext";
 import NotFound from "./Page/NotFound";
+import Other from "./Page/Other";
+import Service from "./Page/Services";
 import PrivateRoute from "./PrivateRoute";
 const MyContext = createContext();
 function App() {
@@ -30,9 +34,9 @@ function App() {
           path="/home"
           element={
             <PrivateRoute>
-              <div className="flex h-screen w-screen">
+              <div className="flex min-h-screen h-screen w-screen">
                 <Sidebar /> {/* Hiển thị Sidebar nếu người dùng đã đăng nhập */}
-                <main className="flex-1 p-6 bg-gray-100">
+                <main className="flex-1 p-6 bg-gray-100 overflow-y-auto">
                   <Home /> {/* Nội dung Home */}
                 </main>
               </div>
@@ -43,10 +47,62 @@ function App() {
           path="/employees"
           element={
             <PrivateRoute>
-              <div className="flex h-screen w-screen">
+              <div className="flex  min-h-screen h-screen w-screen">
                 <Sidebar /> {/* Hiển thị Sidebar nếu người dùng đã đăng nhập */}
-                <main className="flex-1 p-6 bg-gray-100">
+                <main className="flex-1 p-6 bg-gray-100 overflow-y-auto">
                   <Employees /> {/* Nội dung Home */}
+                </main>
+              </div>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/customers"
+          element={
+            <PrivateRoute>
+              <div className="flex min-h-screen h-screen w-screen">
+                <Sidebar /> {/* Hiển thị Sidebar nếu người dùng đã đăng nhập */}
+                <main className="flex-1 p-6 bg-gray-100 overflow-y-auto">
+                  <Customers /> {/* Nội dung Home */}
+                </main>
+              </div>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/chats"
+          element={
+            <PrivateRoute>
+              <div className="flex min-h-screen h-screen w-screen">
+                <Sidebar /> {/* Hiển thị Sidebar nếu người dùng đã đăng nhập */}
+                <main className="flex-1 p-6 bg-gray-100 overflow-y-auto">
+                  <Chat /> {/* Nội dung Home */}
+                </main>
+              </div>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/services"
+          element={
+            <PrivateRoute>
+              <div className="flex min-h-screen h-screen w-screen">
+                <Sidebar />
+                <main className="flex-1 p-6 bg-gray-100 overflow-y-auto">
+                  <Service />
+                </main>
+              </div>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/other"
+          element={
+            <PrivateRoute>
+              <div className="flex min-h-screen h-screen w-screen">
+                <Sidebar /> {/* Hiển thị Sidebar nếu người dùng đã đăng nhập */}
+                <main className="flex-1 p-6 bg-gray-100 overflow-y-auto">
+                  <Other /> {/* Nội dung Home */}
                 </main>
               </div>
             </PrivateRoute>

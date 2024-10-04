@@ -44,7 +44,7 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li className="mb-3 jus">
-                <Link to="/home" className="flex items-center ml-4 p-2">
+                <Link to="/customers" className="flex items-center ml-4 p-2">
                   <i className="fas fa-home mr-2">
                     <FaUserTie />
                   </i>
@@ -52,7 +52,7 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li className="mb-3 jus">
-                <Link to="/home" className="flex items-center ml-4 p-2">
+                <Link to="/services" className="flex items-center ml-4 p-2">
                   <i className="fas fa-home mr-2">
                     <FaHandsHoldingChild />
                   </i>
@@ -60,7 +60,7 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li className="mb-3 jus">
-                <Link to="/home" className="flex items-center ml-4 p-2">
+                <Link to="/chats" className="flex items-center ml-4 p-2">
                   <i className="fas fa-home mr-2">
                     <PiChatsFill />
                   </i>
@@ -68,7 +68,7 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li className="mb-3 jus">
-                <Link to="/home" className="flex items-center ml-4 p-2">
+                <Link to="/other" className="flex items-center ml-4 p-2">
                   <i className="fas fa-home mr-2">
                     <AiOutlineAppstoreAdd />
                   </i>
