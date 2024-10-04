@@ -8,7 +8,7 @@ import "../../../App.css";
 import Logo from "../../../assets/images/logo-rebg.png";
 import { useAuth } from "../../../Page/Login/AuthContext";
 const Sidebar = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, userName } = useAuth();
   return (
     <aside className="bg-indigo-900 text-white w-1/5 p-4 min-w-[200px] left-0">
       {currentUser && (
@@ -23,7 +23,9 @@ const Sidebar = () => {
             </div>
           </div>
           <div className="justify-center flex items-center ">
-            <span className="fullname text-center">Siêu Nguyễn Thanh</span>
+            <span className="fullname text-center">
+              {userName || "Người dùng"}
+            </span>
           </div>
           <nav className="sidebar">
             <ul>
