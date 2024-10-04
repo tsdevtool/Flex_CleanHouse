@@ -2,6 +2,7 @@
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyCspLsug5m3JKwarri0Jis4mrLRSwIWnHs",
   authDomain: "flexcleanhouse.firebaseapp.com",
@@ -16,4 +17,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
-export { analytics, auth };
+const db = getDatabase(app);
+
+export { analytics, auth, db };
