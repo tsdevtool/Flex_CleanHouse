@@ -1,6 +1,7 @@
 package com.example.happyhomes;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
@@ -45,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     ActivityLoginBinding binding;
 
+    private SharedPreferences sharedPreferences;
+    private static final String PREFS_NAME = "LoginPrefs";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +57,27 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
 
+        // Initialize SharedPreferences
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
+        // Check if credentials are saved
+        checkSavedCredentials();
+
         EventLogin();
         Register();
         handlePasswordVisibility();
     }
+    private void checkSavedCredentials() {
+        String savedEmail = sharedPreferences.getString("email", null);
+        String savedPassword = sharedPreferences.getString("password", null);
+        boolean rememberMe = sharedPreferences.getBoolean("rememberMe", false);
 
+        if (rememberMe && savedEmail != null && savedPassword != null) {
+            binding.txtEmail.setText(savedEmail);
+            binding.txtPassword.setText(savedPassword);
+            binding.termsCheckbox.setChecked(true); // Set the checkbox checked if user chose to remember
+        }
+    }
     private void EventLogin() {
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +92,17 @@ public class LoginActivity extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 String userId = user.getUid();
 
+                                // Save credentials if "Remember" is checked
+                                if (binding.termsCheckbox.isChecked()) {
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("email", emailLogin);
+                                    editor.putString("password", passLogin);
+                                    editor.putBoolean("rememberMe", true);
+                                    editor.apply(); // Save the credentials
+                                } else {
+                                    sharedPreferences.edit().clear().apply(); // Clear saved credentials
+                                }
+
                                 // Retrieve user info from Realtime Database
                                 mDatabase.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
@@ -81,12 +111,12 @@ public class LoginActivity extends AppCompatActivity {
                                         if (loggedInUser != null) {
                                             Toast.makeText(LoginActivity.this, "Login SUCCESS", Toast.LENGTH_SHORT).show();
 
-                                            // Pass phone number and other user details to the next activity
+                                            // Pass user details to the next activity
                                             Intent intent = new Intent(LoginActivity.this, Main_CustomerActivity.class);
-                                            intent.putExtra("Cusname", loggedInUser.name); // This passes the username
+                                            intent.putExtra("Cusname", loggedInUser.name);
                                             intent.putExtra("email", loggedInUser.email);
-                                            intent.putExtra("CusId",loggedInUser.userId);
-                                            intent.putExtra("phoneNumber", loggedInUser.phoneNumber); // Ensure this is correctly passed
+                                            intent.putExtra("CusId", loggedInUser.userId);
+                                            intent.putExtra("phoneNumber", loggedInUser.phoneNumber);
                                             startActivity(intent);
 
                                         } else {
