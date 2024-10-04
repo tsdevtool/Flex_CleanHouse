@@ -1,19 +1,28 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdEmail } from "react-icons/md";
 import { TiLockClosed } from "react-icons/ti";
+import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/logo-rebg.png";
 import { auth } from "../../firebase/config"; // Import Firebase auth
+import { useAuth } from "./AuthContext";
 import "./LoginForm.css";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { currentUser } = useAuth(); // Lấy thông tin người dùng từ context
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/home");
+    }
+  }, [currentUser, navigate]);
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       // Chuyển hướng tới trang chủ
-      window.location.href = "/home"; // Bạn có thể thay đổi đường dẫn đến trang chính của bạn
+      // window.location.href = "/home"; // Bạn có thể thay đổi đường dẫn đến trang chính của bạn
     } catch (error) {
       console.error("Error signing in:", error);
       alert("Đăng nhập không thành công. Vui lòng kiểm tra lại thông tin.");
