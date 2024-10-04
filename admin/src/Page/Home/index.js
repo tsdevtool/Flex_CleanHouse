@@ -1,6 +1,5 @@
 import BasicInformation from "../../Components/Header/BasicInformation";
 import HeaderWrapper from "../../Components/Header/HeaderWrapper";
-import Sidebar from "../../Components/Header/Sidebar";
 
 const Home = () => {
   return (

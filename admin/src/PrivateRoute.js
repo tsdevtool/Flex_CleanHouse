@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Navigate } from "react-router-dom";
-import { MyContext } from "./App";
+import { useAuth } from "./Page/Login/AuthContext";
+// Import useAuth để kiểm tra trạng thái đăng nhập
 
-const PrivateRoute = ({ element }) => {
-  const { isLoggedIn } = useContext(MyContext);
+const PrivateRoute = ({ children }) => {
+  const { currentUser } = useAuth(); // Lấy thông tin người dùng từ context
 
-  return isLoggedIn ? element : <Navigate to="/" />;
+  // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập
+  return currentUser ? children : <Navigate to="/" />;
 };
 
 export default PrivateRoute;
