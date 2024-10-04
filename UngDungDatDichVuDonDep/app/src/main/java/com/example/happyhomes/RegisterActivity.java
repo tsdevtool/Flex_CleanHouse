@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Toast;
 
@@ -34,6 +35,8 @@ public class RegisterActivity extends AppCompatActivity {
         login();
         openDB();
         eventRegister();
+
+        handlePasswordVisibility();
     }
 
     private void openDB() {
@@ -67,10 +70,36 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void login() {
-        binding.txtLogin.setOnClickListener(new View.OnClickListener() {
+        binding.txtlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 gotoLogin();
+            }
+        });
+    }
+    private void handlePasswordVisibility() {
+        // Mặc định mật khẩu sẽ bị ẩn
+        binding.togglePasswordVisibility.setTag(false);
+
+        // Bắt sự kiện khi người dùng nhấn vào con mắt
+        binding.togglePasswordVisibility.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isPasswordVisible = (boolean) v.getTag();
+                if (isPasswordVisible) {
+                    // Nếu mật khẩu đang hiển thị, thì ẩn đi và đổi icon
+                    binding.txtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    binding.togglePasswordVisibility.setImageResource(R.drawable.eye); // Icon con mắt đóng
+                } else {
+                    // Nếu mật khẩu đang ẩn, thì hiển thị và đổi icon
+                    binding.txtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    binding.togglePasswordVisibility.setImageResource(R.drawable.view); // Icon con mắt mở
+                }
+                // Cập nhật tag để xác định trạng thái mới
+                v.setTag(!isPasswordVisible);
+
+                // Đặt con trỏ lại cuối văn bản sau khi thay đổi kiểu nhập
+                binding.txtPassword.setSelection(binding.txtPassword.getText().length());
             }
         });
     }
