@@ -23,6 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.example.happyhomes.Model.User;
 import com.example.happyhomes.databinding.ActivityRegisterBinding;
 
+import java.util.List;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "RegisterActivity";
@@ -70,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     Log.d(TAG, "User ID: " + userId);
 
                                     // Create a new user object with the phone number
-                                    User newUser = new User(userId, name, email, phoneNumber);
+                                    User newUser = new User(userId, name, email, phoneNumber,null);
 
                                     // Save user data to Realtime Database
                                     mDatabase.child(userId).setValue(newUser)

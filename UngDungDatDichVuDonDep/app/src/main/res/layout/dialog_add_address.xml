@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white"
+    android:elevation="4dp"
+    android:layout_margin="16dp"
+    android:backgroundTint="@color/white"
+  >
+
+    <EditText
+        android:id="@+id/etNewAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập địa chỉ mới"
+        android:inputType="textPostalAddress"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/darker_gray"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnAddAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thêm địa chỉ"
+        android:background="#2196F3"
+        android:padding="12dp"
+        android:textSize="18sp"
+        android:textColor="@color/gray_light"
+        android:textStyle="bold"/>
+</LinearLayout>

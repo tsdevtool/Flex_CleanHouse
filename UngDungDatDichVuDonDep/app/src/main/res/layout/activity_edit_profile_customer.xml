@@ -7,15 +7,6 @@
     tools:context=".Customer.EditProfileCustomer"
     android:background="@android:color/white">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/btnUpdate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <!-- Divider line at the top -->
-    </LinearLayout>
 
     <View
         android:id="@+id/topDivider"
@@ -106,35 +97,26 @@
         android:layout_marginBottom="16dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp">
-
-        <LinearLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Vị trí đã lưu"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+        <!-- RecyclerView để hiển thị các vị trí đã lưu -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewSavedLocations"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="2dp">
-            <!-- TextView Vị trí đã lưu -->
-            <TextView
-                android:id="@+id/tvSavedLocations"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vị trí đã lưu"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
-
-            <!-- Thêm địa chỉ mới -->
-            <TextView
-                android:id="@+id/tvAddNewAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="+ Thêm địa chỉ mới"
-                android:textColor="@android:color/holo_blue_light" />
-        </LinearLayout>
-
+            android:padding="30dp"/>
     </androidx.cardview.widget.CardView>
 
     <!-- Cập nhật -->
     <Button
-        android:id="@+id/btnUpdate"
+        android:id="@+id/tvAddNewAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cập nhật"
@@ -146,9 +128,10 @@
         android:layout_marginBottom="16dp" />
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:src="@drawable/back"
+        android:id="@+id/back"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/angleleft"
         app:layout_constraintBottom_toBottomOf="@+id/tvPhoneNumber"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintHorizontal_bias="0.0"
@@ -164,7 +147,7 @@
         android:gravity="center"
         android:text="Hồ sơ"
         android:textColor="@color/black"
-        android:textSize="32sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />
