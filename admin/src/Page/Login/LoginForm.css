@@ -1,0 +1,116 @@
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif; /* Chỉnh sửa font-family không có dấu ; kép */
+}
+
+body {
+    background-image: url('../../assets/images/bg-login.png');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin: 0;  /* Loại bỏ margin mặc định */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.khung-ngoai {
+    width: 80vw;  /* Chiều rộng = 80% của viewport width */
+    height: 80vh; /* Chiều cao = 80% của viewport height */
+    display: flex; /* Sử dụng Flexbox để sắp xếp các phần tử con */
+    border-radius: 38px; /* Bo góc toàn bộ khung-ngoai */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Bóng mờ */
+}
+
+.khung-trai {
+    width: 50%;  /* Mỗi thẻ chiếm 50% chiều rộng */
+    height: 100%; /* Chiều cao = 100% của khung-ngoai */
+    padding: 20px; /* Khoảng cách bên trong */
+    text-align: center; /* Căn giữa nội dung bên trong */
+    border-top-left-radius: 38px; /* Bo góc trái trên */
+    border-bottom-left-radius: 38px; /* Bo góc trái dưới */
+    background-color: #fff; /* Màu nền cho khung trái */
+    display: flex; /* Sử dụng Flexbox cho khung trái */
+    justify-content: center; /* Căn giữa logo theo chiều ngang */
+    align-items: center; /* Căn giữa logo theo chiều dọc */
+}
+.logo {
+    width: 55%; /* Chiều ngang cố định cho logo */
+    height: auto; /* Giữ tỷ lệ khung hình */
+}
+.khung-phai {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;  /* Mỗi thẻ chiếm 50% chiều rộng */
+    height: 100%; /* Chiều cao = 100% của khung-ngoai */
+    padding: 40px; /* Khoảng cách bên trong */
+    text-align: center; /* Căn giữa nội dung bên trong */
+    border-top-right-radius: 38px; /* Bo góc phải trên */
+    border-bottom-right-radius: 38px; /* Bo góc phải dưới */
+    background-color: #ABDFF8; /* Màu nền cho khung phải */
+}
+
+.khung-phai h2{
+    font-size: 43px;
+    color: #2E2E48;
+    margin-bottom: 30px;
+    font-weight: 1000;
+}
+.khung-phai .form-group{
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.khung-phai .form-group label{
+    width: 90px;
+    position: absolute;
+    top: -10px;
+    left: 40px;
+    background-color: #fff;
+    padding: 0 5px;
+    font-weight: 600;
+    color: #2E2E48;
+    z-index: 10;
+    border-radius: 10px;
+}
+.khung-phai .input-group{
+    border-radius: 10px;
+    padding: 10px 15px;
+    background-color: #fff;
+}
+.khung-phai .input-group input{
+    border: none;
+    flex: 1;
+}
+.khung-phai .input-group svg{
+    color: #1A719C;
+    width: 24px;
+    height: auto;
+}
+.khung-phai .input-group .input-group-text{
+    background-color: white;
+    border: none;
+    margin-right: 10px;
+}
+.khung-phai .input-group .divider{
+    height: 34px;
+    width: 0.5px;
+    background-color: #1A719C;
+    margin-right: 10px;
+}
+.khung-phai .btn-primary {
+    background-color: #003366;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 24px;
+    width: 50%;
+    font-weight: bold;
+}
+.khung-phai .btn-primary:hover {
+    background-color: #002244;
+}
