@@ -40,7 +40,7 @@ public class MapCustomerActivity extends AppCompatActivity implements OnMapReady
     private SupportMapFragment mapFragment;
     ActivityMapCustomerBinding binding;
     private String selectedAddress = null;
-    private int cusID;
+    private String cusID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public class MapCustomerActivity extends AppCompatActivity implements OnMapReady
 
 
 
-//        binding.btnConfirm.setOnClickListener(v -> confirmLocation());
+        binding.btnConfirm.setOnClickListener(v -> confirmLocation());
     }
 
     private void searchLocation(String location) {
@@ -190,23 +190,23 @@ public class MapCustomerActivity extends AppCompatActivity implements OnMapReady
         return super.onOptionsItemSelected(item);
     }
 
-//    private void confirmLocation() {
-//        if (selectedAddress != null) {
-//            Intent intent = new Intent(MapCustomerActivity.this, ServiceActivity.class);
-//            intent.putExtra("address", selectedAddress);
-//            cusID = getIntent().getIntExtra("CusId", -1);
-//            String cusName = getIntent().getStringExtra("Cusname");
-//            if (cusID != -1) {
-//
-//                intent.putExtra("CusId", cusID);
-//                intent.putExtra("Cusname",cusName);
-//                startActivity(intent);
-//            } else {
-//                Toast.makeText(this, "CusID not found!", Toast.LENGTH_LONG).show();
-//            }
-//
-//        } else {
-//            Toast.makeText(this, "Hãy chọn vị trí ở trên bản đồ", Toast.LENGTH_SHORT).show();
-//        }
-//    }
+    private void confirmLocation() {
+        if (selectedAddress != null) {
+            Intent intent = new Intent(MapCustomerActivity.this, ServiceActivity.class);
+            intent.putExtra("address", selectedAddress);
+            cusID = getIntent().getStringExtra("CusId");
+            String cusName = getIntent().getStringExtra("Cusname");
+            if (cusID !=null) {
+
+                intent.putExtra("CusId", cusID);
+                intent.putExtra("Cusname",cusName);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "CusID not found!", Toast.LENGTH_LONG).show();
+            }
+
+        } else {
+            Toast.makeText(this, "Hãy chọn vị trí ở trên bản đồ", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

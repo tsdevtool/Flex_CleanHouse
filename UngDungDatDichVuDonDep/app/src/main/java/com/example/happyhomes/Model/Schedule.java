@@ -5,12 +5,12 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Schedule {
-    private Long scheduleId;
-    private Long cusId;
+    private String id; // Thay đổi từ Long sang String
+    private String customerId;
     private Date date;
     private Date startTime;
     private String location;
-    private String status;
+    private String status;;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     private SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
 
@@ -27,22 +27,6 @@ public class Schedule {
     public String getStartTimeString() {
         return timeFormat.format(startTime);
     }
-    public Long getScheduleId() {
-        return scheduleId;
-    }
-
-    public void setScheduleId(Long scheduleId) {
-        this.scheduleId = scheduleId;
-    }
-
-    public Long getCusId() {
-        return cusId;
-    }
-
-    public void setCusId(Long cusId) {
-        this.cusId = cusId;
-    }
-
     public void setDate(Date date) {
         this.date = date;
     }
@@ -75,9 +59,10 @@ public class Schedule {
         return startTime;
     }
 
-    public Schedule(Long scheduleId, Long cusId, Date date, Date startTime, String location, String status) {
-        this.scheduleId = scheduleId;
-        this.cusId = cusId;
+    // Hàm khởi tạo của lớp Schedule
+    public Schedule(String id, String customerId, Date date, Date startTime, String location, String status) {
+        this.id = id;
+        this.customerId = customerId;
         this.date = date;
         this.startTime = startTime;
         this.location = location;
@@ -92,4 +77,6 @@ public class Schedule {
                 ", status='" + status + '\'' +
                 '}';
     }
+
+
 }

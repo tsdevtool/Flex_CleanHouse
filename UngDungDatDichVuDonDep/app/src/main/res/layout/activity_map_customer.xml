@@ -141,7 +141,6 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="8dp"
         android:layout_gravity="center">
-
         <androidx.appcompat.widget.SearchView
             android:id="@+id/mapSearch"
             android:layout_width="391dp"
@@ -152,7 +151,6 @@
             app:searchIcon="@drawable/icons8_location_64"
             app:iconifiedByDefault="false"
             />
-
     </androidx.cardview.widget.CardView>
 <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
