@@ -45,6 +45,8 @@ body {
     flex: 1;
     flex-direction: column;
     justify-content: center;
+    min-width: 400px;
+    min-height: auto;
     width: 50%;  /* Mỗi thẻ chiếm 50% chiều rộng */
     height: 100%; /* Chiều cao = 100% của khung-ngoai */
     padding: 40px; /* Khoảng cách bên trong */
@@ -58,6 +60,8 @@ body {
     font-size: 43px;
     color: #2E2E48;
     margin-bottom: 30px;
+    margin-top: 20px;
+
     font-weight: 1000;
 }
 .khung-phai .form-group{
@@ -110,6 +114,7 @@ body {
     font-size: 24px;
     width: 50%;
     font-weight: bold;
+    margin-bottom: 30px;
 }
 .khung-phai .btn-primary:hover {
     background-color: #002244;
