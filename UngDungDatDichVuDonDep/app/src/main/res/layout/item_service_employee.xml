@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/border_background_vien_den_bogoc"
+    android:padding="10dp"
+    android:layout_margin="8dp"
+    >
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dọn dẹp nhà"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="#000000"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Dọn dẹp cơ bản - Trên 100m2"
+        android:textColor="#000000"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:gravity="center"/>
+
+   <!-- <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+        &lt;!&ndash; Icon ngày &ndash;&gt;
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/icons8_date_64" />
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25/09/2024"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center"/>
+        &lt;!&ndash; Icon thời gian &ndash;&gt;
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="end"
+            android:layout_marginLeft="80dp"
+            android:src="@drawable/icons8_time_50" />
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15h30"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"/>
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical">
+
+        <!-- Icon ngày -->
+        <ImageView
+            android:id="@+id/iconDate"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/icons8_date_64"
+            android:layout_marginStart="10dp"/>
+
+        <!-- TextView ngày -->
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25/09/2024"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="8dp"
+            android:layout_gravity="center_vertical" />
+
+        <!-- Icon thời gian -->
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <!-- Icon thời gian -->
+        <ImageView
+            android:id="@+id/iconTime"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/icons8_time_50" />
+
+        <!-- TextView thời gian -->
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15h30"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+    </LinearLayout>
+
+
+
+
+    <!-- Địa chỉ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp">
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/icons8_map_50"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:text="65 Đường 339, Phước Long B,..."
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Giá và điểm -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp">
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/icon_money_48"
+            android:layout_marginStart="10dp"/>
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="200,000đ"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/icons8_medal_48" />
+        <TextView
+            android:id="@+id/tvPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20 Points"
+            android:layout_marginLeft="8dp"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_gravity="center"/>
+
+        <!-- Nút nhận -->
+        <TextView
+            android:id="@+id/tvAction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NHẬN"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:textColor="#34A853"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+</LinearLayout>
