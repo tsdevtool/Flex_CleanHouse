@@ -5,39 +5,33 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.happyhomes.DatabaseHelper;
 import com.example.happyhomes.Model.Service;
 import com.example.happyhomes.R;
 import com.example.happyhomes.databinding.ActivityServiceBinding;
-import java.io.IOException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceActivity extends AppCompatActivity {
 
     private ActivityServiceBinding binding;
-    private DatabaseHelper databaseHelper;
-    private List<Service> serviceList;
+    private List<Service> serviceList = new ArrayList<>();
     private static final String TAG = "ServiceActivity";
     private String cusID;
     private String cusName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityServiceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        databaseHelper = new DatabaseHelper(this);
-
-        try {
-            // Initialize and copy database if needed
-            databaseHelper.createDatabase();
-            Log.d(TAG, "Database created successfully.");
-        } catch (IOException e) {
-            Log.e(TAG, "Error initializing database", e);
-            Toast.makeText(this, "Error initializing database", Toast.LENGTH_LONG).show();
-            return;
-        }
 
         Intent intent = getIntent();
         String address = intent.getStringExtra("address");
@@ -48,58 +42,68 @@ public class ServiceActivity extends AppCompatActivity {
         }
         cusID = intent.getStringExtra("CusId");
         cusName = intent.getStringExtra("Cusname");
-        // Load services from database and display them in RadioButtons
-        loadServicesIntoRadioButtons();
+
+        // Load services from Firebase and display them in RadioButtons
+        loadServicesFromFirebase();
         addEvents();
     }
 
-    private void loadServicesIntoRadioButtons() {
-        try {
-            databaseHelper.openDatabase();
-            Log.d(TAG, "Database opened successfully.");
-        } catch (Exception e) {
-            Log.e(TAG, "Error opening database", e);
-            Toast.makeText(this, "Error opening database", Toast.LENGTH_LONG).show();
-            return;
-        }
+    private void loadServicesFromFirebase() {
+        DatabaseReference serviceRef = FirebaseDatabase.getInstance().getReference("services");
 
-        serviceList = databaseHelper.getAllServices();
+        serviceRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                serviceList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Service service = snapshot.getValue(Service.class);
+                    if (service != null) {
+                        serviceList.add(service);
+                    }
+                }
 
-        if (serviceList == null || serviceList.isEmpty()) {
-            Log.d(TAG, "No services available in the database.");
+                // Populate the RadioButtons with the retrieved service data
+                populateRadioButtons();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "Error loading services: " + databaseError.getMessage());
+                Toast.makeText(ServiceActivity.this, "Error loading services", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void populateRadioButtons() {
+        if (serviceList.isEmpty()) {
+            Log.d(TAG, "No services available in Firebase.");
             Toast.makeText(this, "No services available", Toast.LENGTH_LONG).show();
             return;
         }
 
         if (serviceList.size() > 0) {
-            String serviceInfo = serviceList.get(0).getServiceType();
-            binding.radioTwoHours.setText(serviceInfo);
-            Log.d(TAG, "Setting text for radioTwoHours: " + serviceInfo);
+            binding.radioTwoHours.setText(serviceList.get(0).getServiceType());
+            Log.d(TAG, "Setting text for radioTwoHours: " + serviceList.get(0).getServiceType());
         }
         if (serviceList.size() > 1) {
-            String serviceInfo = serviceList.get(1).getServiceType() ;
-            binding.radioThreeHours.setText(serviceInfo);
-            Log.d(TAG, "Setting text for radioThreeHours: " + serviceInfo);
+            binding.radioThreeHours.setText(serviceList.get(1).getServiceType());
+            Log.d(TAG, "Setting text for radioThreeHours: " + serviceList.get(1).getServiceType());
         }
         if (serviceList.size() > 2) {
-            String serviceInfo = serviceList.get(2).getServiceType();
-            binding.radioFourHours.setText(serviceInfo);
-            Log.d(TAG, "Setting text for radioFourHours: " + serviceInfo);
+            binding.radioFourHours.setText(serviceList.get(2).getServiceType());
+            Log.d(TAG, "Setting text for radioFourHours: " + serviceList.get(2).getServiceType());
         }
         if (serviceList.size() > 3) {
-            String serviceInfo = serviceList.get(3).getServiceType() ;
-            binding.radioFiveHours.setText(serviceInfo);
-            Log.d(TAG, "Setting text for radioFiveHours: " + serviceInfo);
+            binding.radioFiveHours.setText(serviceList.get(3).getServiceType());
+            Log.d(TAG, "Setting text for radioFiveHours: " + serviceList.get(3).getServiceType());
         }
         if (serviceList.size() > 4) {
-            String serviceInfo = serviceList.get(4).getServiceType() ;
-            binding.radioSixHours.setText(serviceInfo);
-            Log.d(TAG, "Setting text for radioSixHours: " + serviceInfo);
+            binding.radioSixHours.setText(serviceList.get(4).getServiceType());
+            Log.d(TAG, "Setting text for radioSixHours: " + serviceList.get(4).getServiceType());
         }
         if (serviceList.size() > 5) {
-            String serviceInfo = serviceList.get(5).getServiceType() ;
-            binding.radioSevenHours.setText(serviceInfo);
-            Log.d(TAG, "Setting text for radioSevenHours: " + serviceInfo);
+            binding.radioSevenHours.setText(serviceList.get(5).getServiceType());
+            Log.d(TAG, "Setting text for radioSevenHours: " + serviceList.get(5).getServiceType());
         }
 
         // Automatically select the first RadioButton as checked
@@ -168,12 +172,11 @@ public class ServiceActivity extends AppCompatActivity {
             selectTimeIntent.putExtra("selectedServiceId", selectedServiceId);
             selectTimeIntent.putExtra("selectedServiceCost", selectedServiceCost);
             selectTimeIntent.putExtra("adress", binding.address.getText());
-            selectTimeIntent.putExtra("CusId",cusID);
-            selectTimeIntent.putExtra("Cusname",cusName);
+            selectTimeIntent.putExtra("CusId", cusID);
+            selectTimeIntent.putExtra("Cusname", cusName);
             startActivity(selectTimeIntent);
         });
     }
-
 
     private void updateTxtMoney(int index) {
         if (serviceList != null && !serviceList.isEmpty() && index >= 0 && index < serviceList.size()) {

@@ -19,7 +19,7 @@ import com.example.happyhomes.Customer.Main_CustomerActivity;
 import com.example.happyhomes.Model.Customer;
 import com.example.happyhomes.Model.Employee;
 import com.example.happyhomes.Model.User;
-import com.example.happyhomes.NhanVien.NhanVienActivity;
+//import com.example.happyhomes.NhanVien.NhanVienActivity;
 import com.example.happyhomes.databinding.ActivityLoginBinding;
 
 import java.io.File;
@@ -109,16 +109,20 @@ public class LoginActivity extends AppCompatActivity {
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         User loggedInUser = dataSnapshot.getValue(User.class);
                                         if (loggedInUser != null) {
-                                            Toast.makeText(LoginActivity.this, "Login SUCCESS", Toast.LENGTH_SHORT).show();
+                                            // Check if the user's role is "customer"
+                                            if ("customer".equals(loggedInUser.role)) {
+                                                Toast.makeText(LoginActivity.this, "Login SUCCESS", Toast.LENGTH_SHORT).show();
 
-                                            // Pass user details to the next activity
-                                            Intent intent = new Intent(LoginActivity.this, Main_CustomerActivity.class);
-                                            intent.putExtra("Cusname", loggedInUser.name);
-                                            intent.putExtra("email", loggedInUser.email);
-                                            intent.putExtra("CusId", loggedInUser.userId);
-                                            intent.putExtra("phoneNumber", loggedInUser.phoneNumber);
-                                            startActivity(intent);
-
+                                                // Pass user details to the next activity
+                                                Intent intent = new Intent(LoginActivity.this, Main_CustomerActivity.class);
+                                                intent.putExtra("Cusname", loggedInUser.name);
+                                                intent.putExtra("email", loggedInUser.email);
+                                                intent.putExtra("CusId", loggedInUser.userId);
+                                                intent.putExtra("phoneNumber", loggedInUser.phoneNumber);
+                                                startActivity(intent);
+                                            } else {
+                                                Toast.makeText(LoginActivity.this, "Unauthorized: Only customers can access this screen.", Toast.LENGTH_SHORT).show();
+                                            }
                                         } else {
                                             Toast.makeText(LoginActivity.this, "Failed to retrieve user data.", Toast.LENGTH_SHORT).show();
                                         }

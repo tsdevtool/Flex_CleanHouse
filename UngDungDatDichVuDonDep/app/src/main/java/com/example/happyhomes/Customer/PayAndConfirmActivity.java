@@ -125,17 +125,15 @@ public class PayAndConfirmActivity extends AppCompatActivity {
     private void saveJobToDatabase() {
         Intent intent = getIntent();
         int serviceId = intent.getIntExtra("selectedServiceId", -1);
-
         String note = binding.txtNote.getText().toString();
-        String selectedDate = binding.txtDate.getText().toString(); // Expecting format "yyyy/MM/dd"
-        String selectedHour = binding.txtTime.getText().toString(); // Expecting format "HH:mm"
+        String selectedDate = binding.txtDate.getText().toString(); // Dạng ngày "yyyy/MM/dd"
+        String selectedHour = binding.txtTime.getText().toString(); // Dạng giờ "HH:mm"
 
         if (serviceId == -1) {
-            Toast.makeText(this, "Error: Service not selected.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Lỗi: Dịch vụ chưa được chọn.", Toast.LENGTH_LONG).show();
             return;
         }
 
-        // Sử dụng format ngày giờ thích hợp
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
@@ -143,34 +141,50 @@ public class PayAndConfirmActivity extends AppCompatActivity {
             Date date = dateFormat.parse(selectedDate);
             Date startTime = timeFormat.parse(selectedHour);
 
-            // Tạo đối tượng Schedule và lưu vào Firebase
+            // Tạo ID duy nhất cho lịch trình
             String scheduleId = databaseReference.push().getKey();
+
+            // Tạo đối tượng Schedule bao gồm customerId
             Schedule schedule = new Schedule(
                     scheduleId,
-                    cusId,
+                    cusId,  // Thêm customerId ở đây
                     date,
                     startTime,
                     binding.locationtext.getText().toString(),
                     "Đang chờ"
             );
 
-            // Lưu schedule vào Firebase
+            // Lưu lịch trình vào Firebase bao gồm customerId
             databaseReference.child("schedules").child(scheduleId).setValue(schedule)
                     .addOnSuccessListener(aVoid -> {
-                        // Sau khi lưu thành công Schedule, tiếp tục lưu Payment
                         savePayment(scheduleId, serviceId);
+                        saveServiceSchedule(scheduleId, serviceId);
                     })
                     .addOnFailureListener(e -> {
-                        Log.e("PayAndConfirmActivity", "Error saving schedule to Firebase", e);
-                        Toast.makeText(PayAndConfirmActivity.this, "Failed to save schedule.", Toast.LENGTH_LONG).show();
+                        Log.e("PayAndConfirmActivity", "Lỗi khi lưu lịch trình vào Firebase", e);
+                        Toast.makeText(PayAndConfirmActivity.this, "Không thể lưu lịch trình.", Toast.LENGTH_LONG).show();
                     });
 
         } catch (ParseException e) {
-            Log.e("PayAndConfirmActivity", "Error parsing date or hour", e);
-            Toast.makeText(this, "Invalid date or time format.", Toast.LENGTH_LONG).show();
+            Log.e("PayAndConfirmActivity", "Lỗi khi phân tích ngày hoặc giờ", e);
+            Toast.makeText(this, "Định dạng ngày hoặc giờ không hợp lệ.", Toast.LENGTH_LONG).show();
         }
     }
+    private void saveServiceSchedule(String scheduleId, int serviceId) {
+        // Tạo đối tượng ServiceSchedule
+        String serviceScheduleId = databaseReference.push().getKey();
+        ServiceSchedule serviceSchedule = new ServiceSchedule(Long.valueOf(serviceScheduleId.hashCode()), (long) serviceId, Long.valueOf(scheduleId.hashCode()));
 
+        // Lưu ServiceSchedule vào Firebase
+        databaseReference.child("serviceSchedules").child(serviceScheduleId).setValue(serviceSchedule)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("PayAndConfirmActivity", "ServiceSchedule saved successfully!");
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("PayAndConfirmActivity", "Error saving ServiceSchedule to Firebase", e);
+                    Toast.makeText(PayAndConfirmActivity.this, "Failed to save service schedule.", Toast.LENGTH_LONG).show();
+                });
+    }
     private void savePayment(String scheduleId, int serviceId) {
         // Chuyển đổi ngày giờ thành chuỗi định dạng
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
