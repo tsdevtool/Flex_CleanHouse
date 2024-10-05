@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="8dp"
-    android:background="#E4E4E4">
+    android:background="@drawable/rounded_backgrounditem"
+
+    >
 
     <!-- Date, Time, and Service Type -->
     <LinearLayout
@@ -126,7 +128,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ĐẶT LẠI"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="#0AD312"
             android:background="@android:color/transparent"
             android:layout_marginStart="8dp" />
 

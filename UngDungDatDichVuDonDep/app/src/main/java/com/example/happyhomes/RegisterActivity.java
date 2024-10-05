@@ -71,8 +71,11 @@ public class RegisterActivity extends AppCompatActivity {
                                     String userId = user.getUid();
                                     Log.d(TAG, "User ID: " + userId);
 
-                                    // Create a new user object with the phone number
-                                    User newUser = new User(userId, name, email, phoneNumber,null);
+                                    // Set the default role as "customer"
+                                    String defaultRole = "customer";
+
+                                    // Create a new user object with the role
+                                    User newUser = new User(userId, name, email, phoneNumber, null, defaultRole);
 
                                     // Save user data to Realtime Database
                                     mDatabase.child(userId).setValue(newUser)
