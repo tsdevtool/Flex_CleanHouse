@@ -47,7 +47,7 @@ public class SelectTimeCustomerActivity extends AppCompatActivity {
             String additionalRequest = binding.edtNote.getText().toString();
 
             // Tạo Intent để bắt đầu PayAndConfirmActivity
-            Intent payAndConfirmIntent = new Intent(SelectTimeCustomerActivity.this, PayAndConfirmActivity.class);
+        /*    Intent payAndConfirmIntent = new Intent(SelectTimeCustomerActivity.this, PayAndConfirmActivity.class);
             // Truyền giá trị ngày và giờ riêng biệt qua Intent
             payAndConfirmIntent.putExtra("selectedServiceId", selectedServiceId);
             payAndConfirmIntent.putExtra("selectedDate", selectedDate); // Truyền ngày
@@ -57,7 +57,7 @@ public class SelectTimeCustomerActivity extends AppCompatActivity {
             payAndConfirmIntent.putExtra("cost", binding.txtCost.getText().toString());
             payAndConfirmIntent.putExtra("CusId", cusId);
             payAndConfirmIntent.putExtra("Cusname", cusName);
-            startActivity(payAndConfirmIntent);
+            startActivity(payAndConfirmIntent);*/
         });
 
         // Load data and set up events

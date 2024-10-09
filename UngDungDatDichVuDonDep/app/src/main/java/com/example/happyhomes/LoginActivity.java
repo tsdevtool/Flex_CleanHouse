@@ -20,6 +20,7 @@ import com.example.happyhomes.Model.Customer;
 import com.example.happyhomes.Model.Employee;
 import com.example.happyhomes.Model.User;
 //import com.example.happyhomes.NhanVien.NhanVienActivity;
+import com.example.happyhomes.NhanVien.NhanVienActivity;
 import com.example.happyhomes.databinding.ActivityLoginBinding;
 
 import java.io.File;
@@ -120,9 +121,20 @@ public class LoginActivity extends AppCompatActivity {
                                                 intent.putExtra("CusId", loggedInUser.userId);
                                                 intent.putExtra("phoneNumber", loggedInUser.phoneNumber);
                                                 startActivity(intent);
+                                            }
+                                            if ("employee".equals(loggedInUser.role)) {
+                                                Toast.makeText(LoginActivity.this, "Login SUCCESS", Toast.LENGTH_SHORT).show();
+
+                                                // Pass user details to the next activity
+                                                Intent intent = new Intent(LoginActivity.this, NhanVienActivity.class);
+                                                intent.putExtra("EplName", loggedInUser.name);
+                                                intent.putExtra("EplId", loggedInUser.userId);
+                                                /*intent.putExtra("phoneNumber", loggedInUser.phoneNumber);*/
+                                                startActivity(intent);
                                             } else {
                                                 Toast.makeText(LoginActivity.this, "Unauthorized: Only customers can access this screen.", Toast.LENGTH_SHORT).show();
                                             }
+
                                         } else {
                                             Toast.makeText(LoginActivity.this, "Failed to retrieve user data.", Toast.LENGTH_SHORT).show();
                                         }
