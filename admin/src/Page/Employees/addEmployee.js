@@ -1,6 +1,8 @@
 import {
   createUserWithEmailAndPassword,
   fetchSignInMethodsForEmail,
+  sendEmailVerification,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { onValue, ref, set } from "firebase/database";
 import {
@@ -98,7 +100,7 @@ const AddEmployee = () => {
           name: name,
           phoneNumber: phone,
           role: roleName,
-          salary: salary,
+          salary: parseFloat(salary),
           image: imageUrl, // Lưu đường dẫn hình ảnh
         });
       } else {
@@ -111,12 +113,13 @@ const AddEmployee = () => {
           name: name,
           phoneNumber: phone,
           role: roleName,
-          salary: salary,
+          salary: parseFloat(salary),
           image: null, // Hoặc bạn có thể không lưu trường này
         });
       }
 
       alert("Tạo tài khoản thành công!");
+      await sendPasswordResetEmail(auth, email);
     } catch (error) {
       console.error("Lỗi tạo tài khoản:", error);
       alert(
