@@ -30,3 +30,6 @@ aside .logo{width: 8rem;color: white;margin-bottom: 15px;}
 /* Customer */
 table tr td .btn-action{border: 1px solid rgba(0, 0, 0, 0.3) !important; border-radius: 8px; font-weight: 600; font-size: 18px; color: #ffff; min-width: 85px; width: 80%;}
 table tr td .btn-action:hover{color: #fff !important;}
+.iconbox{font-size: 30px !important; color: #1A719C !important;}
+.text-input-box{font-size: 18px !important; color: #1A719C !important; font-weight: 600 !important;}
+.button-box{font-size: 24px; text-transform: capitalize; padding: 10px 80px; color: #fff; background: #03184B; font-weight: 600 ;}
