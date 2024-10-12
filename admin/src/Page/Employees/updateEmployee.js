@@ -1,15 +1,4 @@
-import {
-  createUserWithEmailAndPassword,
-  fetchSignInMethodsForEmail,
-  sendEmailVerification,
-  sendPasswordResetEmail,
-} from "firebase/auth";
-import { onValue, ref, set } from "firebase/database";
-import {
-  getDownloadURL,
-  ref as storageRef,
-  uploadBytes,
-} from "firebase/storage";
+import { onValue, ref, update } from "firebase/database";
 import { useEffect, useState } from "react";
 import { BiRename } from "react-icons/bi";
 import { CiCamera } from "react-icons/ci";
@@ -17,39 +6,17 @@ import { FaAngleLeft, FaIdCard } from "react-icons/fa";
 import { FaMoneyBillWave } from "react-icons/fa6";
 import { IoIosLock } from "react-icons/io";
 import { MdContactPhone, MdEmail } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "../../App.css";
-import { auth, db, storage } from "../../firebase/config";
+import { db } from "../../firebase/config";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
-const AddEmployee = () => {
-  const [image, setImage] = useState(null); // Change to null for image file
-  const [imageUrl, setImageUrl] = useState("");
+const UpdateEmployee = () => {
+  const { id } = useParams(); // Lấy ID nhân viên từ URL
+  const [employee, setEmployee] = useState(null); // Trạng thái lưu thông tin nhân viên
+  const [image, setImage] = useState(null); // Trạng thái lưu ảnh
   const [roles, setRoles] = useState([]);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [position, setPosition] = useState("");
-  const [salary, setSalary] = useState("");
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      //   setImage(file); // Set the file instead of the image URL
-      //   const imageUrl = URL.createObjectURL(file);
-      //   setImageUrl(imageUrl);
-
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setImage(reader.result);
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-  };
-
+  const navigate = useNavigate();
   useEffect(() => {
     const rolesRef = ref(db, "roles");
     onValue(rolesRef, (snapshot) => {
@@ -66,67 +33,73 @@ const AddEmployee = () => {
     });
   }, []);
 
-  const handleUpdateAccount = async (e) => {
+  useEffect(() => {
+    const employeeRef = ref(db, `users/${id}`); // Tham chiếu đến nhân viên trong Firebase
+    onValue(employeeRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setEmployee(data); // Cập nhật trạng thái với dữ liệu nhân viên
+      }
+    });
+  }, [id]);
+
+  const handleUpdateAccount = (e) => {
     e.preventDefault();
-    try {
-      const signInMethods = await fetchSignInMethodsForEmail(auth, email);
-      if (signInMethods.length > 0) {
-        alert("Email đã tồn tại. Vui lòng sử dụng email khác hoặc đăng nhập.");
-        return; // Ngừng thực hiện nếu email đã tồn tại
-      }
 
-      // Tạo người dùng mới trong Firebase Authentication
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredential.user;
+    // Cập nhật thông tin nhân viên trong Firebase
+    const employeeRef = ref(db, `users/${id}`); // Tham chiếu đến nhân viên trong Firebase
 
-      // Tải hình ảnh lên Firebase Storage
-      if (image) {
-        const imageRef = storageRef(storage, `images/${user.uid}/profile.jpg`); // Lưu hình ảnh theo ID người dùng
-        await uploadBytes(imageRef, image); // Tải lên hình ảnh
+    const selectedRole = roles.find((role) => role.id === employee.position); // position là id của role
+    const roleName = selectedRole ? selectedRole.name : null;
+    // Tạo một đối tượng với dữ liệu nhân viên mới
+    const updatedData = {
+      email: employee.email,
+      password: employee.password,
+      name: employee.name,
+      phoneNumber: employee.phoneNumber,
+      role: roleName,
+      salary: employee.salary,
+      image: image || employee.image, // Giữ lại hình ảnh cũ nếu không có hình mới
+    };
 
-        // Lấy URL của hình ảnh
-        const imageUrl = await getDownloadURL(imageRef);
+    update(employeeRef, updatedData)
+      .then(() => {
+        const auth = getAuth();
+        sendPasswordResetEmail(auth, employee.email)
+          .then(() => {
+            console.log(
+              "Email reset mật khẩu đã được gửi đến:",
+              employee.email
+            );
+            alert(
+              "Thông báo: Đã gửi email reset mật khẩu đến " + employee.email
+            );
+          })
+          .catch((error) => {
+            console.error("Lỗi khi gửi email reset mật khẩu:", error);
+            alert("Đã có lỗi xảy ra khi gửi email reset mật khẩu.");
+          });
 
-        const selectedRole = roles.find((role) => role.id === position); // position là id của role
-        const roleName = selectedRole ? selectedRole.name : null;
-        // Lưu thông tin người dùng vào Realtime Database
-        const userRef = ref(db, "users/" + user.uid);
-        await set(userRef, {
-          email: email,
-          name: name,
-          phoneNumber: phone,
-          role: roleName,
-          salary: parseFloat(salary),
-          image: imageUrl, // Lưu đường dẫn hình ảnh
-        });
-      } else {
-        const selectedRole = roles.find((role) => role.id === position); // position là id của role
-        const roleName = selectedRole ? selectedRole.name : null;
-        // Nếu không có hình ảnh, lưu người dùng mà không có hình ảnh
-        const userRef = ref(db, "users/" + user.uid);
-        await set(userRef, {
-          email: email,
-          name: name,
-          phoneNumber: phone,
-          role: roleName,
-          salary: parseFloat(salary),
-          image: null, // Hoặc bạn có thể không lưu trường này
-        });
-      }
+        navigate("/employees"); // Điều hướng về trang chủ sau khi cập nhật thành công
+      })
+      .catch((error) => {
+        console.error("Lỗi khi cập nhật thông tin nhân viên:", error);
+      });
+  };
 
-      alert("Tạo tài khoản thành công!");
-      await sendPasswordResetEmail(auth, email);
-    } catch (error) {
-      console.error("Lỗi tạo tài khoản:", error);
-      alert(
-        "Kiểm tra lại thông tin người dùng hoặc người dùng đã có thông tin."
-      );
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Xử lý tải ảnh lên (nếu cần)
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
+
+  if (!employee) return <div>Loading...</div>;
 
   return (
     <main className="flex-1 p-6 bg-gray-100">
@@ -134,13 +107,13 @@ const AddEmployee = () => {
         <Link to={"/employees"} className="fas fa-arrow-left mr-2 text-3xl">
           <FaAngleLeft />
         </Link>
-        <h1 className="text-2xl font-bold">Thêm nhân viên mới</h1>
+        <h1 className="text-2xl font-bold">Cập nhật thông tin nhân viên</h1>
       </div>
       <form onSubmit={handleUpdateAccount}>
         <div className="flex justify-center mb-8">
           <div className=" text-center">
             <img
-              src={image}
+              src={image || employee.image}
               alt="Ảnh đại diện"
               className="rounded-full mb-4 ml-3 w-24 h-24 object-cover border-1 border-black"
             />
@@ -175,9 +148,12 @@ const AddEmployee = () => {
               <input
                 type="email"
                 placeholder="Nhập email"
+                value={employee.email}
                 className="w-full outline-none p-2 bg-white mt-2"
                 required
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) =>
+                  setEmployee({ ...employee, email: e.target.value })
+                }
               />
             </div>
           </div>
@@ -196,7 +172,9 @@ const AddEmployee = () => {
                 placeholder="Nhập mật khẩu"
                 className="w-full outline-none p-2 bg-white mt-2"
                 required
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) =>
+                  setEmployee({ ...employee, password: e.target.value })
+                }
               />
             </div>
           </div>
@@ -213,9 +191,12 @@ const AddEmployee = () => {
               <input
                 type="text"
                 placeholder="Nhập họ và tên"
+                value={employee.name}
                 className="w-full outline-none p-2 bg-white mt-2"
                 required
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) =>
+                  setEmployee({ ...employee, name: e.target.value })
+                }
               />
             </div>
           </div>
@@ -232,9 +213,12 @@ const AddEmployee = () => {
               <input
                 type="phone"
                 placeholder="Nhập số điện thoại"
+                value={employee.phoneNumber}
                 className="w-full outline-none p-2 bg-white mt-2"
                 required
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) =>
+                  setEmployee({ ...employee, phoneNumber: e.target.value })
+                }
               />
             </div>
           </div>
@@ -251,9 +235,12 @@ const AddEmployee = () => {
               <select
                 type="text"
                 placeholder="Nhập chức vụ"
+                value={employee.roles}
                 className="w-full outline-none p-2 bg-white mt-2"
                 required
-                onChange={(e) => setPosition(e.target.value)}
+                onChange={(e) =>
+                  setEmployee({ ...employee, position: e.target.value })
+                }
               >
                 <option value="">Chọn chức vụ</option>
                 {roles.map((role) => (
@@ -281,16 +268,19 @@ const AddEmployee = () => {
               <input
                 type="number"
                 placeholder="Nhập lương cơ bản"
+                value={employee.salary}
                 className="w-full outline-none p-2 bg-white mt-2"
                 required
-                onChange={(e) => setSalary(e.target.value)}
+                onChange={(e) =>
+                  setEmployee({ ...employee, salary: e.target.value })
+                }
               />
             </div>
           </div>
         </div>
         <div className="flex justify-center mt-8">
           <button type="submit" className=" button-box rounded-full">
-            Tạo tài khoản
+            Cập nhật
           </button>
         </div>
       </form>
@@ -298,4 +288,4 @@ const AddEmployee = () => {
   );
 };
 
-export default AddEmployee;
+export default UpdateEmployee;

@@ -82,10 +82,12 @@ const Employees = () => {
                   Nhắn tin
                 </button>
               </div>
-              <div >
-                <button className="bg-yellow-500 m-2 p-2 btn-action">
-                  Chỉnh sửa
-                </button>
+              <div>
+                <Link to={`/employees/update/${employee.id}`}>
+                  <button className="bg-yellow-500 m-2 p-2 btn-action">
+                    Chỉnh sửa
+                  </button>
+                </Link>
               </div>
               <div>
                 <button type="button" onClick={() => handleDelete(employee.id)} className="bg-red-500 m-2 p-2 btn-action">
