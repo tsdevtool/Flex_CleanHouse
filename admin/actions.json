@@ -1,0 +1,96 @@
+[
+  {
+    "id": "ef7fa541-aca1-4671-b0be-2428751255c9",
+    "type": "type",
+    "createTime": 1728224006561,
+    "updatedTime": 1728224007288,
+    "duration": 579,
+    "text": "09588"
+  },
+  {
+    "id": "eaa3c527-35b6-4a54-b8de-a9955380beff",
+    "type": "press",
+    "createTime": 1728224008967,
+    "updatedTime": 1728224008967,
+    "duration": 88,
+    "key": "Backspace",
+    "altKey": false,
+    "ctrlKey": false,
+    "metaKey": false,
+    "shiftKey": false
+  },
+  {
+    "id": "75845491-22f7-4ed2-91df-14b95bfbb14d",
+    "type": "press",
+    "createTime": 1728224009098,
+    "updatedTime": 1728224009098,
+    "duration": 73,
+    "key": "Backspace",
+    "altKey": false,
+    "ctrlKey": false,
+    "metaKey": false,
+    "shiftKey": false
+  },
+  {
+    "id": "ab59f0b6-3fb8-4569-8d65-62efc2c4e7d4",
+    "type": "press",
+    "createTime": 1728224009292,
+    "updatedTime": 1728224009292,
+    "duration": 102,
+    "key": "Backspace",
+    "altKey": false,
+    "ctrlKey": false,
+    "metaKey": false,
+    "shiftKey": false
+  },
+  {
+    "id": "84eebb10-a5b6-46c1-b11d-bf62bd939a8d",
+    "type": "press",
+    "createTime": 1728224009450,
+    "updatedTime": 1728224009450,
+    "duration": 94,
+    "key": "Backspace",
+    "altKey": false,
+    "ctrlKey": false,
+    "metaKey": false,
+    "shiftKey": false
+  },
+  {
+    "id": "7383f98c-1f48-4968-a937-c6e0afb2a539",
+    "type": "type",
+    "createTime": 1728224011093,
+    "updatedTime": 1728224012425,
+    "duration": 975,
+    "text": "968832714"
+  },
+  {
+    "id": "ed93b848-b98f-4203-9d09-e6815266a03b",
+    "type": "click",
+    "createTime": 1728224013470,
+    "updatedTime": 1728224013470,
+    "duration": 77,
+    "point": {
+      "x": 0.44982698961937717,
+      "y": 0.33384615384615385
+    }
+  },
+  {
+    "id": "8ddff87b-9443-4bf5-858b-f9fabbd7e1c6",
+    "type": "type",
+    "createTime": 1728224015797,
+    "updatedTime": 1728224016080,
+    "duration": 419,
+    "text": "123"
+  },
+  {
+    "id": "0e701d4a-f32b-48a6-9e13-4c433fa3c3d8",
+    "type": "click",
+    "createTime": 1728224024229,
+    "updatedTime": 1728224024229,
+    "duration": 71,
+    "point": {
+      "x": 0.5034602076124568,
+      "y": 0.4
+    }
+  }
+]
