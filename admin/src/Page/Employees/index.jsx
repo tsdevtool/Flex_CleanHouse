@@ -1,4 +1,4 @@
-import { onValue, ref } from "firebase/database";
+import { onValue, ref, remove } from "firebase/database"; // Import remove từ firebase/database
 import { useEffect, useState } from "react";
 import { IoMdPersonAdd } from "react-icons/io";
 import { Link } from "react-router-dom";
@@ -6,6 +6,7 @@ import File from "../../Components/File";
 import BasicInformation from "../../Components/Header/BasicInformation";
 import HeaderWrapper from "../../Components/Header/HeaderWrapper";
 import { db } from "../../firebase/config";
+
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
 
@@ -22,6 +23,18 @@ const Employees = () => {
       }
     });
   }, []);
+
+  const handleDelete = async (employeeId) => {
+    if (window.confirm("Bạn có chắc chắn muốn xóa nhân viên này?")) {
+      try {
+        await remove(ref(db, `users/${employeeId}`)); // Xóa nhân viên từ Realtime Database
+        console.log("User deleted successfully");
+      } catch (error) {
+        console.error("Error deleting user:", error);
+      }
+    }
+  };
+
   return (
     <main className="flex-1 p-6 bg-gray-100">
       <HeaderWrapper />
@@ -52,36 +65,35 @@ const Employees = () => {
         </thead>
         <tbody>
           {employees.map((employee, index) => (
-            <>
-              <tr key={employee.id} className="bg-indigo-100">
-                <td className="p-2">{index + 1}</td>
-                <td className="p-2">{employee.name}</td>
-                <td className="p-2">{employee.role}</td>
-                <td className="p-2">{employee.email}</td>
-                <td className="p-2">{employee.phoneNumber}</td>
-                <td className="p-2"> {employee.salary
-    ? employee.salary.toLocaleString("vi-VN")
-    : "Chưa có lương"}</td>
-                <td className="p-2">
-                  <form onClick={true}>
-                    <button className="bg-success m-2 p-2 btn-action">
-                      Nhắn tin
-                    </button>
-                  </form>
-                  <form onClick={true}>
-                    <button className="bg-yellow-500 m-2 p-2 btn-action">
-                      Chỉnh sửa
-                    </button>
-                  </form>
-                  <form onClick={true}>
-                    <button className="bg-red-500 m-2 p-2 btn-action">
-                      Xóa
-                    </button>
-                  </form>
-                </td>
-              </tr>
-              <hr></hr>
-            </>
+            <tr key={employee.id} className="bg-indigo-100">
+            <td className="p-2">{index + 1}</td>
+            <td className="p-2">{employee.name}</td>
+            <td className="p-2">{employee.role}</td>
+            <td className="p-2">{employee.email}</td>
+            <td className="p-2">{employee.phoneNumber}</td>
+            <td className="p-2">
+              {employee.salary
+                ? employee.salary.toLocaleString("vi-VN")
+                : "Chưa có lương"}
+            </td>
+            <td className="p-2">
+              <div >
+                <button className="bg-success m-2 p-2 btn-action">
+                  Nhắn tin
+                </button>
+              </div>
+              <div >
+                <button className="bg-yellow-500 m-2 p-2 btn-action">
+                  Chỉnh sửa
+                </button>
+              </div>
+              <div>
+                <button type="button" onClick={() => handleDelete(employee.id)} className="bg-red-500 m-2 p-2 btn-action">
+                  Xóa
+                </button>
+              </div>
+            </td>
+          </tr>
           ))}
         </tbody>
       </table>
