@@ -1,6 +1,6 @@
 import { onValue, ref, remove, update } from "firebase/database";
 import { useEffect, useState } from "react";
-import { useHistory, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import File from "../../Components/File";
 import BasicInformation from "../../Components/Header/BasicInformation";
 import HeaderWrapper from "../../Components/Header/HeaderWrapper";

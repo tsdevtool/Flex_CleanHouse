@@ -64,7 +64,7 @@ const Employees = () => {
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee, index) => (
+          {employees.filter((employee)=>employee.role!=="customer").map((employee, index) => (
             <tr key={employee.id} className="bg-indigo-100">
             <td className="p-2">{index + 1}</td>
             <td className="p-2">{employee.name}</td>
