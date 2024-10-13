@@ -33,20 +33,31 @@ import vn.zalopay.sdk.ZaloPayError;
 import vn.zalopay.sdk.ZaloPaySDK;
 import vn.zalopay.sdk.listeners.PayOrderListener;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+
+
 public class PayAndConfirmActivity extends AppCompatActivity {
+    // Khởi tạo Firebase Realtime Database
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
     ActivityPayAndConfirmBinding binding;
     DatabaseHelper databaseHelper;
-    private int cusId;
+    private String cusId;
     private String cusName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPayAndConfirmBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        //firebase
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("jobs");
         // Initialize DatabaseHelper
         databaseHelper = new DatabaseHelper(this);
         Intent intent = getIntent();
-        cusId = intent.getIntExtra("CusId",-1);
+        cusId = intent.getStringExtra("CusId");
         cusName = intent.getStringExtra("Cusname");
         // Load data from the intent and display on the UI
         loadData();
@@ -98,7 +109,7 @@ public class PayAndConfirmActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             String selectedDate = intent.getStringExtra("selectedDate");
-            String selectedHour = intent.getStringExtra("selectedHour");
+            String selectedHour = intent.getStringExtra("selectedTime");
             String additionalRequest = intent.getStringExtra("additionalRequest");
             String adress = intent.getStringExtra("adress");
             String cost = intent.getStringExtra("cost");
@@ -114,78 +125,93 @@ public class PayAndConfirmActivity extends AppCompatActivity {
     private void saveJobToDatabase() {
         Intent intent = getIntent();
         int serviceId = intent.getIntExtra("selectedServiceId", -1);
-
         String note = binding.txtNote.getText().toString();
-        String selectedDate = binding.txtDate.getText().toString(); // Expecting format "yyyy-MM-dd"
-        String selectedHour = binding.txtTime.getText().toString(); // Expecting format "HH:mm:ss"
+        String selectedDate = binding.txtDate.getText().toString(); // Dạng ngày "yyyy/MM/dd"
+        String selectedHour = binding.txtTime.getText().toString(); // Dạng giờ "HH:mm"
 
         if (serviceId == -1) {
-            Toast.makeText(this, "Error: Service not selected.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Lỗi: Dịch vụ chưa được chọn.", Toast.LENGTH_LONG).show();
             return;
         }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()); // Ensure this format matches the date string
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault()); // Updated format to match "04:48"
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
         try {
             Date date = dateFormat.parse(selectedDate);
-            // Handle the case where the time might not include seconds
             Date startTime = timeFormat.parse(selectedHour);
 
+            // Tạo ID duy nhất cho lịch trình
+            String scheduleId = databaseReference.push().getKey();
+
+            // Tạo đối tượng Schedule bao gồm customerId
             Schedule schedule = new Schedule(
-                    null,
-                    (long) cusId,
+                    scheduleId,
+                    cusId,  // Thêm customerId ở đây
                     date,
                     startTime,
                     binding.locationtext.getText().toString(),
                     "Đang chờ"
             );
-            // Save the schedule to the database
-            long scheduleId = databaseHelper.addSchedule(schedule);
-            if (scheduleId != -1) {
-                ServiceSchedule serviceSchedule = new ServiceSchedule(
-                        null,
-                        (long) serviceId,
-                        scheduleId
-                );
-                databaseHelper.addServiceSchedule(serviceSchedule);
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                java.sql.Date payDay = new java.sql.Date(timestamp.getTime());
 
+            // Lưu lịch trình vào Firebase bao gồm customerId
+            databaseReference.child("schedules").child(scheduleId).setValue(schedule)
+                    .addOnSuccessListener(aVoid -> {
+                        savePayment(scheduleId, serviceId);
+                        saveServiceSchedule(scheduleId, serviceId);
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e("PayAndConfirmActivity", "Lỗi khi lưu lịch trình vào Firebase", e);
+                        Toast.makeText(PayAndConfirmActivity.this, "Không thể lưu lịch trình.", Toast.LENGTH_LONG).show();
+                    });
 
-                if(binding.rdoTienMat.isChecked()){
-                    Payment payment = new Payment(
-                            null,
-                            (long)scheduleId,
-                            (long) 1,
-                            (long) serviceId,
-                            payDay
-                    );
-                    databaseHelper.addPayment(payment);
-                }else if(binding.rdoZalo.isChecked()){
-                    Payment payment = new Payment(
-                            null,
-                            (long)scheduleId,
-                            (long) 6,
-                            (long) serviceId,
-                            payDay
-                    );
-                    databaseHelper.addPayment(payment);
-                    zalopay();
-                }
-                Toast.makeText(this, "Job posted successfully!", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(this, "Failed to save job.", Toast.LENGTH_LONG).show();
-            }
         } catch (ParseException e) {
-            Log.e("PayAndConfirmActivity", "Error parsing date or hour", e);
-        } catch (Exception e) {
-            Log.e("PayAndConfirmActivity", "Error saving job to database", e);
+            Log.e("PayAndConfirmActivity", "Lỗi khi phân tích ngày hoặc giờ", e);
+            Toast.makeText(this, "Định dạng ngày hoặc giờ không hợp lệ.", Toast.LENGTH_LONG).show();
+        }
+    }
+    private void saveServiceSchedule(String scheduleId, int serviceId) {
+        // Tạo đối tượng ServiceSchedule
+        String serviceScheduleId = databaseReference.push().getKey();
+        ServiceSchedule serviceSchedule = new ServiceSchedule(Long.valueOf(serviceScheduleId.hashCode()), (long) serviceId, Long.valueOf(scheduleId.hashCode()));
 
+        // Lưu ServiceSchedule vào Firebase
+        databaseReference.child("serviceSchedules").child(serviceScheduleId).setValue(serviceSchedule)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("PayAndConfirmActivity", "ServiceSchedule saved successfully!");
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("PayAndConfirmActivity", "Error saving ServiceSchedule to Firebase", e);
+                    Toast.makeText(PayAndConfirmActivity.this, "Failed to save service schedule.", Toast.LENGTH_LONG).show();
+                });
+    }
+    private void savePayment(String scheduleId, int serviceId) {
+        // Chuyển đổi ngày giờ thành chuỗi định dạng
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String payDay = sdf.format(timestamp);
+
+        // Tạo đối tượng Payment dựa trên phương thức thanh toán
+        Payment payment = null;
+        if (binding.rdoTienMat.isChecked()) {
+            payment = new Payment(null, (long) scheduleId.hashCode(), (long) 1, (long) serviceId, payDay);
+        } else if (binding.rdoZalo.isChecked()) {
+            payment = new Payment(null, (long) scheduleId.hashCode(), (long) 6, (long) serviceId, payDay);
+            zalopay();
         }
 
-
+        // Lưu Payment vào Firebase
+        if (payment != null) {
+            databaseReference.child("payments").child(scheduleId).setValue(payment)
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(PayAndConfirmActivity.this, "Payment saved successfully!", Toast.LENGTH_LONG).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e("PayAndConfirmActivity", "Error saving payment to Firebase", e);
+                        Toast.makeText(PayAndConfirmActivity.this, "Failed to save payment.", Toast.LENGTH_LONG).show();
+                    });
+        }
     }
-
     private void zalopay() {
         CreateOrder orderApi = new CreateOrder();
         String cost2 = binding.txtCost.getText().toString();

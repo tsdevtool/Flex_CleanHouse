@@ -30,4 +30,11 @@
     <string name="th_ng_tin_c_ng_vi_c">Thông tin công việc</string>
     <string name="v_tr_l_m_vi_c">Vị trí làm việc</string>
     <string name="x_c_nh_n_v_thanh_to_n">Xác nhận và thanh toán</string>
+    <string name="login_text">Do you already have an account? <b>Log in</b></string>
+    <string name="register_text">Do you have an account yet? <b>Sign in</b></string>
+    <string name="username_or_email">Username or Email</string>
+    <string name="enter_your_full_name">Enter your full name</string>
+    <string name="password">Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

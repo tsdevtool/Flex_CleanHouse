@@ -19,119 +19,105 @@ public class SelectTimeCustomerActivity extends AppCompatActivity {
 
     private ActivitySelectTimeCustomerBinding binding;
     private int selectedServiceId;
-    private double slectedServiceCode;
-    private int cusId;
+    private double selectedServiceCode;
+    private String cusId;
     private String cusName;
+    private String selectedDate;  // Lưu trữ ngày đã chọn
+    private String selectedTime;  // Lưu trữ giờ đã chọn
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySelectTimeCustomerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        // Retrieve data from Intent
 
-        // Log to verify date and time picker setup
-        Log.d("SelectTimeCustomer", "Setting up Date and Time Pickers");
-        // Set up date and time pickers
-        setupDatePicker();
-        setupTimePicker();
+        // Retrieve data from Intent
         Intent intent = getIntent();
-        cusId = intent.getIntExtra("CusId",-1);
+        cusId = intent.getStringExtra("CusId");
         cusName = intent.getStringExtra("Cusname");
+
         // Set up the Next button click listener
         binding.btnNext.setOnClickListener(view -> {
-            // Retrieve values from the views
-            String selectedDate = binding.dateTextView.getText().toString();
-            String selectedHour = binding.hourPicker.getText().toString();
+            // Kiểm tra xem ngày và giờ có được chọn không
+            if (selectedDate == null || selectedTime == null) {
+                Toast.makeText(SelectTimeCustomerActivity.this, "Vui lòng chọn ngày và giờ.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             String additionalRequest = binding.edtNote.getText().toString();
-            // Log the values being sent to PayAndConfirmActivity
-            Log.d("SelectTimeCustomer", "Next button clicked");
-            Log.d("SelectTimeCustomer", "Selected Date: " + selectedDate);
-            Log.d("SelectTimeCustomer", "Selected Hour: " + selectedHour);
-            Log.d("SelectTimeCustomer", "Additional Request: " + additionalRequest);
-            // Create an Intent to start PayAndConfirmActivity
+
+            // Tạo Intent để bắt đầu PayAndConfirmActivity
             Intent payAndConfirmIntent = new Intent(SelectTimeCustomerActivity.this, PayAndConfirmActivity.class);
-            // Add the retrieved values to the Intent as extras
+            // Truyền giá trị ngày và giờ riêng biệt qua Intent
             payAndConfirmIntent.putExtra("selectedServiceId", selectedServiceId);
-            payAndConfirmIntent.putExtra("selectedDate", selectedDate);
-            payAndConfirmIntent.putExtra("selectedHour", selectedHour);
+            payAndConfirmIntent.putExtra("selectedDate", selectedDate); // Truyền ngày
+            payAndConfirmIntent.putExtra("selectedTime", selectedTime); // Truyền giờ
             payAndConfirmIntent.putExtra("additionalRequest", additionalRequest);
-            payAndConfirmIntent.putExtra("adress",binding.address.getText().toString());
-            // Start the PayAndConfirmActivity
-            payAndConfirmIntent.putExtra("cost",binding.txtCost.getText().toString());
-            payAndConfirmIntent.putExtra("CusId",cusId);
-            payAndConfirmIntent.putExtra("Cusname",cusName);
+            payAndConfirmIntent.putExtra("adress", binding.address.getText().toString());
+            payAndConfirmIntent.putExtra("cost", binding.txtCost.getText().toString());
+            payAndConfirmIntent.putExtra("CusId", cusId);
+            payAndConfirmIntent.putExtra("Cusname", cusName);
             startActivity(payAndConfirmIntent);
         });
+
+        // Load data and set up events
         loadData();
+        setupDateTimePicker();
         addEvent();
     }
 
-    private void addEvent() {
-        // Back button event
-        binding.ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Go back to the previous screen
-                onBackPressed();
-            }
+    private void setupDateTimePicker() {
+        binding.btnSelectDateTime.setOnClickListener(v -> {
+            Calendar calendar = Calendar.getInstance();
+
+            // Open DatePickerDialog first
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    SelectTimeCustomerActivity.this,
+                    (view, year, month, dayOfMonth) -> {
+                        // When date is set, open TimePickerDialog
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                                SelectTimeCustomerActivity.this,
+                                (timeView, hourOfDay, minute) -> {
+                                    // Lưu ngày và giờ riêng biệt
+                                    selectedDate = year + "/" + (month + 1) + "/" + dayOfMonth;
+                                    selectedTime = String.format("%02d:%02d", hourOfDay, minute);
+
+                                    // Hiển thị ngày và giờ đã chọn trên TextView
+                                    binding.dateTimeTextView.setText("Ngày đã chọn: " + selectedDate + " Giờ: " + selectedTime);
+
+                                },
+                                calendar.get(Calendar.HOUR_OF_DAY),
+                                calendar.get(Calendar.MINUTE),
+                                true
+                        );
+                        timePickerDialog.show();
+                    },
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH)
+            );
+            datePickerDialog.show();
         });
     }
+
 
     private void loadData() {
         try {
             Intent incomingIntent = getIntent();
             selectedServiceId = incomingIntent.getIntExtra("selectedServiceId", -1);
-            slectedServiceCode = incomingIntent.getDoubleExtra("selectedServiceCost", 0.0);
-            String selectedAdress= incomingIntent.getStringExtra("adress");
-            binding.txtCost.setText(String.format("%.0f", slectedServiceCode));
-            binding.address.setText(selectedAdress);
-            // Log to check the value of selectedServiceId
-            Log.d("SelectTimeCustomer", "Received Service ID: " + selectedServiceId);
+            selectedServiceCode = incomingIntent.getDoubleExtra("selectedServiceCost", 0.0);
+            String selectedAddress = incomingIntent.getStringExtra("adress");
+            binding.txtCost.setText(String.format("%.0f", selectedServiceCode));
+            binding.address.setText(selectedAddress);
 
+            Log.d("SelectTimeCustomer", "Received Service ID: " + selectedServiceId);
         } catch (Exception e) {
-            // Log error and show a toast
             Log.e("SelectTimeCustomer", "Error retrieving selected service ID", e);
             Toast.makeText(this, "An error occurred while retrieving the service ID.", Toast.LENGTH_SHORT).show();
         }
     }
 
-
-    // Date and Time Picker methods remain the same...
-    private void setupDatePicker() {
-        binding.dateButton.setOnClickListener(v -> {
-            Calendar calendar = Calendar.getInstance();
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-            DatePickerDialog datePickerDialog = new DatePickerDialog(
-                    this,
-                    (view, selectedYear, selectedMonth, selectedDay) -> {
-                        String date = + selectedYear + "/" + (selectedMonth + 1) + "/" + selectedDay;
-                        binding.dateTextView.setText(date);
-                    },
-                    year, month, day
-            );
-
-            datePickerDialog.show();
-        });
-    }
-
-    private void setupTimePicker() {
-        binding.timePickerLayout.setOnClickListener(v -> {
-            Calendar calendar = Calendar.getInstance();
-            int hour = calendar.get(Calendar.HOUR_OF_DAY);
-            int minute = calendar.get(Calendar.MINUTE);
-
-            TimePickerDialog timePickerDialog = new TimePickerDialog(
-                    this,
-                    (view, selectedHour, selectedMinute) -> {
-                        String time = String.format("%02d:%02d", selectedHour, selectedMinute);
-                        binding.hourPicker.setText(time);
-                    },
-                    hour, minute, true
-            );
-            timePickerDialog.show();
-        });
+    private void addEvent() {
+        binding.btnback.setOnClickListener(view -> onBackPressed());
     }
 }

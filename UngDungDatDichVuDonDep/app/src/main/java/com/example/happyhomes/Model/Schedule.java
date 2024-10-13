@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Schedule {
-    private Long scheduleId;
-    private Long cusId;
+    private String id; // Changed from Long to String
+    private String customerId; // Make sure there is a getter and setter for this field
     private Date date;
     private Date startTime;
     private String location;
@@ -16,6 +16,35 @@ public class Schedule {
 
     public Schedule() {
     }
+
+    // Constructor with parameters
+    public Schedule(String id, String customerId, Date date, Date startTime, String location, String status) {
+        this.id = id;
+        this.customerId = customerId;
+        this.date = date;
+        this.startTime = startTime;
+        this.location = location;
+        this.status = status;
+    }
+
+    // Getters and setters for all fields
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
     public String getDateString() {
         return dateFormat.format(date);
     }
@@ -26,21 +55,6 @@ public class Schedule {
 
     public String getStartTimeString() {
         return timeFormat.format(startTime);
-    }
-    public Long getScheduleId() {
-        return scheduleId;
-    }
-
-    public void setScheduleId(Long scheduleId) {
-        this.scheduleId = scheduleId;
-    }
-
-    public Long getCusId() {
-        return cusId;
-    }
-
-    public void setCusId(Long cusId) {
-        this.cusId = cusId;
     }
 
     public void setDate(Date date) {
@@ -75,14 +89,6 @@ public class Schedule {
         return startTime;
     }
 
-    public Schedule(Long scheduleId, Long cusId, Date date, Date startTime, String location, String status) {
-        this.scheduleId = scheduleId;
-        this.cusId = cusId;
-        this.date = date;
-        this.startTime = startTime;
-        this.location = location;
-        this.status = status;
-    }
     @Override
     public String toString() {
         return "Schedule{" +

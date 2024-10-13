@@ -1,156 +1,233 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
     android:background="@color/white"
     tools:context=".Customer.ServiceActivity">
 
-    <!-- Address Section -->
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16dp">
+        android:layout_height="250dp"
+        android:orientation="vertical"
+        android:background="@drawable/anhnen">
 
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerHorizontal="true"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/dropdownIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="0dp"
-            android:src="@drawable/baseline_location_pin_24" />
-    </RelativeLayout>
-
-    <!-- Duration Section -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Thời lượng"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:paddingBottom="8dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Vui lòng ước tính diện tích cần dọn dẹp và chọn phương án phù hợp."
-        android:textColor="#F44336"
-        android:textSize="14sp"
-        android:paddingBottom="16dp" />
-
-    <RadioGroup
-        android:id="@+id/durationRadioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <RadioButton
-            android:id="@+id/radioTwoHours"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:buttonTint="@color/black"
-            android:background="?attr/selectableItemBackground"
-            android:drawablePadding="8dp" />
+            android:layout_marginTop="20dp">
 
+            <ImageView
+                android:id="@+id/btnback"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/icon_back"
 
-        <RadioButton
-            android:id="@+id/radioThreeHours"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:buttonTint="@color/black"
-            android:background="?attr/selectableItemBackground"
-            android:drawablePadding="8dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.428" />
 
-        <RadioButton
-            android:id="@+id/radioFourHours"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:buttonTint="@color/black"
-            android:background="?attr/selectableItemBackground"
-            android:drawablePadding="8dp" />
-        <RadioButton
-            android:id="@+id/radioFiveHours"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:buttonTint="@color/black"
-            android:background="?attr/selectableItemBackground"
-            android:drawablePadding="8dp" />
-        <RadioButton
-            android:id="@+id/radioSixHours"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:buttonTint="@color/black"
-            android:background="?attr/selectableItemBackground"
-            android:drawablePadding="8dp" />
-        <RadioButton
-            android:id="@+id/radioSevenHours"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:buttonTint="@color/black"
-            android:background="?attr/selectableItemBackground"
-            android:drawablePadding="8dp" />
-    </RadioGroup>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Chọn diện tích dọn dẹp"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="126dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/border_background_vien"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/txtServicename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Dọn dẹp nhà"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="123 Nguyễn Đình Chiểu, Phường 2, ..."
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <!-- Thêm margin cho đường kẻ -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+
+                android:orientation="horizontal"> <!-- Thêm margin cho LinearLayout -->
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/icon_money_48" />
+
+                <TextView
+                    android:id="@+id/txtPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Đang tính toán"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:background="#2196F3"
-        android:padding="16dp"
-        android:layout_marginTop="16dp">
-
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <TextView
-            android:id="@+id/txtMoney"
-            android:layout_width="0dp"
+            android:paddingTop="16dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:text="Vui lòng ước tính diện tích cần dọn dẹp và chọn phương án phù hợp"
+            android:textColor="#F44336"
+            android:textSize="15sp"
+            android:layout_gravity="center"
+            android:gravity="center" />
+        <RadioGroup
+            android:id="@+id/durationRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="216,000 VND/2h"
-            android:textSize="18sp"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:layout_marginLeft="30dp">
 
-        <Button
-            android:id="@+id/nextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tiếp theo"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:background="@android:color/transparent" />
+            <RadioButton
+                android:id="@+id/radioTwoHours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Dọn dẹp cơ bản - Dưới 50m2"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:buttonTint="@color/black"
+                android:background="?attr/selectableItemBackground"
+                android:drawablePadding="8dp" />
+            <RadioButton
+                android:id="@+id/radioThreeHours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Dọn dẹp cơ bản - 50m2 - 100m2"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:buttonTint="@color/black"
+                android:background="?attr/selectableItemBackground"
+                android:drawablePadding="8dp" />
+
+            <RadioButton
+                android:id="@+id/radioFourHours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Dọn dẹp cơ bản - Trên 100m2"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:buttonTint="@color/black"
+                android:background="?attr/selectableItemBackground"
+                android:drawablePadding="8dp" />
+            <RadioButton
+                android:id="@+id/radioFiveHours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Dọn dẹp chi tiết - Dưới 50m2"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:buttonTint="@color/black"
+                android:background="?attr/selectableItemBackground"
+                android:drawablePadding="8dp" />
+            <RadioButton
+                android:id="@+id/radioSixHours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Dọn dẹp chi tiết - 50m2 - 100m2"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:buttonTint="@color/black"
+                android:background="?attr/selectableItemBackground"
+                android:drawablePadding="8dp" />
+            <RadioButton
+                android:id="@+id/radioSevenHours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Dọn dẹp chi tiết - Trên 100m2"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:buttonTint="@color/black"
+                android:background="?attr/selectableItemBackground"
+                android:drawablePadding="8dp" />
+        </RadioGroup>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#34A853"
+            android:layout_gravity="center"
+            >
+
+            <TextView
+                android:id="@+id/txtMoney"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Dọn dẹp cơ bản - Trên 100m2 750.000đ"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/nextButton"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Tiếp tục"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
     </LinearLayout>
+
 
 </LinearLayout>

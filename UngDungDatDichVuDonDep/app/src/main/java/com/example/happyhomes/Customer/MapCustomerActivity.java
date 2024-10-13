@@ -40,7 +40,7 @@ public class MapCustomerActivity extends AppCompatActivity implements OnMapReady
     private SupportMapFragment mapFragment;
     ActivityMapCustomerBinding binding;
     private String selectedAddress = null;
-    private int cusID;
+    private String cusID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,9 +194,9 @@ public class MapCustomerActivity extends AppCompatActivity implements OnMapReady
         if (selectedAddress != null) {
             Intent intent = new Intent(MapCustomerActivity.this, ServiceActivity.class);
             intent.putExtra("address", selectedAddress);
-            cusID = getIntent().getIntExtra("CusId", -1);
+            cusID = getIntent().getStringExtra("CusId");
             String cusName = getIntent().getStringExtra("Cusname");
-            if (cusID != -1) {
+            if (cusID !=null) {
 
                 intent.putExtra("CusId", cusID);
                 intent.putExtra("Cusname",cusName);

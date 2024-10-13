@@ -6,246 +6,178 @@
     android:layout_height="match_parent"
     tools:context=".Customer.SelectTimeCustomerActivity"
     android:background="@android:color/white"
-    android:padding="16dp"
     android:orientation="vertical">
 
     <!-- Nội dung chính -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="250dp"
+        android:orientation="vertical"
+        android:background="@drawable/anhnen">
 
         <!-- Header -->
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_marginTop="20dp">
 
             <ImageView
-                android:id="@+id/ivBack"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_back_arrow"
-                android:contentDescription="Trở lại" />
+                android:id="@+id/btnback"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/icon_back"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.428" />
 
             <TextView
-                android:id="@+id/header_title"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ch_n_th_i_gian_l_m_vi_c"
+                android:layout_gravity="center"
+                android:text="Chọn diện tích dọn dẹp"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="126dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/border_background_vien"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/txtServicename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Dọn dẹp nhà"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_marginStart="16dp"
-                android:textColor="@android:color/black" />
-        </LinearLayout>
-
-        <!-- Address Section -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:paddingBottom="16dp">
+                android:layout_marginTop="5dp"/>
 
             <TextView
                 android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerHorizontal="true"
-                android:text=""
+                android:layout_gravity="center"
+                android:text="123 Nguyễn Đình Chiểu, Phường 2, ..."
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="15sp" />
 
-            <ImageView
-                android:id="@+id/dropdownIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="0dp"
-                android:src="@drawable/baseline_location_pin_24" />
-        </RelativeLayout>
+            <!-- Thêm margin cho đường kẻ -->
 
-        <!-- Time Selection -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/th_i_gian_l_m_vi_c"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="24dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ng_y_ch_n"
-                android:textSize="16sp"
-                android:textColor="@android:color/darker_gray" />
-
-            <TextView
-                android:id="@+id/date_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="20sp"
-                android:textColor="@android:color/darker_gray"
-                android:layout_gravity="end"
-                android:layout_marginStart="10dp" />
-        </LinearLayout>
-
-        <!-- Date Buttons -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
-
-            <!-- Repeat these LinearLayouts for each day button -->
             <LinearLayout
-                android:id="@+id/date_button"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_margin="4dp"
-                android:background="#21B1F3">
+
+                android:orientation="horizontal"> <!-- Thêm margin cho LinearLayout -->
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/icon_money_48" />
 
                 <TextView
+                    android:id="@+id/txtCost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ch_n_ng_y"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center" />
-            </LinearLayout>
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="5dp"
+                    android:text="750.000đ"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <!-- Add more date buttons here -->
-            <!-- Repeat the above LinearLayout for each day -->
-
-        </LinearLayout>
-
-        <!-- Time Picker -->
-        <LinearLayout
-            android:id="@+id/time_picker_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/time_picker_background"
-            android:padding="12dp">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_time"
-                android:contentDescription="Time"
-                app:tint="@android:color/holo_orange_dark" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ch_n_gi_l_m"
-                android:textSize="20sp"
-                android:layout_marginStart="16dp"
-                android:textColor="@android:color/black" />
-
-            <!-- Time Selection -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginStart="10dp">
-                <TextView
-                    android:id="@+id/hour_picker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="20sp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginEnd="4dp" />
             </LinearLayout>
         </LinearLayout>
+    </LinearLayout>
 
-        <!-- Weekly Repeat Toggle -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp"
-            android:gravity="center_vertical">
-        </LinearLayout>
-
-        <!-- Notes Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ghi_ch_cho_tasker"
-            android:textSize="18sp"
+            android:text="Chọn ngày giờ làm việc:"
+            android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
-            android:layout_marginTop="24dp" />
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp" />
 
+        <!-- Combined date and time TextView -->
+        <TextView
+            android:id="@+id/dateTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ngày giờ đã chọn: "
+            android:textSize="18dp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp" />
+
+        <!-- Combined date and time selection button -->
+        <Button
+            android:id="@+id/btnSelectDateTime"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#C3D9F7"
+            android:elevation="8dp"
+            android:text="Chọn ngày giờ làm việc"
+            android:textColor="@android:color/black"
+            android:textSize="12dp"
+            android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ghi_ch_n_y_s_gi_p_tasker_l_m_nhanh_v_t_t_h_n"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="8dp" />
-
+            android:text="Ghi chú cho Happy Homes:"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp" />
         <EditText
             android:id="@+id/edtNote"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:hint="@string/b_n_c_y_u_c_u_g_th_m_h_y_nh_p_y_nh"
-            android:textSize="16sp"
-            android:padding="12dp"
-            android:background="@drawable/edit_text_background"
-            android:layout_marginTop="8dp"
-            android:gravity="top" />
-
-    </LinearLayout>
-
-    <!-- Bottom Button with Price -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:background="#2196F3"
-        android:padding="16dp">
-
-        <TextView
-            android:id="@+id/txtCost"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="216,000"
-            android:textSize="18sp"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
-
+            android:layout_height="200dp"
+            android:hint="Nhập ghi chú bạn muốn gửi đến Happy Homes ở đây nhé"
+            android:textSize="13sp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="@drawable/border_background_vien"
+            android:gravity="center" />
 
         <Button
             android:id="@+id/btnNext"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="@string/ti_p_theo"
+            android:layout_gravity="center"
+            android:layout_marginTop="140dp"
+            android:backgroundTint="#34A853"
+            android:text="Tiếp tục"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:background="@android:color/transparent" />
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
 </LinearLayout>

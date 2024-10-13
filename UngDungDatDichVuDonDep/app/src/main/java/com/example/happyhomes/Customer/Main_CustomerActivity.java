@@ -1,75 +1,80 @@
 package com.example.happyhomes.Customer;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.MenuItem;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 
+import com.example.happyhomes.Firebase.FirebaseService;
+import com.example.happyhomes.Model.Service;
 import com.example.happyhomes.R;
 import com.example.happyhomes.databinding.ActivityMainCustomerBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Main_CustomerActivity extends AppCompatActivity {
 
-    private int cusID;
-
     ActivityMainCustomerBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main_customer);
         binding = ActivityMainCustomerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        loadActivity();
-        addEvent();
 
+//        // Set up Bottom Navigation
+//        Service service1 = new Service(1L, "Dọn dẹp nhỏ - Dưới 50m²", 200000.0);
+//        Service service2 = new Service(2L, "Dọn dẹp nhỏ - 50m² đến 100m²", 300000.0);
+//        Service service3 = new Service(3L, "Dọn dẹp nhỏ - Trên 100m²", 400000.0);
+//        Service service4 = new Service(4L, "Dọn dẹp lớn - Dưới 100m²", 375000.0);
+//        Service service5 = new Service(5L, "Dọn dẹp lớn - 100m² đến 200m²", 450000.0);
+//        Service service6 = new Service(6L, "Dọn dẹp lớn - Trên 200m²", 500000.0);
+//
+//        // Saving each service to Firebase
+//        FirebaseService.saveServiceToFirebase(service1);
+//        FirebaseService.saveServiceToFirebase(service2);
+//        FirebaseService.saveServiceToFirebase(service3);
+//        FirebaseService.saveServiceToFirebase(service4);
+//        FirebaseService.saveServiceToFirebase(service5);
+//        FirebaseService.saveServiceToFirebase(service6);
+        setupBottomNavigation();
     }
 
-    private void addEvent() {
-        binding.imgClean.setOnClickListener(new View.OnClickListener() {
+    private void setupBottomNavigation() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent1 = getIntent();
-                String cusName = intent1.getStringExtra("Cusname");
-                Intent intent = new Intent(Main_CustomerActivity.this,MapCustomerActivity.class);
-                intent.putExtra("CusId",cusID);
-                intent.putExtra("Cusname",cusName);
-                startActivity(intent);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment selectedFragment = null;
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.nav_home) {
+                    selectedFragment = new HomeFragment();
+                } else if (itemId == R.id.nav_activity) {
+                    selectedFragment = new ScheduleHistoryFragment();
+                } else if (itemId == R.id.nav_message) {
+                    selectedFragment = new MessageFragment();
+                } else if (itemId == R.id.nav_account) {
+                    selectedFragment = new ProfileFragment();
+                }
+
+                return loadFragment(selectedFragment);
             }
         });
-        binding.imgProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent1 = getIntent();
-                Intent intent = new Intent(Main_CustomerActivity.this,ProfileCustomerActivity.class);
-                String cusName = intent1.getStringExtra("Cusname");
-                String Phone = intent1.getStringExtra("phone");
-                intent.putExtra("CusId",cusID);
-                intent.putExtra("phone",Phone);
-                intent.putExtra("Cusname",cusName);
-                startActivity(intent);
-            }
-        });
+
+        // Set default selection
+        bottomNavigationView.setSelectedItemId(R.id.nav_home);  // Ensure default home selection is handled
     }
 
-
-    public void loadActivity()
-    {
-        Intent intent = getIntent();
-        if (intent != null) {
-            String cusName = intent.getStringExtra("Cusname");
-            int cusId = intent.getIntExtra("CusId",-1);
-
-            if (cusName != null && cusId != -1) {
-                binding.txtUserName.setText(String.format("Xin chào, "+ cusName));
-                cusID = cusId;
-            }
+    private boolean loadFragment(Fragment fragment) {
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+            return true;
         }
+        return false;
     }
-
 }

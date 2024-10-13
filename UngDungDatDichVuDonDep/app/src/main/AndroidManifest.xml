@@ -24,6 +24,15 @@
         android:theme="@style/Theme.HappyHomes"
         tools:targetApi="31">
         <activity
+            android:name=".Customer.EditDetailsProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Customer.EditProfileCustomer"
+            android:exported="false" />
+        <activity
+            android:name=".Customer.ProfileDetailCustomer"
+            android:exported="false" />
+        <activity
             android:name=".NhanVien.ScheduleDetailActivity"
             android:exported="false" />
         <activity

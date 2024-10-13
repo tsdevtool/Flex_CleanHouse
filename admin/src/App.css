@@ -1,8 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 *{
   margin: 0px;
   padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif; 
 }
+.bg-indigo-900{ --tw-bg-opacity: 1; background-color: rgb(46 46 72 / var(--tw-bg-opacity))}
+aside .fullname{font-size: 20px;font-weight: 600;text-transform: uppercase; margin-bottom: 40px;}
 
-.header{
-  color: red;
-}
+aside .logo{width: 8rem;color: white;margin-bottom: 15px;}
+.sidebar ul li{justify-content: center; text-decoration: none;}
+.sidebar ul li p{font-size: 24px;}
+.sidebar ul li svg{width: 32px; height: auto;}
+.sidebar ul li:hover{background: #fff; border-radius: 20px;}
+.sidebar ul li:hover a{text-decoration: none;}
+.sidebar ul li:hover p {color: rgb(46 46 72 / var(--tw-bg-opacity));}
+.sidebar ul li:hover svg{color: rgb(46 46 72 / var(--tw-bg-opacity));}
+.headerWrapper .search {display: flex; align-items: center;}
+.headerWrapper .search svg{font-size: 24px; color: rgba(0, 0, 0, 0.5); margin-left: 5px; margin-right: 8px;}
+.headerWrapper .search input{border: none; flex: 1; height: 100%; padding: 0.5rem; box-sizing: border-box; outline: none; background: transparent; font-size: 20px;}
+.headerWrapper .timeNow{display:flex;padding: 7px 26px !important; margin-right: 20px; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 5px; align-items: center; margin-top: -7px;}
+.headerWrapper .timeNow p{font-size: 13px;}
+.headerWrapper .timeNow svg{font-size: 32px;}
+.headerWrapper .user{ margin-top: -7px;}
+
+/* Customer */
+table tr td .btn-action{border: 1px solid rgba(0, 0, 0, 0.3) !important; border-radius: 8px; font-weight: 600; font-size: 18px; color: #ffff; min-width: 85px; width: 80%;}
+table tr td .btn-action:hover{color: #fff !important;}
+.iconbox{font-size: 30px !important; color: #1A719C !important;}
+.text-input-box{font-size: 18px !important; color: #1A719C !important; font-weight: 600 !important;}
+.button-box{font-size: 24px; text-transform: capitalize; padding: 10px 80px; color: #fff; background: #03184B; font-weight: 600 ;}
