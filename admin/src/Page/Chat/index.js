@@ -11,12 +11,12 @@ const Chat = () => {
   const { id } = useParams(); // Lấy ID từ URL
   const [messages, setMessages] = useState([]);
   const [customers, setCustomers] = useState([]);
+  const [image, setImage] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const auth = getAuth();
   const currentUser = auth.currentUser;
   const [menuOpen, setMenuOpen] = useState(false);
-  const [customerIds, setCustomerIds] = useState(new Set()); // Lưu trữ ID của những người đã gửi tin nhắn
 
   useEffect(() => {
     const customersRef = ref(db, "users");
@@ -43,9 +43,6 @@ const Chat = () => {
             ...data[key],
           }));
           setMessages(messageList);
-
-          // Cập nhật customerIds với ID của người đã gửi tin nhắn
-          setCustomerIds((prev) => new Set(prev).add(selectedCustomer.id));
         } else {
           setMessages([]);
         }
@@ -80,17 +77,6 @@ const Chat = () => {
     setMenuOpen((prev) => !prev);
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleSendMessage();
-    }
-  };
-
-  // Lọc danh sách khách hàng chỉ để hiển thị những người đã gửi tin nhắn
-  const filteredCustomers = customers.filter((customer) =>
-    customerIds.has(customer.id)
-  );
-
   return (
     <div className="flex h-screen">
       <div className="w-1/3 border-r border-gray-300">
@@ -101,7 +87,7 @@ const Chat = () => {
           </button>
         </div>
         <div className="overflow-y-auto h-full">
-          {filteredCustomers.map((customer) => (
+          {customers.map((customer) => (
             <div
               key={customer.id}
               className="flex items-center p-4 hover:bg-gray-100 cursor-pointer"
@@ -170,12 +156,12 @@ const Chat = () => {
                   <div
                     key={message.id}
                     className={`flex items-start mb-4 ${
-                      message.senderId === currentUser.uid // Tin nhắn của tài khoản đang đăng nhập
+                      message.senderId === currentUser.uid
                         ? "justify-end"
-                        : "justify-start" // Tin nhắn từ người dùng khác
+                        : "justify-start"
                     }`}
                   >
-                    {message.senderId === currentUser.uid ? ( // Kiểm tra nếu người gửi là tài khoản đang đăng nhập
+                    {message.senderId === currentUser.uid ? (
                       <div className="bg-blue-100 p-3 rounded-lg">
                         <p>{message.content}</p>
                         <span className="text-xs text-gray-500">
@@ -210,7 +196,6 @@ const Chat = () => {
                 type="text"
                 placeholder="Tin nhắn mới"
                 value={newMessage}
-                onKeyDown={handleKeyDown}
                 onChange={(e) => setNewMessage(e.target.value)}
                 className="flex-1 p-2 border border-gray-300 rounded-lg mr-4 mb-3"
               />
