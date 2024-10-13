@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import { IoIosSend } from "react-icons/io";
 import { IoList } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
-import { db } from "../../firebase/config";
 import { useParams } from "react-router-dom"; // Import useParams
+import { db } from "../../firebase/config";
 
 const Chat = () => {
   const { id } = useParams(); // Lấy ID từ URL
@@ -38,17 +38,35 @@ const Chat = () => {
       onValue(messagesRef, (snapshot) => {
         const data = snapshot.val();
         if (data) {
+          // Convert the message object into an array
           const messageList = Object.keys(data).map((key) => ({
             id: key,
             ...data[key],
           }));
           setMessages(messageList);
         } else {
-          setMessages([]);
+          setMessages([]); // No messages found
         }
       });
     }
   }, [selectedCustomer]);
+  // useEffect(() => {
+  //   if (selectedCustomer) {
+  //     const messagesRef = ref(db, `messages/${selectedCustomer.id}`);
+  //     onValue(messagesRef, (snapshot) => {
+  //       const data = snapshot.val();
+  //       if (data) {
+  //         const messageList = Object.keys(data).map((key) => ({
+  //           id: key,
+  //           ...data[key],
+  //         }));
+  //         setMessages(messageList);
+  //       } else {
+  //         setMessages([]);
+  //       }
+  //     });
+  //   }
+  // }, [selectedCustomer]);
 
   useEffect(() => {
     // Kiểm tra xem ID từ URL có tồn tại trong danh sách khách hàng không
