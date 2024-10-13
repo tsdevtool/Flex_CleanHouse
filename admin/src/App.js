@@ -110,7 +110,7 @@ function App() {
                 <div className="flex min-h-screen h-screen w-screen">
                   <Sidebar />{" "}
                   {/* Hiển thị Sidebar nếu người dùng đã đăng nhập */}
-                  <main className="flex-1 p-6 bg-gray-100 overflow-y-auto">
+                  <main className="flex-1 bg-gray-100 overflow-y-auto h-full">
                     <Chat /> {/* Nội dung Home */}
                   </main>
                 </div>
