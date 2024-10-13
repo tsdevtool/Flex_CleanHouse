@@ -9,8 +9,10 @@ import {
 import "./App.css";
 import Sidebar from "./Components/Header/Sidebar";
 import Chat from "./Page/Chat";
-import Customers from "./Page/Customers";
+import Customers from "./Page/Customers/index.jsx";
 import Employees from "./Page/Employees";
+import AddEmployee from "./Page/Employees/addEmployee";
+import UpdateEmployee from "./Page/Employees/updateEmployee";
 import Home from "./Page/Home";
 import LoginForm from "./Page/Login";
 import { AuthProvider, useAuth } from "./Page/Login/AuthContext";
@@ -18,8 +20,6 @@ import NotFound from "./Page/NotFound";
 import Other from "./Page/Other";
 import Service from "./Page/Services";
 import PrivateRoute from "./PrivateRoute";
-import AddEmployee from "./Page/Employees/addEmployee";
-import UpdateEmployee from "./Page/Employees/updateEmployee";
 const MyContext = createContext();
 function App() {
   const { currentUser } = useAuth();
@@ -104,13 +104,13 @@ function App() {
             }
           />
           <Route
-            path="/chats"
+            path="/chats/:id"
             element={
               <PrivateRoute>
                 <div className="flex min-h-screen h-screen w-screen">
                   <Sidebar />{" "}
                   {/* Hiển thị Sidebar nếu người dùng đã đăng nhập */}
-                  <main className="flex-1 p-6 bg-gray-100 overflow-y-auto">
+                  <main className="flex-1 bg-gray-100 overflow-y-auto h-full">
                     <Chat /> {/* Nội dung Home */}
                   </main>
                 </div>
