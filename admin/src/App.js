@@ -104,7 +104,7 @@ function App() {
             }
           />
           <Route
-            path="/chats"
+            path="/chats/:id"
             element={
               <PrivateRoute>
                 <div className="flex min-h-screen h-screen w-screen">
