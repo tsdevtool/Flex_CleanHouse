@@ -6,9 +6,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.bumptech.glide.Glide;
 import com.example.happyhomes.Model.User;
 import com.example.happyhomes.R;
-import com.example.happyhomes.databinding.ActivityEditDetailsProfileBinding;
 import com.example.happyhomes.databinding.ActivityEditProfileCustomerBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,11 +34,11 @@ public class EditProfileCustomer extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-    private LinearLayout llSavedLocations;
     private TextView tvUserName, tvPhoneNumber, tvAddNewAddress;
     private RecyclerView recyclerViewSavedLocations;
     private SavedLocationsAdapter adapter;
     ActivityEditProfileCustomerBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,22 +48,23 @@ public class EditProfileCustomer extends AppCompatActivity {
         // Khởi tạo Firebase Auth và Database Reference
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
-
         tvUserName = findViewById(R.id.tvUserName);
         tvPhoneNumber = findViewById(R.id.tvPhoneNumber);
         tvAddNewAddress = findViewById(R.id.tvAddNewAddress);
 
         // Khởi tạo RecyclerView
-        recyclerViewSavedLocations = findViewById(R.id.recyclerViewSavedLocations); // Thêm dòng này
+        recyclerViewSavedLocations = findViewById(R.id.recyclerViewSavedLocations);
         recyclerViewSavedLocations.setLayoutManager(new LinearLayoutManager(this));
         adapter = new SavedLocationsAdapter(new ArrayList<>());
         recyclerViewSavedLocations.setAdapter(adapter);
 
         // Load thông tin người dùng
         loadUserInfo();
+
         // Gán sự kiện bấm vào "Thêm địa chỉ mới"
         tvAddNewAddress.setOnClickListener(v -> showAddAddressDialog());
 
+        // Xử lý sự kiện khi bấm vào ảnh đại diện
         binding.imgProfile.setOnClickListener(v -> {
             FirebaseUser currentUser = mAuth.getCurrentUser();
             if (currentUser != null) {
@@ -73,6 +74,7 @@ public class EditProfileCustomer extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         // Xử lý sự kiện bấm nút quay lại
         binding.back.setOnClickListener(v -> {
             finish();  // Kết thúc activity hiện tại và quay lại activity trước đó
@@ -89,8 +91,21 @@ public class EditProfileCustomer extends AppCompatActivity {
                     if (dataSnapshot.exists()) {
                         User user = dataSnapshot.getValue(User.class);
                         if (user != null) {
+                            // Hiển thị tên và số điện thoại
                             tvUserName.setText(user.name);
                             tvPhoneNumber.setText(user.phoneNumber);
+
+                            // Hiển thị avatar
+                            if (user.image != null && !user.image.isEmpty()) {
+                                // Sử dụng Glide để tải ảnh từ URL
+                                Glide.with(EditProfileCustomer.this)
+                                        .load(user.image)
+                                        .placeholder(R.drawable.account) // Ảnh thay thế nếu không có avatar
+                                        .into(binding.imgProfile); // Hiển thị vào ImageView imgProfile
+                            } else {
+                                // Nếu không có URL avatar, hiển thị ảnh mặc định
+                                binding.imgProfile.setImageResource(R.drawable.account);
+                            }
 
                             // Hiển thị danh sách các địa chỉ đã lưu
                             loadSavedAddresses(userId);
