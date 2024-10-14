@@ -1,8 +1,12 @@
 import { getDatabase, onValue, ref } from "firebase/database"; // Import các hàm cần thiết
 import React, { useEffect, useState } from "react";
+import { BsFillCalendar2DateFill } from "react-icons/bs";
 import BasicInformation from "../../Components/Header/BasicInformation";
 import HeaderWrapper from "../../Components/Header/HeaderWrapper";
-
+import { FaToolbox } from "react-icons/fa";
+import { MdPriceChange } from "react-icons/md";
+import { GiReceiveMoney } from "react-icons/gi";
+import { GiTakeMyMoney } from "react-icons/gi";
 const Home = () => {
   const [paymentData, setPaymentData] = useState([]); // State để lưu dữ liệu thanh toán
   const db = getDatabase(); // Khởi tạo database
@@ -87,12 +91,45 @@ const Home = () => {
         <table className="w-full bg-white rounded shadow">
           <thead>
             <tr className="bg-indigo-900 text-white">
-              <th className="p-2">Ngày</th>
+              <th className="p-2 ">
+                <div className="flex">
+                  <i className="mt-0.5 mr-1.5">
+                    <BsFillCalendar2DateFill />
+                  </i>
+                  Ngày
+                </div>
+              </th>
               {/* <th className="p-2">Nhân viên</th> */}
-              <th className="p-2">Dụng cụ</th>
-              <th className="p-2">Chi phí</th>
-              <th className="p-2">Thu vào</th>
-              <th className="p-2">Lợi nhuận</th>
+              <th className="p-2">
+                <div className="flex">
+                  <i className="mt-0.5 mr-1.5">
+                    <FaToolbox />
+                  </i>
+                  Dụng cụ
+                </div>
+              </th>
+              <th className="p-2">
+                <div className="flex">
+                  <i className="mt-0.5 mr-1.5">
+                    <MdPriceChange />
+                  </i>
+                  Chi phí
+                </div>
+              </th>
+              <th className="p-2 ">
+                <div className="flex">
+                  <i className="mt-0.5 mr-1.5">
+                    <GiReceiveMoney />
+                  </i>
+                  Thu vào
+                </div>
+              </th>
+              <th className="p-2 flex">
+                <i className="mt-0.5 mr-1.5">
+                  <GiTakeMyMoney />
+                </i>
+                Lợi nhuận
+              </th>
             </tr>
           </thead>
           <tbody>
