@@ -3,7 +3,7 @@ package com.example.happyhomes.Model;
 public class Payment {
     private Long payId;
     private Long methodId;
-    private Long serScheId;
+    private String serScheId;
     private Long serviceId;
     private String payDay;  // Thay đổi từ java.sql.Date sang String
 
@@ -23,11 +23,11 @@ public class Payment {
         this.methodId = methodId;
     }
 
-    public Long getSerScheId() {
+    public String getSerScheId() {
         return serScheId;
     }
 
-    public void setSerScheId(Long serScheId) {
+    public void setSerScheId(String serScheId) {
         this.serScheId = serScheId;
     }
 
@@ -47,7 +47,7 @@ public class Payment {
         this.payDay = payDay;
     }
 
-    public Payment(Long payId, Long methodId, Long serScheId, Long serviceId, String payDay) {
+    public Payment(Long payId, Long methodId, String serScheId, Long serviceId, String payDay) {
         this.payId = payId;
         this.methodId = methodId;
         this.serScheId = serScheId;
