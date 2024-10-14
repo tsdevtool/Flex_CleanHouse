@@ -56,7 +56,7 @@ const Customers = () => {
   };
 
   const handleMessageClick = (customerId) => {
-    navigate(`/chat/${customerId}`); // Điều hướng đến trang chat với ID khách hàng
+    navigate(`/chats/${customerId}`); // Điều hướng đến trang chat với ID khách hàng
 };
 
   return (
@@ -78,7 +78,7 @@ const Customers = () => {
         </thead>
         <tbody>
           {customers
-            .filter((customer) => customer.role === "customer")
+            .filter((customer) => customer.role === "customer" || customer.role==="admin")
             .map(({ id, name, email, phoneNumber, lock }) => ( // Destructure for cleaner code
               <tr key={id} className="bg-indigo-100">
                 <td className="p-2 truncate w-24">{id}</td>
