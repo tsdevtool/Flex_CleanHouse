@@ -36,7 +36,7 @@ const Other = () => {
             <img
               src={Mui}
               alt="Ngô Xuân Mùi"
-              class="w-full h-[250px] rounded-lg mb-4 object-cover w-full h-full"
+              class="w-full h-[250px] rounded-lg mb-4 object-cover "
             />
             <h3 class="text-xl font-bold">Ngô Xuân Mùi</h3>
             <p class="text-gray-600">UI / Developer</p>
@@ -46,7 +46,7 @@ const Other = () => {
             <img
               src={Sieu}
               alt="Nguyễn Thanh Siêu"
-              class="w-full h-[250px] rounded-lg mb-4 object-cover w-full h-full"
+              class="w-full h-[250px] rounded-lg mb-4 object-cover "
             />
             <h3 class="text-xl font-bold">Nguyễn Thanh Siêu</h3>
             <p class="text-gray-600">Project Manager / Website Developer</p>
@@ -56,7 +56,7 @@ const Other = () => {
             <img
               src={Trang}
               alt="Đặng Lê Ngọc Trạng"
-              class="w-full h-[250px] rounded-lg mb-4 object-cover w-full h-full"
+              class="w-full h-[250px] rounded-lg mb-4 object-cover "
             />
             <h3 class="text-xl font-bold">Đặng Lê Ngọc Trạng</h3>
             <p class="text-gray-600">Mobile Developer</p>
@@ -66,7 +66,7 @@ const Other = () => {
             <img
               src={Duc}
               alt="Trần Việt Đức"
-              class="w-full h-[250px] rounded-lg mb-4 object-cover w-full h-full"
+              class="w-full h-[250px] rounded-lg mb-4 object-cover "
             />
             <h3 class="text-xl font-bold">Trần Việt Đức</h3>
             <p class="text-gray-600">Mobile Developer</p>
