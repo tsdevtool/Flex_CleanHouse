@@ -18,7 +18,7 @@ import LoginForm from "./Page/Login";
 import { AuthProvider, useAuth } from "./Page/Login/AuthContext";
 import NotFound from "./Page/NotFound";
 import Other from "./Page/Other";
-import Service from "./Page/Services";
+import Service from "./Page/Services/index.js";
 import PrivateRoute from "./PrivateRoute";
 const MyContext = createContext();
 function App() {
@@ -145,7 +145,6 @@ function App() {
             }
           />
           <Route path="*" element={<NotFound />} />{" "}
-          {/* Route cho trang Not Found */}
         </Routes>
       </Router>
     </AuthProvider>

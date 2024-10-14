@@ -1,9 +1,7 @@
 const Service = () => {
-  <>
-    <div className="container">
-      <h1>Service</h1>
-    </div>
-  </>;
+  <div className="flex h-full">
+    <p>Service</p>
+  </div>;
 };
 
 export default Service;
