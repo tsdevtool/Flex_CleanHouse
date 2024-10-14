@@ -3,6 +3,8 @@ package com.example.happyhomes.Customer;
 import android.os.Bundle;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
 import com.example.happyhomes.Model.User;
 import com.example.happyhomes.R;
 import com.example.happyhomes.databinding.ActivityEditDetailsProfileBinding;
@@ -67,6 +69,17 @@ public class EditDetailsProfileActivity extends AppCompatActivity {
                         binding.editTextUserName.setText(user.name);
                         binding.editTextEmail.setText(user.email);
                         binding.editTextPhoneNumber.setText(user.phoneNumber);
+                        // Hiển thị avatar
+                        if (user.image != null && !user.image.isEmpty()) {
+                            // Sử dụng Glide để tải ảnh từ URL
+                            Glide.with(EditDetailsProfileActivity.this)
+                                    .load(user.image)
+                                    .placeholder(R.drawable.account) // Ảnh thay thế nếu không có avatar
+                                    .into(binding.imgProfile); // Hiển thị vào ImageView imgProfile
+                        } else {
+                            // Nếu không có URL avatar, hiển thị ảnh mặc định
+                            binding.imgProfile.setImageResource(R.drawable.account);
+                        }
                     }
                 } else {
                     Toast.makeText(EditDetailsProfileActivity.this, "Không tìm thấy người dùng.", Toast.LENGTH_SHORT).show();
