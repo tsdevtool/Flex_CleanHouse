@@ -1,15 +1,17 @@
 import { signOut } from "firebase/auth";
+import { ref as databaseRef, onValue } from "firebase/database"; // Import Firebase Realtime Database
 import { useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaRegClock } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../../firebase/config";
+import { auth, db } from "../../../firebase/config"; // Sử dụng Firebase config
 import { useAuth } from "../../../Page/Login/AuthContext";
 
 const HeaderWrapper = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const [userImage, setUserImage] = useState(null); // Trạng thái để lưu hình ảnh của người dùng
   const menuRef = useRef(null);
-  const { currentUser } = useAuth();
+  const { currentUser } = useAuth(); // Lấy thông tin người dùng hiện tại
   const navigate = useNavigate();
   const now = new Date();
   const time = now.toLocaleTimeString([], {
@@ -21,6 +23,22 @@ const HeaderWrapper = () => {
   const handleAvatarClick = () => {
     setShowMenu(!showMenu);
   };
+
+  // Lấy thông tin người dùng từ Realtime Database
+  useEffect(() => {
+    if (currentUser && currentUser.uid) {
+      const userRef = databaseRef(db, `users/${currentUser.uid}`);
+      onValue(userRef, (snapshot) => {
+        const userData = snapshot.val();
+        if (userData && userData.image) {
+          setUserImage(userData.image); // Cập nhật hình ảnh từ dữ liệu Firebase
+        } else {
+          setUserImage("https://cdn-icons-png.flaticon.com/512/219/219986.png"); // Sử dụng hình ảnh mặc định nếu không có ảnh trong DB
+        }
+      });
+    }
+  }, [currentUser]);
+
   useEffect(() => {
     const handleClickOutSide = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -42,6 +60,7 @@ const HeaderWrapper = () => {
       alert("Đăng xuất thất bại. Có lẽ có một lỗi nào đó!");
     }
   };
+
   return (
     <div className="headerWrapper flex justify-between items-center mb-3 flex-wrap">
       <div className="search p-2 border rounded w-full md:w-3/4 mb-2 md:mb-0">
@@ -61,9 +80,10 @@ const HeaderWrapper = () => {
             className="user w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden cursor-pointer"
             onClick={handleAvatarClick}
           >
+            {/* Hiển thị hình ảnh người dùng */}
             <img
               className="w-full h-full object-cover"
-              src="https://scontent.fsgn2-10.fna.fbcdn.net/v/t39.30808-1/449789952_1149098856148205_3885276472304786082_n.jpg?stp=cp6_dst-jpg_s200x200&_nc_cat=109&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=f7vI1TBTz3AQ7kNvgGWA1-x&_nc_ht=scontent.fsgn2-10.fna&_nc_gid=Abm-bg-61i4Q-vnw4JftP9v&oh=00_AYDgWXROLHyivihiJF0Gm2uCyiU2EXkse_5Yy1K4efecHA&oe=6705537B"
+              src={userImage} // Hiển thị ảnh từ state userImage
               alt="User avatar"
             />
           </div>
@@ -93,4 +113,5 @@ const HeaderWrapper = () => {
     </div>
   );
 };
+
 export default HeaderWrapper;
