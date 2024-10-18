@@ -68,6 +68,11 @@ dependencies {
         "exclude" to listOf("")
     )))
     implementation(libs.firebase.storage)
+    implementation(fileTree(mapOf(
+        "dir" to "D:\\Source\\LibZaloPay_Android\\zalopayLib",
+        "include" to listOf("*.aar", "*.jar"),
+        "exclude" to listOf("")
+    )))
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
