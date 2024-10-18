@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home_employee"
+        android:icon="@drawable/home"
+        android:title="Trang chủ" />
+    <item
+        android:id="@+id/nav_activity_employee"
+        android:icon="@drawable/hoatdong"
+        android:title="Hoạt động" />
+    <item
+        android:id="@+id/nav_account_employee"
+        android:icon="@drawable/account"
+        android:title="Tài khoản" />
+</menu>

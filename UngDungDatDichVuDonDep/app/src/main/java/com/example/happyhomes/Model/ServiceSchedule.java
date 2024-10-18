@@ -5,6 +5,9 @@ public class ServiceSchedule {
     private Long serviceId;
     private String scheduleId; // Change to String
 
+    public ServiceSchedule() {
+        // Firebase sẽ sử dụng constructor này để khởi tạo đối tượng
+    }
     // Getter and Setter for serScheId
     public String getSerScheId() {
         return serScheId;

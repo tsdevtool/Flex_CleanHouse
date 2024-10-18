@@ -485,9 +485,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Workdate workdate = new Workdate(
-                        cursor.getLong(cursor.getColumnIndexOrThrow("WORKDATE_ID")),
-                        cursor.getLong(cursor.getColumnIndexOrThrow("EMID")),
-                        cursor.getLong(cursor.getColumnIndexOrThrow("SER_SCHE_ID"))
+                        cursor.getString(cursor.getColumnIndexOrThrow("WORKDATE_ID")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("EMID")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("SER_SCHE_ID")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("STATUS"))
                 );
                 workdates.add(workdate);
             } while (cursor.moveToNext());
