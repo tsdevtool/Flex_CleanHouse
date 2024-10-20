@@ -1,66 +1,108 @@
 package com.example.happyhomes.Customer;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.EditText;
+import android.widget.ImageButton;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.example.happyhomes.Model.Message;
 import com.example.happyhomes.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MessageFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MessageFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private RecyclerView recyclerView;
+    private EditText editTextMessage;
+    private ImageButton imgbutSend;
+    private List<Message> messageList;
+    private MessageAdapter messageAdapter;
+    private DatabaseReference messagesRef;
+    private String currentUserId;
+    private String adminId = "ADMIN_USER_ID"; // Thay đổi giá trị này với ID của admin
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public MessageFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MessageFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MessageFragment newInstance(String param1, String param2) {
-        MessageFragment fragment = new MessageFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_message, container, false);
+
+        recyclerView = view.findViewById(R.id.recycler_view_messages);
+        editTextMessage = view.findViewById(R.id.editTextMessage);
+        imgbutSend = view.findViewById(R.id.imgbutSend);
+
+        messageList = new ArrayList<>();
+        currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        messagesRef = FirebaseDatabase.getInstance().getReference("messages");
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        messageAdapter = new MessageAdapter(getContext(), messageList, currentUserId);  // Truyền thêm Context từ Fragment
+        recyclerView.setAdapter(messageAdapter);
+
+
+        // Load messages from Firebase
+        loadMessages();
+
+        // Send message
+        imgbutSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendMessage();
+            }
+        });
+
+        return view;
+    }
+
+    private void loadMessages() {
+        messagesRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
+                Message message = dataSnapshot.getValue(Message.class);
+
+                if (message != null && message.getReceiverId() != null && message.getSenderId() != null) {
+                    // Kiểm tra xem người gửi hoặc người nhận có phải là currentUserId không
+                    if (message.getReceiverId().equals(currentUserId) || message.getSenderId().equals(currentUserId)) {
+                        messageList.add(message);
+                        messageAdapter.notifyItemInserted(messageList.size() - 1);
+                        recyclerView.scrollToPosition(messageList.size() - 1);
+                    }
+                }
+            }
+
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {}
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {}
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {}
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
+        });
+    }
+
+    private void sendMessage() {
+        String messageText = editTextMessage.getText().toString();
+        if (!messageText.isEmpty()) {
+            // Gửi tin nhắn từ người dùng hiện tại đến admin
+            Message message = new Message(messageText, currentUserId, adminId, System.currentTimeMillis());
+            messagesRef.push().setValue(message);
+            editTextMessage.setText("");
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message, container, false);
     }
 }
