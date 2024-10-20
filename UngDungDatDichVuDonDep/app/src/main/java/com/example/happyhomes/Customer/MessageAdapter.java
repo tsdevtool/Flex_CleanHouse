@@ -24,7 +24,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public MessageAdapter(Context context, List<Message> messageList, String currentUserId) {
         this.messageList = messageList;
         this.currentUserId = currentUserId;
-        this.inflater = LayoutInflater.from(context);  // Khởi tạo LayoutInflater với Context hợp lệ
+        this.inflater = LayoutInflater.from(context);
     }
 
     @NonNull
@@ -48,11 +48,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         return new MessageViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
         Message message = messageList.get(position);
-        holder.messageText.setText(message.getMessageText());
+        holder.messageText.setText(message.getContent());  // Hiển thị nội dung tin nhắn
     }
 
     @Override
@@ -63,12 +62,20 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public int getItemViewType(int position) {
         Message message = messageList.get(position);
-        if (message.getSenderId().equals(currentUserId)) {
-            return 1; // Tin nhắn do người dùng hiện tại gửi
+
+        // Kiểm tra nếu currentUserId hoặc senderId của message là null
+        if (currentUserId != null && message.getSenderId() != null) {
+            if (currentUserId.equals(message.getSenderId())) {
+                return 1; // Tin nhắn do người dùng hiện tại gửi
+            } else {
+                return 0; // Tin nhắn từ người khác
+            }
         } else {
-            return 0; // Tin nhắn do người dùng khác gửi
+            // Trường hợp nếu một trong hai là null, trả về loại mặc định
+            return 1; // Hoặc 1, tùy theo bạn muốn xử lý như thế nào khi gặp null
         }
     }
+
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
         TextView messageText;

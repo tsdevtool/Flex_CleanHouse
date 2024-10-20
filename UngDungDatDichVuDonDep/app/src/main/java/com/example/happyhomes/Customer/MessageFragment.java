@@ -4,105 +4,155 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.happyhomes.Model.Message;
+import com.example.happyhomes.Model.User;
 import com.example.happyhomes.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MessageFragment extends Fragment {
 
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerViewMessages;
+    private Spinner spinnerUsers;
     private EditText editTextMessage;
     private ImageButton imgbutSend;
     private List<Message> messageList;
     private MessageAdapter messageAdapter;
-    private DatabaseReference messagesRef;
+    private DatabaseReference messagesRef, usersRef;
     private String currentUserId;
-    private String adminId = "ADMIN_USER_ID"; // Thay đổi giá trị này với ID của admin
+    private String selectedUserId;  // Người nhận được chọn
+    private List<User> userList;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_message, container, false);
 
-        recyclerView = view.findViewById(R.id.recycler_view_messages);
+        spinnerUsers = view.findViewById(R.id.spinner_users);
+        recyclerViewMessages = view.findViewById(R.id.recycler_view_messages);
         editTextMessage = view.findViewById(R.id.editTextMessage);
         imgbutSend = view.findViewById(R.id.imgbutSend);
 
-        messageList = new ArrayList<>();
         currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         messagesRef = FirebaseDatabase.getInstance().getReference("messages");
+        usersRef = FirebaseDatabase.getInstance().getReference("users");
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        messageAdapter = new MessageAdapter(getContext(), messageList, currentUserId);  // Truyền thêm Context từ Fragment
-        recyclerView.setAdapter(messageAdapter);
+        messageList = new ArrayList<>();
+        userList = new ArrayList<>();
 
+        // Setup RecyclerView cho danh sách tin nhắn
+        recyclerViewMessages.setLayoutManager(new LinearLayoutManager(getContext()));
+        messageAdapter = new MessageAdapter(getContext(), messageList, currentUserId);
+        recyclerViewMessages.setAdapter(messageAdapter);
 
-        // Load messages from Firebase
-        loadMessages();
+        // Tải danh sách người nhận vào Spinner
+        loadUsers();
 
-        // Send message
-        imgbutSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendMessage();
-            }
-        });
+        // Gửi tin nhắn khi bấm nút
+        imgbutSend.setOnClickListener(v -> sendMessage());
 
         return view;
     }
 
-    private void loadMessages() {
-        messagesRef.addChildEventListener(new ChildEventListener() {
+    // Hàm tải danh sách người dùng (admin và nhân viên)
+    private void loadUsers() {
+        usersRef.orderByChild("role").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
-                Message message = dataSnapshot.getValue(Message.class);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userList.clear();
+                List<String> userNames = new ArrayList<>();
 
-                if (message != null && message.getReceiverId() != null && message.getSenderId() != null) {
-                    // Kiểm tra xem người gửi hoặc người nhận có phải là currentUserId không
-                    if (message.getReceiverId().equals(currentUserId) || message.getSenderId().equals(currentUserId)) {
-                        messageList.add(message);
-                        messageAdapter.notifyItemInserted(messageList.size() - 1);
-                        recyclerView.scrollToPosition(messageList.size() - 1);
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    User user = snapshot.getValue(User.class);
+                    if (user != null && ("admin".equals(user.role) || "employee".equals(user.role))) {
+                        userList.add(user);
+                        userNames.add(user.name);  // Lấy tên để hiển thị trong Spinner
                     }
                 }
+
+                // Tạo ArrayAdapter cho Spinner
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, userNames);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerUsers.setAdapter(adapter);
+
+                // Lắng nghe sự kiện khi người dùng chọn người nhận
+                spinnerUsers.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        selectedUserId = userList.get(position).userId;  // Lấy ID người nhận được chọn
+                        loadMessages();  // Tải tin nhắn giữa người dùng hiện tại và người nhận được chọn
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // Không làm gì nếu không có người nhận được chọn
+                    }
+                });
             }
 
-
             @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {}
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {}
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {}
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {}
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Xử lý lỗi
+            }
         });
     }
 
+    // Hàm tải tin nhắn giữa currentUserId và selectedUserId
+    private void loadMessages() {
+        if (selectedUserId == null) return;
+
+        messagesRef.child(generateChatId(currentUserId, selectedUserId))
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        messageList.clear();
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Message message = snapshot.getValue(Message.class);
+                            if (message != null) {
+                                messageList.add(message);
+                            }
+                        }
+                        messageAdapter.notifyDataSetChanged();
+                        recyclerViewMessages.scrollToPosition(messageList.size() - 1);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Xử lý lỗi
+                    }
+                });
+    }
+
+    // Hàm gửi tin nhắn
     private void sendMessage() {
         String messageText = editTextMessage.getText().toString();
-        if (!messageText.isEmpty()) {
-            // Gửi tin nhắn từ người dùng hiện tại đến admin
-            Message message = new Message(messageText, currentUserId, adminId, System.currentTimeMillis());
-            messagesRef.push().setValue(message);
-            editTextMessage.setText("");
+        if (!messageText.isEmpty() && selectedUserId != null) {
+            Message message = new Message(messageText, currentUserId, selectedUserId, System.currentTimeMillis());
+            messagesRef.child(generateChatId(currentUserId, selectedUserId)).push().setValue(message);
+            editTextMessage.setText("");  // Xóa trường nhập sau khi gửi
         }
+    }
+
+    private String generateChatId(String senderId, String receiverId) {
+        return senderId.compareTo(receiverId) < 0 ? senderId + "_" + receiverId : receiverId + "_" + senderId;
     }
 }

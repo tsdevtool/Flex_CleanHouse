@@ -17,12 +17,36 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_gravity="center"
-            android:text="Trò chuyện"
+            android:text="Chọn người để nhắn tin"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="20dp"/>
 
-        <!-- Vùng hiển thị nội dung tin nhắn -->
+        <!-- Vùng hiển thị danh sách người để chọn nhắn tin -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/border_background_vien_den_bogoc">
+
+            <!-- RecyclerView hiển thị danh sách người (Admin hoặc Nhân viên) -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_users"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                android:clipToPadding="false"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
+        </LinearLayout>
+
+        <!-- Vùng hiển thị nội dung tin nhắn sau khi chọn người -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -52,24 +76,6 @@
                 android:layout_height="60dp"
                 android:orientation="horizontal">
 
-                <!-- Nút thêm -->
-                <ImageButton
-                    android:id="@+id/imgbutAdd"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/icons8_plus_64" />
-
-                <!-- Nút thêm ảnh -->
-                <ImageButton
-                    android:id="@+id/imgbutAddImage"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/icons8_picture_64" />
-
                 <!-- Ô nhập tin nhắn -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -98,7 +104,9 @@
                         android:background="@drawable/icons8_send_60"
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
-                        android:layout_marginLeft="5dp" />
+                        android:layout_marginLeft="5dp"
+                        android:contentDescription="Gửi tin nhắn" />  <!-- Thêm mô tả nội dung -->
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

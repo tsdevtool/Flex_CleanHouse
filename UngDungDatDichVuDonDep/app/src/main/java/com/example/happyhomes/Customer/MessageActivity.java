@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.happyhomes.Model.Message;
 import com.example.happyhomes.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,8 +40,8 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nhan_tin);
 
         // Get sender and receiver ID from intent or session
-        senderId = "CURRENT_USER_ID"; // Retrieve from session or FirebaseAuth
-        receiverId = getIntent().getStringExtra("RECEIVER_ID"); // Passed from user selection
+        senderId = FirebaseAuth.getInstance().getCurrentUser().getUid(); // Lấy ID người dùng hiện tại từ FirebaseAuth
+        receiverId = getIntent().getStringExtra("RECEIVER_ID"); // Lấy ID người nhận từ Intent
 
         // Initialize Firebase reference
         messagesDatabaseRef = FirebaseDatabase.getInstance().getReference("messages").child(generateChatId(senderId, receiverId));
@@ -68,6 +69,7 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
+    // Hàm tải các tin nhắn từ Firebase
     private void loadMessages() {
         messagesDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -76,11 +78,11 @@ public class MessageActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Message message = snapshot.getValue(Message.class);
                     if (message != null) {
-                        messageList.add(message);
+                        messageList.add(message); // Thêm tin nhắn vào danh sách
                     }
                 }
-                messageAdapter.notifyDataSetChanged();
-                recyclerViewMessages.scrollToPosition(messageList.size() - 1);
+                messageAdapter.notifyDataSetChanged(); // Thông báo adapter rằng dữ liệu đã thay đổi
+                recyclerViewMessages.scrollToPosition(messageList.size() - 1); // Cuộn xuống tin nhắn mới nhất
             }
 
             @Override
@@ -90,20 +92,24 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
+    // Hàm gửi tin nhắn lên Firebase
     private void sendMessage() {
         String messageText = editTextMessage.getText().toString().trim();
         if (!TextUtils.isEmpty(messageText)) {
-            long timestamp = new Date().getTime();
+            long timestamp = new Date().getTime(); // Thời gian hiện tại
+
+            // Tạo đối tượng tin nhắn
             Message message = new Message(messageText, senderId, receiverId, timestamp);
 
-            // Push the message to Firebase
+            // Lưu tin nhắn lên Firebase
             messagesDatabaseRef.push().setValue(message);
 
-            // Clear input field
+            // Xóa trường nhập tin nhắn sau khi gửi
             editTextMessage.setText("");
         }
     }
 
+    // Hàm tạo ID cho cuộc trò chuyện giữa 2 người (sender và receiver)
     private String generateChatId(String senderId, String receiverId) {
         return senderId.compareTo(receiverId) < 0 ? senderId + "_" + receiverId : receiverId + "_" + senderId;
     }
