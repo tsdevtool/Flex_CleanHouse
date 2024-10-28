@@ -73,6 +73,11 @@ dependencies {
         "include" to listOf("*.aar", "*.jar"),
         "exclude" to listOf("")
     )))
+    implementation(fileTree(mapOf(
+        "dir" to "C:\\Users\\Ngomu\\Downloads\\zalopayLib",
+        "include" to listOf("*.aar", "*.jar"),
+        "exclude" to listOf("")
+    )))
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -96,4 +101,5 @@ dependencies {
 
 
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+    implementation ("com.firebaseui:firebase-ui-database:8.0.0")
 }

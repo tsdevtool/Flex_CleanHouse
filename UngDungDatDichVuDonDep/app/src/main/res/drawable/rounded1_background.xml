@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#70CAF2"/> <!-- Màu nền -->
+    <corners android:radius="20dp"/> <!-- Bo góc nhẹ -->
+    <elevation android:elevation="2dp"/> <!-- Độ nổi -->
+</shape>
