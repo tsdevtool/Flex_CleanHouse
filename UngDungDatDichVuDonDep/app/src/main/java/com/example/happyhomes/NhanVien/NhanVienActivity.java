@@ -90,21 +90,21 @@ public class NhanVienActivity extends AppCompatActivity implements ScheduleAdapt
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.nav_home_employee) {
-                    finish();
-                    startActivity(new Intent(NhanVienActivity.this, NhanVienActivity.class));
-                    Intent intent1 = new Intent(NhanVienActivity.this, LichSuCongViecActivity.class);
+                    Intent intent1 = new Intent(NhanVienActivity.this, NhanVienActivity.class);
                     intent1.putExtra("EplId", emId);
-                    return true;
+                    intent1.putExtra("EplName", employee.getEmName());
+                    startActivity(intent1);
                 } else if (item.getItemId() == R.id.nav_activity_employee) {
                     Intent intent1 = new Intent(NhanVienActivity.this, LichSuCongViecActivity.class);
                     intent1.putExtra("EplId", emId);
+                    intent1.putExtra("EplName", employee.getEmName());
                     startActivity(intent1);
 
                 } else if (item.getItemId() == R.id.nav_account_employee) {
-                    startActivity(new Intent(NhanVienActivity.this, HoSoNVActivity.class));
-                    Intent intent1 = new Intent(NhanVienActivity.this, LichSuCongViecActivity.class);
+                    Intent intent1 = new Intent(NhanVienActivity.this, HoSoNVActivity.class);
                     intent1.putExtra("EplId", emId);
-                    return true;
+                    intent1.putExtra("EplName", employee.getEmName());
+                    startActivity(intent1);
                 }
                 return false;
             }

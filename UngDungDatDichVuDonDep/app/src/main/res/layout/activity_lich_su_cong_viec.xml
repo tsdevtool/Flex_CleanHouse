@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Xin chào, "
+            android:text="Lịch sử hoạt động"
             android:textSize="20dp"
             android:textStyle="bold"
             android:textColor="#090909"
@@ -61,6 +61,8 @@
         app:menu="@menu/bottom_nav_menu_employee"
         android:background="?android:attr/windowBackground"
         android:elevation="8dp"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
         app:itemHorizontalTranslationEnabled="false" /> <!-- Thêm độ nổi để menu đẹp hơn -->
 
 </LinearLayout>

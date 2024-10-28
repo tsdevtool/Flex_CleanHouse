@@ -1,0 +1,8 @@
+<!-- res/drawable/circle_shape.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#EAEAEA" /> <!-- Màu nền nếu không có ảnh -->
+    <corners android:radius="50dp" /> <!-- Bo góc với bán kính lớn để làm tròn -->
+    <size
+        android:width="100dp"
+        android:height="100dp" />
+</shape>

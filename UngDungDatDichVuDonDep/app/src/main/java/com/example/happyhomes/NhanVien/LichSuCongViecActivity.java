@@ -47,6 +47,7 @@ public class LichSuCongViecActivity extends AppCompatActivity implements Schedul
     private ActivityLichSuCongViecBinding binding;
     private String priceSer;
     String emId;
+    String emName;
     String status;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
@@ -61,6 +62,7 @@ public class LichSuCongViecActivity extends AppCompatActivity implements Schedul
 
         Intent intent = getIntent();
         emId = intent.getStringExtra("EplId");
+        emName = intent.getStringExtra("EplName");
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("jobs");
@@ -74,11 +76,17 @@ public class LichSuCongViecActivity extends AppCompatActivity implements Schedul
 
                 if (item.getItemId() == R.id.nav_activity_employee) {
                     intent = new Intent(LichSuCongViecActivity.this, LichSuCongViecActivity.class);
+                    intent.putExtra("EplId", emId);
+                    intent.putExtra("EplName", emName);
                     finish(); // Kết thúc Activity hiện tại.
                 } else if (item.getItemId() == R.id.nav_home_employee) {
                     intent = new Intent(LichSuCongViecActivity.this, NhanVienActivity.class);
+                    intent.putExtra("EplId", emId);
+                    intent.putExtra("EplName", emName);
                 } else if (item.getItemId() == R.id.nav_account_employee) {
                     intent = new Intent(LichSuCongViecActivity.this, HoSoNVActivity.class);
+                    intent.putExtra("EplId", emId);
+                    intent.putExtra("EplName", emName);
                 } else {
                     return false; // Trả về false nếu không có item nào được chọn.
                 }
@@ -86,6 +94,7 @@ public class LichSuCongViecActivity extends AppCompatActivity implements Schedul
                 // Thêm EplId vào Intent
                 if (intent != null) {
                     intent.putExtra("EplId", emId);
+                    intent.putExtra("EplName", emName);
                     startActivity(intent);
                 }
                 return true; // Trả về true nếu một item đã được chọn và xử lý thành công.
@@ -224,7 +233,7 @@ public class LichSuCongViecActivity extends AppCompatActivity implements Schedul
                                                                                         }
                                                                                         DecimalFormat decimalFormat = new DecimalFormat("#,###");
                                                                                         String totalStr = decimalFormat.format(total).replace(',', '.');
-                                                                                        binding.txtstatus.setText(binding.txtstatus.getText() + totalStr);
+                                                                                        binding.txtstatus.setText("Doanh thu: "+totalStr);
                                                                                     }
 
                                                                                     @Override

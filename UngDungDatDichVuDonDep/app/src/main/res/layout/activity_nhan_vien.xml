@@ -61,6 +61,8 @@
         app:menu="@menu/bottom_nav_menu_employee"
         android:background="?android:attr/windowBackground"
         android:elevation="8dp"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
         app:itemHorizontalTranslationEnabled="false" /> <!-- Thêm độ nổi để menu đẹp hơn -->
 
 </LinearLayout>

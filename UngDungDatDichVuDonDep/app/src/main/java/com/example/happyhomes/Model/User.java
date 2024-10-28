@@ -22,4 +22,5 @@ public class User {
         this.addresses = addresses;
         this.role = role;
     }
+
 }
