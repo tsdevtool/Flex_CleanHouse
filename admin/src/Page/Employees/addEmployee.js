@@ -1,7 +1,6 @@
 import {
   createUserWithEmailAndPassword,
   fetchSignInMethodsForEmail,
-  sendEmailVerification,
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { onValue, ref, set } from "firebase/database";
@@ -282,7 +281,6 @@ const AddEmployee = () => {
                 type="number"
                 placeholder="Nhập lương cơ bản"
                 className="w-full outline-none p-2 bg-white mt-2"
-                required
                 onChange={(e) => setSalary(e.target.value)}
               />
             </div>
