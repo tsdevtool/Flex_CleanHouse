@@ -1,18 +1,23 @@
 package com.example.happyhomes.Model;
 
 public class ServiceSchedule {
-    private Long serScheId;
+    private String serScheId; // Change to String
     private Long serviceId;
-    private Long scheduleId;
+    private String scheduleId; // Change to String
 
-    public Long getSerScheId() {
+    public ServiceSchedule() {
+        // Firebase sẽ sử dụng constructor này để khởi tạo đối tượng
+    }
+    // Getter and Setter for serScheId
+    public String getSerScheId() {
         return serScheId;
     }
 
-    public void setSerScheId(Long serScheId) {
+    public void setSerScheId(String serScheId) {
         this.serScheId = serScheId;
     }
 
+    // Getter and Setter for serviceId
     public Long getServiceId() {
         return serviceId;
     }
@@ -21,15 +26,17 @@ public class ServiceSchedule {
         this.serviceId = serviceId;
     }
 
-    public Long getScheduleId() {
+    // Getter and Setter for scheduleId
+    public String getScheduleId() {
         return scheduleId;
     }
 
-    public void setScheduleId(Long scheduleId) {
+    public void setScheduleId(String scheduleId) {
         this.scheduleId = scheduleId;
     }
 
-    public ServiceSchedule(Long serScheId, Long serviceId, Long scheduleId) {
+    // Constructor
+    public ServiceSchedule(String serScheId, Long serviceId, String scheduleId) {
         this.serScheId = serScheId;
         this.serviceId = serviceId;
         this.scheduleId = scheduleId;

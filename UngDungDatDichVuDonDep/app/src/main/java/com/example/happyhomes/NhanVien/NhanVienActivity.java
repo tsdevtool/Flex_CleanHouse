@@ -1,372 +1,279 @@
-//package com.example.happyhomes.NhanVien;
-//
-//import android.app.AlertDialog;
-//import android.app.Dialog;
-//import android.content.Intent;
-//import android.content.SharedPreferences;
-//import android.graphics.Color;
-//import android.graphics.drawable.ColorDrawable;
-//import android.os.Bundle;
-//import android.util.Log;
-//import android.view.Gravity;
-//import android.view.LayoutInflater;
-//import android.view.View;
-//import android.view.WindowManager;
-//import android.widget.Button;
-//import android.widget.LinearLayout;
-//import android.widget.ListView;
-//import android.widget.TextView;
-//
-//import androidx.activity.EdgeToEdge;
-//import androidx.appcompat.app.AppCompatActivity;
-//
-//import com.example.happyhomes.DatabaseHelper;
-//import com.example.happyhomes.LoginActivity;
-//import com.example.happyhomes.Model.Check_Work;
-//import com.example.happyhomes.Model.Employee;
-//import com.example.happyhomes.Model.Schedule;
-//import com.example.happyhomes.R;
-//import com.example.happyhomes.databinding.ActivityNhanVienBinding;
-//import android.content.DialogInterface;
-//
-//import java.text.SimpleDateFormat;
-//import java.util.ArrayList;
-//import java.util.Date;
-//import java.util.List;
-//import java.util.Locale;
-//
-//public class NhanVienActivity extends AppCompatActivity {
-//
-//    ActivityNhanVienBinding binding;
-//    boolean checkIn;
-//    Employee employee;
-//    Schedule selectedSchedule; // Biến lưu trữ SCHEDULE được chọn
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        EdgeToEdge.enable(this);
-//        binding = ActivityNhanVienBinding.inflate(getLayoutInflater());
-//        setContentView(binding.getRoot());
-//
-//        // Nhận dữ liệu Employee từ Intent
-//        Intent intent = getIntent();
-//        employee = (Employee) intent.getSerializableExtra("Employee");
-//
-//        // Kiểm tra nếu đối tượng employee là null
-//        if (employee == null) {
-//            Log.e("NhanVienActivity", "Employee object is null!");
-//            finish();  // Dừng Activity nếu không có dữ liệu employee
-//            return;
-//        }
-//
-//        // Hiển thị thông tin Employee
-//        binding.txtusername.setText(employee.getEmName());
-//
-//        binding.lvLichSu.setEmptyView(findViewById(R.id.txtEmpty));
-//
-//        // Khôi phục trạng thái từ SharedPreferences
-//        //restoreCheckStatusFromPreferences();
-//
-//        addEvents();
-//
-//    }
-//
-//    private void addEvents() {
-//        // Hiển thị dialog khi nhấn vào layoutProfile
-//        binding.layotProfile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                showBottomSheet();
-//            }
-//        });
-//
-//        // Xử lý sự kiện Check-in/Check-out
-//        binding.btnCheckIn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (!checkIn && binding.btnCheckIn.getText().toString().equals("Sẵn sàng làm việc")) {
-//                    showReadyToWorkDialog();
-//                } else if (checkIn && binding.btnCheckIn.getText().toString().equals("Hoàn thành")) {
-//                    showConfirmDialog();
-//                }
-//            }
-//        });
-//    }
-//
-//    // Hiển thị dialog sẵn sàng làm việc
-//    private void showReadyToWorkDialog() {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(NhanVienActivity.this);
-//        LayoutInflater inflater = getLayoutInflater();
-//        View dialogView = inflater.inflate(R.layout.dialog_ready_to_work, null);
-//        builder.setView(dialogView);
-//
-//        final AlertDialog dialog = builder.create();
-//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        dialog.show();
-//
-//        TextView tvReadyDate = dialogView.findViewById(R.id.tvReadyDate);
-//        Button btnCancel = dialogView.findViewById(R.id.btnCancel);
-//        Button btnCheckIn = dialogView.findViewById(R.id.btnCheckIn);
-//
-//        // Lấy thời gian hiện tại
-//        String currentDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()).format(new Date());
-//        tvReadyDate.setText(currentDate);
-//
-//        btnCancel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        btnCheckIn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                // Xử lý khi bấm nút Check-in
-//                dialog.dismiss();
-//
-//                showAvailableSchedulesDialog();
-//            }
-//        });
-//    }
-//
-//    private void showAvailableSchedulesDialog() {
-//        DatabaseHelper dbHelper = new DatabaseHelper(this);
-//        List<Schedule> schedules = dbHelper.getAvailableSchedulesByEmployeeId(employee.getEmId());
-//
-//        Dialog dialog = new Dialog(NhanVienActivity.this);
-//        dialog.setContentView(R.layout.dialog_available_schedules);
-//
-//        ListView lvSchedules = dialog.findViewById(R.id.lvSchedules);
-//        ScheduleAdapter adapter = new ScheduleAdapter(this, schedules, employee.getEmId(), false);
-//        lvSchedules.setAdapter(adapter);
-//
-//        lvSchedules.setOnItemClickListener((parent, view, position, id) -> {
-//            selectedSchedule = schedules.get(position); // Gán giá trị cho selectedSchedule
-//            updateScheduleStatusToWorking(selectedSchedule.getScheduleId());
-//            showSelectedScheduleDetails(selectedSchedule);
-//            dialog.dismiss(); // Đóng dialog sau khi chọn lịch làm việc
-//        });
-//
-//        // Xử lý nút Hủy
-//        Button btnCancel = dialog.findViewById(R.id.btnCancel);
-//        btnCancel.setOnClickListener(v -> dialog.dismiss());
-//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//
-//        dialog.show();
-//
-////        AlertDialog.Builder builder = new AlertDialog.Builder(NhanVienActivity.this);
-////        builder.setTitle("Chọn lịch làm việc");
-////
-////        String[] scheduleItems = new String[schedules.size()];
-////        for (int i = 0; i < schedules.size(); i++) {
-////            scheduleItems[i] = schedules.get(i).getLocation() + " - " + schedules.get(i).getDateString();
-////        }
-////
-////        builder.setItems(scheduleItems, new DialogInterface.OnClickListener() {
-////            @Override
-////            public void onClick(DialogInterface dialog, int which) {
-////                selectedSchedule = schedules.get(which); // Gán giá trị cho selectedSchedule
-////                updateScheduleStatusToWorking(selectedSchedule.getScheduleId());
-////                showSelectedScheduleDetails(selectedSchedule);
-////            }
-////        });
-////
-////        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-////            @Override
-////            public void onClick(DialogInterface dialog, int which) {
-////                dialog.dismiss();
-////            }
-////        });
-////
-////        builder.create().show();
-//    }
-//
-//    private void updateScheduleStatusToWorking(Long scheduleId) {
-//        DatabaseHelper dbHelper = new DatabaseHelper(this);
-//        dbHelper.updateScheduleStatusToWorking(scheduleId);
-//
-//        // Cập nhật giao diện hoặc thông báo cho người dùng
-//        checkIn = true;
-//        //saveCheckStatusToPreferences(0);
-//        binding.txtstatus.setText("Đang làm việc");
-//        binding.btnCheckIn.setText("Hoàn thành");
-//    }
-//
-//    private void showSelectedScheduleDetails(Schedule schedule) {
-//        List<Schedule> selectedSchedules = new ArrayList<>();
-//        selectedSchedules.add(schedule);
-//
-//
-//        ScheduleAdapter adapter = new ScheduleAdapter(this, selectedSchedules, false);
-//        binding.lvLichSu.setAdapter(adapter);
-//    }
-//
-//    private void showConfirmDialog() {
-//        if (selectedSchedule == null) {
-//            Log.e("NhanVienActivity", "No schedule selected");
-//            return; // Không thực hiện gì nếu không có lịch làm việc nào được chọn
-//        }
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(NhanVienActivity.this);
-//        builder.setTitle("Xác nhận Hoàn thành");
-//
-//        builder.setMessage("Bạn có chắc chắn muốn Hoàn thành?");
-//
-//        builder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                // Cập nhật STATUS của SCHEDULE thành "Hoàn Thành"
-//                DatabaseHelper dbHelper = new DatabaseHelper(NhanVienActivity.this);
-//                dbHelper.updateScheduleStatusToCompleted(selectedSchedule.getScheduleId());
-//
-//                // Lưu thông tin vào bảng CHECK_WORK
-//                saveCheckWorkData();
-//
-//                // Cập nhật giao diện
-//                checkIn = false;
-//                //saveCheckStatusToPreferences(1);
-//                binding.txtstatus.setText("Hoàn thành");
-//                binding.btnCheckIn.setText("Sẵn sàng làm việc");
-//
-//                clearScheduleDetails();
-//            }
-//        });
-//
-//        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        builder.create().show();
-//    }
-//
-//    private void saveCheckWorkData() {
-//        if (selectedSchedule == null) {
-//            Log.e("NhanVienActivity", "No schedule selected");
-//            return; // Không thực hiện gì nếu không có lịch làm việc nào được chọn
-//        }
-//
-//        DatabaseHelper dbHelper = new DatabaseHelper(this);
-//
-//        // Lấy thời gian hiện tại khi người dùng nhấn nút "Tạm nghỉ"
-//        Date currentTime = new Date();
-//
-//        Check_Work checkWork = new Check_Work();
-//        checkWork.setWorkdateId(selectedSchedule.getScheduleId()); // Giả sử rằng WorkdateId chính là ScheduleId
-//        checkWork.setCheckPic(null); // Lưu giá trị null cho hình ảnh
-//        checkWork.setCheckType(1); // 1 cho "Check-Out", 0 cho "Check-In"
-//        checkWork.setTime(currentTime); // Lưu thời gian hiện tại vào bảng CHECK_WORK
-//
-//        dbHelper.addCheckWork(checkWork);
-//    }
-//
-//    private void clearScheduleDetails() {
-//        List<Schedule> emptyList = new ArrayList<>();
-//        ScheduleAdapter adapter = new ScheduleAdapter(this, emptyList, true);
-//        binding.lvLichSu.setAdapter(adapter);
-//    }
-//
-//    // Lưu trạng thái vào SharedPreferences
-//    private void saveCheckStatusToPreferences(int checkType) {
-//        SharedPreferences sharedPreferences = getSharedPreferences("CheckStatusPrefs", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putInt("CheckType", checkType); // Lưu trạng thái check-in hoặc check-out
-//        editor.apply();
-//    }
-//
-//    // Khôi phục trạng thái từ SharedPreferences
-//    private void restoreCheckStatusFromPreferences() {
-//        SharedPreferences sharedPreferences = getSharedPreferences("CheckStatusPrefs", MODE_PRIVATE);
-//        int checkType = sharedPreferences.getInt("CheckType", -1);
-//
-//        if (checkType == 0) { // 1 là Check-in
-//            checkIn = true;
-//            binding.txtstatus.setText("Đang làm việc");
-//            binding.btnCheckIn.setText("Hoàn thành");
-//        } else if (checkType == 1) { // 0 là Check-out
-//            checkIn = false;
-//            binding.txtstatus.setText("Hoàn thành");
-//            binding.btnCheckIn.setText("Sẵn sàng làm việc");
-//        }
-//    }
-//
-//    // Hiển thị bottom sheet
-//    private void showBottomSheet() {
-//        Dialog dialog = new Dialog(NhanVienActivity.this);
-//        dialog.setContentView(R.layout.bottom_dialog);
-//
-//        TextView txtEmployeeName = dialog.findViewById(R.id.txtusername);
-//        if (employee != null) {
-//            txtEmployeeName.setText(employee.getEmName());
-//        }
-//
-//        //Lịch làm việc
-//        LinearLayout linearLichLamViec= dialog.findViewById(R.id.layotLich);
-//        linearLichLamViec.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(NhanVienActivity.this, ScheduleActivity.class);
-//                intent.putExtra("EMPLOYEE_ID", employee.getEmId());
-//                startActivity(intent);
-//            }
-//        });
-//        //Lich sử làm việc
-//        LinearLayout linearLichSuLamViec= dialog.findViewById(R.id.layotThuNhap);
-//        linearLichSuLamViec.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(NhanVienActivity.this, LichSuCongViecActivity.class);
-//                intent.putExtra("EMPLOYEE_ID", employee.getEmId());
-//                startActivity(intent);
-//            }
-//        });
-//
-//        //ho tro
-//        LinearLayout linearHoTro = dialog.findViewById(R.id.layotHoTro);
-//        linearHoTro.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(NhanVienActivity.this, HoTroActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        //dang xat
-//        LinearLayout linearDangXat = dialog.findViewById(R.id.layotĐangXuat);
-//        linearDangXat.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(NhanVienActivity.this, LoginActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        //Ho So
-//        LinearLayout linearHoSo = dialog.findViewById(R.id.layoutHoSo);
-//        linearHoSo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(NhanVienActivity.this, HoSoNVActivity.class);
-//                intent.putExtra("EMPLOYEE_ID", employee.getEmId());
-//                startActivity(intent);
-//            }
-//        });
-//
-//        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-//        params.gravity = Gravity.START | Gravity.TOP;
-//        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
-//        params.height = WindowManager.LayoutParams.MATCH_PARENT;
-//        params.x = 0;
-//        params.y = 0;
-//
-//        dialog.getWindow().setAttributes(params);
-//        dialog.getWindow().getAttributes().windowAnimations = R.style.BottonSheetAnimation;
-//        dialog.show();
-//    }
-//
-//}
+package com.example.happyhomes.NhanVien;
+
+import static java.security.AccessController.getContext;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.happyhomes.Customer.HomeFragment;
+import com.example.happyhomes.Customer.Main_CustomerActivity;
+import com.example.happyhomes.Customer.MessageFragment;
+import com.example.happyhomes.Customer.ProfileFragment;
+import com.example.happyhomes.Customer.ScheduleHistoryFragment;
+import com.example.happyhomes.Model.Service;
+import com.example.happyhomes.Model.ServiceSchedule;
+import com.example.happyhomes.Model.Workdate;
+import com.example.happyhomes.NhanVien.ScheduleAdapter;
+import com.example.happyhomes.LoginActivity;
+import com.example.happyhomes.Model.Employee;
+import com.example.happyhomes.Model.Schedule;
+import com.example.happyhomes.Model.User;
+import com.example.happyhomes.R;
+import com.example.happyhomes.databinding.ActivityNhanVienBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class NhanVienActivity extends AppCompatActivity implements ScheduleAdapter.OnScheduleClickListener {
+
+    private ActivityNhanVienBinding binding;
+    private Employee employee;
+    private DatabaseReference databaseReference;
+    FirebaseDatabase firebaseDatabase;
+    String workId;
+    String emId;
+    String priceSer;
+    String statusWork = "Hoàn thành?";
+     // Biến toàn cục để lưu trữ trạng thái
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        binding = ActivityNhanVienBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("jobs");
+        workId = databaseReference.push().getKey();
+        // Nhận dữ liệu Employee từ Intent
+        Intent intent = getIntent(); // Sử dụng trường Email lưu id
+        employee = new Employee(null, intent.getStringExtra("EplName"), intent.getStringExtra("EplId"), null);
+        binding.txtusername.setText("Xin chào, " + employee.getEmName());
+        emId = intent.getStringExtra("EplId");
+        check_work(new WorkCheckCallback() {
+            @Override
+            public void onWorkCheckComplete(boolean isWorkCompleted) {
+                if (isWorkCompleted) {
+                    binding.txtstatus.setText("Chưa nhận công việc");
+                } else {
+                    binding.txtstatus.setText("Bạn đang thực hiện công việc");
+                }
+            }
+        });
+        getSchedulesFromFirebase();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_employee);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.nav_home_employee) {
+                    Intent intent1 = new Intent(NhanVienActivity.this, NhanVienActivity.class);
+                    intent1.putExtra("EplId", emId);
+                    intent1.putExtra("EplName", employee.getEmName());
+                    startActivity(intent1);
+                } else if (item.getItemId() == R.id.nav_activity_employee) {
+                    Intent intent1 = new Intent(NhanVienActivity.this, LichSuCongViecActivity.class);
+                    intent1.putExtra("EplId", emId);
+                    intent1.putExtra("EplName", employee.getEmName());
+                    startActivity(intent1);
+
+                } else if (item.getItemId() == R.id.nav_account_employee) {
+                    Intent intent1 = new Intent(NhanVienActivity.this, HoSoNVActivity.class);
+                    intent1.putExtra("EplId", emId);
+                    intent1.putExtra("EplName", employee.getEmName());
+                    startActivity(intent1);
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void onScheduleClick(Schedule schedule) {
+        new AlertDialog.Builder(this)
+                .setTitle("Xác nhận")
+                .setMessage("Bạn có chắc chắn muốn nhận công việc này không?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        check_work(new WorkCheckCallback() {
+                            @Override
+                            public void onWorkCheckComplete(boolean isWorkCompleted) {
+                                if (isWorkCompleted) {
+                                    Workdate workdate = new Workdate(
+                                            workId,
+                                            emId,
+                                            schedule.getId(),
+                                            statusWork
+                                    );
+                                    databaseReference.child("Workdate").child(workId).setValue(workdate);
+                                    Map<String, Object> statusUpdate = new HashMap<>();
+                                    statusUpdate.put("status", "Đã nhận");
+                                    databaseReference.child("schedules").child(schedule.getId()).updateChildren(statusUpdate).addOnCompleteListener(task -> {
+                                        if (task.isSuccessful()) {
+                                            dialog.dismiss();
+                                            Toast.makeText(getApplicationContext(), "Công việc đã được nhận thành công!", Toast.LENGTH_SHORT).show();
+                                            Intent intent = getIntent();
+                                            finish();
+                                            startActivity(intent);
+                                        } else {
+                                            // Nếu cập nhật không thành công, hiển thị lỗi
+                                            Toast.makeText(getApplicationContext(), "Cập nhật thất bại. Vui lòng thử lại.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Không thể nhận thêm công việc.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+   private void getSchedulesFromFirebase() {
+       DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("jobs").child("schedules");
+       DatabaseReference mDatabase_service = FirebaseDatabase.getInstance().getReference("services");
+       DatabaseReference mDatabase_service_sche = FirebaseDatabase.getInstance().getReference("jobs").child("serviceSchedules");
+
+       mDatabase.orderByChild("status").equalTo("Đang chờ")
+               .addListenerForSingleValueEvent(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                       List<Schedule> scheduleList = new ArrayList<>();
+
+                       // Nếu không có dữ liệu, cập nhật giao diện và thoát
+                       if (!dataSnapshot.exists()) {
+                           updateUIWithScheduleList(scheduleList);
+                           return;
+                       }
+
+                       // Duyệt qua các snapshot của lịch biểu
+                       for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                           Schedule schedule = snapshot.getValue(Schedule.class);
+                           if (schedule != null) {
+                               // Truy vấn lấy thông tin ServiceSchedule
+                               mDatabase_service_sche.orderByChild("scheduleId").equalTo(schedule.getId())
+                                       .addListenerForSingleValueEvent(new ValueEventListener() {
+                                           @Override
+                                           public void onDataChange(@NonNull DataSnapshot serviceScheduleSnapshot) {
+                                               for (DataSnapshot ser_sche : serviceScheduleSnapshot.getChildren()) {
+                                                   ServiceSchedule ser_sche_model = ser_sche.getValue(ServiceSchedule.class);
+                                                   if (ser_sche_model != null) {
+                                                       // Cập nhật thông tin của schedule
+                                                       schedule.setStatus(ser_sche_model.getServiceId().toString());
+
+                                                       // Lấy thông tin dịch vụ tương ứng
+                                                       mDatabase_service.orderByChild("serviceId")
+                                                               .equalTo(ser_sche_model.getServiceId())
+                                                               .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                   @Override
+                                                                   public void onDataChange(@NonNull DataSnapshot serviceSnapshot) {
+                                                                       for (DataSnapshot service : serviceSnapshot.getChildren()) {
+                                                                           Service ser = service.getValue(Service.class);
+                                                                           if (ser != null) {
+                                                                               schedule.setStatus(ser.getServiceType());
+                                                                               priceSer = ser.getServiceCost().toString();
+                                                                           }
+                                                                       }
+
+                                                                       // Thêm schedule vào danh sách sau khi xử lý xong
+                                                                       scheduleList.add(schedule);
+
+                                                                       // Kiểm tra điều kiện cập nhật giao diện
+                                                                       if (scheduleList.size() == dataSnapshot.getChildrenCount()) {
+                                                                           updateUIWithScheduleList(scheduleList);
+                                                                       }
+                                                                   }
+
+                                                                   @Override
+                                                                   public void onCancelled(@NonNull DatabaseError error) {
+                                                                       Log.e("Service", "Failed to read service data", error.toException());
+                                                                   }
+                                                               });
+                                                   }
+                                               }
+                                           }
+
+                                           @Override
+                                           public void onCancelled(@NonNull DatabaseError error) {
+                                               Log.e("Schedule", "Failed to read service schedules", error.toException());
+                                           }
+                                       });
+                           }
+                       }
+                   }
+                   @Override
+                   public void onCancelled(@NonNull DatabaseError databaseError) {
+                       Log.e("Schedule", "Failed to read data from Firebase", databaseError.toException());
+                   }
+               });
+   }
+    // Phương thức cập nhật giao diện
+    private void updateUIWithScheduleList(List<Schedule> scheduleList) {
+        ListView listView = findViewById(R.id.ListView);
+        if (!scheduleList.isEmpty()) {
+            ScheduleAdapter adapter = new ScheduleAdapter(NhanVienActivity.this, scheduleList, priceSer,null, this);
+            listView.setAdapter(adapter);
+        } else {
+            Log.d("Schedule", "No schedules found for select");
+        }
+    }
+
+    public interface WorkCheckCallback {
+        void onWorkCheckComplete(boolean isWorkCompleted);
+    }
+    public void check_work(WorkCheckCallback callback) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("jobs").child("Workdate");
+        mDatabase.orderByChild("emId").equalTo(emId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean isWorkCompleted = true;  // Assume work is completed unless found otherwise
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Workdate workdate = dataSnapshot.getValue(Workdate.class);
+                    if (statusWork.equals(workdate.getStatus())) {
+                        isWorkCompleted = false;  // Found a matching status, so work is not completed
+                        break;
+                    }
+                }
+                // Pass the result to the callback
+                callback.onWorkCheckComplete(isWorkCompleted);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle potential errors here if needed
+                Log.e("Firebase", "Database error: " + error.getMessage());
+            }
+        });
+    }
+}

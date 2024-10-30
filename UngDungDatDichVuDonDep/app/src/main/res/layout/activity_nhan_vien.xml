@@ -5,23 +5,22 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NhanVien.NhanVienActivity"
     android:orientation="vertical"
-    android:padding="25dp"
-    android:background="@drawable/anhnen">
+    android:background="@drawable/anhnen"
+    tools:context=".NhanVien.NhanVienActivity">
 
     <RelativeLayout
         android:id="@+id/layot_Profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:paddingTop="20dp">
 
         <TextView
             android:id="@+id/txtusername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Xin chào, Username"
+            android:text="Xin chào, "
             android:textSize="20dp"
             android:textStyle="bold"
             android:textColor="#090909"
@@ -41,14 +40,29 @@
 
     </RelativeLayout>
 
-
-
-        <!-- RecyclerView hiển thị các công việc -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <!-- ListView hiển thị các công việc -->
+    <ListView
+        android:id="@+id/ListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@null"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:dividerHeight="5dp"/>
 
+    <!-- Bottom Navigation View tràn màn hình dưới cùng -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_employee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_nav_menu_employee"
+        android:background="?android:attr/windowBackground"
+        android:elevation="8dp"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
+        app:itemHorizontalTranslationEnabled="false" /> <!-- Thêm độ nổi để menu đẹp hơn -->
 
 </LinearLayout>

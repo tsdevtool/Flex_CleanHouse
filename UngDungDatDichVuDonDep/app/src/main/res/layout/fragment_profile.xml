@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#4EB6F0"
-    tools:context=".Customer.Profile">
+    tools:context=".Customer.">
 
     <!-- Profile Section -->
     <LinearLayout
@@ -20,11 +20,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/profile_image"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:background="@drawable/circle_background" />
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintWidth_default="wrap"
+            app:shapeAppearanceOverlay="@style/CircleImage"
+            app:srcCompat="@drawable/circle_background" />
 
         <TextView
             android:id="@+id/username"
@@ -39,17 +42,21 @@
     </LinearLayout>
 
     <!-- Menu Section -->
+
+    <!-- Bottom Navigation Bar -->
     <LinearLayout
         android:id="@+id/menu_section"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/white"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="@color/white"
         app:layout_constraintBottom_toTopOf="@id/navigation_bar"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile_section">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_section"
+        app:layout_constraintVertical_bias="0.0">
 
         <!-- Menu Items - Repeat for each item -->
         <LinearLayout
@@ -174,7 +181,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginStart="160dp"
+                android:layout_marginStart="156dp"
                 android:src="@drawable/angleright" />
         </LinearLayout>
 
@@ -199,7 +206,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginStart="230dp"
+                android:layout_marginStart="225dp"
                 android:src="@drawable/angleright" />
         </LinearLayout>
 
@@ -224,7 +231,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginStart="150dp"
+                android:layout_marginStart="142dp"
                 android:src="@drawable/angleright" />
         </LinearLayout>
 
@@ -249,14 +256,13 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginStart="230dp"
+                android:layout_marginStart="218dp"
                 android:src="@drawable/angleright" />
         </LinearLayout>
         <!-- Repeat this block for other menu items -->
 
     </LinearLayout>
 
-    <!-- Bottom Navigation Bar -->
     <LinearLayout
         android:id="@+id/navigation_bar"
         android:layout_width="match_parent"

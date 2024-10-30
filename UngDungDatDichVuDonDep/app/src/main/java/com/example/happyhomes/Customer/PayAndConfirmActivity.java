@@ -157,8 +157,8 @@ public class PayAndConfirmActivity extends AppCompatActivity {
             // Lưu lịch trình vào Firebase bao gồm customerId
             databaseReference.child("schedules").child(scheduleId).setValue(schedule)
                     .addOnSuccessListener(aVoid -> {
-                        savePayment(scheduleId, serviceId);
-                        saveServiceSchedule(scheduleId, serviceId);
+                        String serviceScheduleId = saveServiceSchedule(scheduleId, serviceId);
+                        savePayment(serviceScheduleId, serviceId);  // Pass the correct serviceScheduleId
                     })
                     .addOnFailureListener(e -> {
                         Log.e("PayAndConfirmActivity", "Lỗi khi lưu lịch trình vào Firebase", e);
@@ -170,12 +170,15 @@ public class PayAndConfirmActivity extends AppCompatActivity {
             Toast.makeText(this, "Định dạng ngày hoặc giờ không hợp lệ.", Toast.LENGTH_LONG).show();
         }
     }
-    private void saveServiceSchedule(String scheduleId, int serviceId) {
-        // Tạo đối tượng ServiceSchedule
-        String serviceScheduleId = databaseReference.push().getKey();
-        ServiceSchedule serviceSchedule = new ServiceSchedule(Long.valueOf(serviceScheduleId.hashCode()), (long) serviceId, Long.valueOf(scheduleId.hashCode()));
 
-        // Lưu ServiceSchedule vào Firebase
+    private String saveServiceSchedule(String scheduleId, int serviceId) {
+        // Generate a unique ID for service schedule
+        String serviceScheduleId = databaseReference.push().getKey();
+
+        // Directly use the Firebase-generated IDs as strings
+        ServiceSchedule serviceSchedule = new ServiceSchedule(serviceScheduleId, (long) serviceId, scheduleId);
+
+        // Save ServiceSchedule to Firebase
         databaseReference.child("serviceSchedules").child(serviceScheduleId).setValue(serviceSchedule)
                 .addOnSuccessListener(aVoid -> {
                     Log.d("PayAndConfirmActivity", "ServiceSchedule saved successfully!");
@@ -184,9 +187,11 @@ public class PayAndConfirmActivity extends AppCompatActivity {
                     Log.e("PayAndConfirmActivity", "Error saving ServiceSchedule to Firebase", e);
                     Toast.makeText(PayAndConfirmActivity.this, "Failed to save service schedule.", Toast.LENGTH_LONG).show();
                 });
+
+        return serviceScheduleId;  // Return the generated serviceScheduleId
     }
-    private void savePayment(String scheduleId, int serviceId) {
-        // Chuyển đổi ngày giờ thành chuỗi định dạng
+    private void savePayment(String serScheId, int serviceId) {
+        // Chuyển đổi ngày giờ hiện tại thành chuỗi định dạng
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         String payDay = sdf.format(timestamp);
@@ -194,15 +199,17 @@ public class PayAndConfirmActivity extends AppCompatActivity {
         // Tạo đối tượng Payment dựa trên phương thức thanh toán
         Payment payment = null;
         if (binding.rdoTienMat.isChecked()) {
-            payment = new Payment(null, (long) scheduleId.hashCode(), (long) 1, (long) serviceId, payDay);
+            // Method ID 1 corresponds to "Cash Payment"
+            payment = new Payment(null, 1L, serScheId, (long) serviceId, payDay);
         } else if (binding.rdoZalo.isChecked()) {
-            payment = new Payment(null, (long) scheduleId.hashCode(), (long) 6, (long) serviceId, payDay);
-            zalopay();
+            // Method ID 6 corresponds to "ZaloPay"
+            payment = new Payment(null, 6L, serScheId, (long) serviceId, payDay);
+            zalopay();  // Initiate ZaloPay payment if selected
         }
 
-        // Lưu Payment vào Firebase
+        // Lưu đối tượng Payment vào Firebase
         if (payment != null) {
-            databaseReference.child("payments").child(scheduleId).setValue(payment)
+            databaseReference.child("payments").child(serScheId).setValue(payment)
                     .addOnSuccessListener(aVoid -> {
                         Toast.makeText(PayAndConfirmActivity.this, "Payment saved successfully!", Toast.LENGTH_LONG).show();
                     })
@@ -212,6 +219,7 @@ public class PayAndConfirmActivity extends AppCompatActivity {
                     });
         }
     }
+
     private void zalopay() {
         CreateOrder orderApi = new CreateOrder();
         String cost2 = binding.txtCost.getText().toString();

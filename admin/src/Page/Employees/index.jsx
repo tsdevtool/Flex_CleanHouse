@@ -1,7 +1,7 @@
 import { onValue, ref, remove } from "firebase/database"; // Import remove từ firebase/database
 import { useEffect, useState } from "react";
 import { IoMdPersonAdd } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import File from "../../Components/File";
 import BasicInformation from "../../Components/Header/BasicInformation";
 import HeaderWrapper from "../../Components/Header/HeaderWrapper";
@@ -9,19 +9,41 @@ import { db } from "../../firebase/config";
 
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  // useEffect(() => {
+  //   const employeesRef = ref(db, "users"); // Tham chiếu đến "users" trong Realtime Database
+  //   onValue(employeesRef, (snapshot) => {
+  //     const data = snapshot.val();
+  //     if (data) {
+  //       const employeesArray = Object.keys(data).map((key) => ({
+  //         id: key,
+  //         ...data[key], // Gán tất cả các thuộc tính của người dùng
+  //       }));
+  //       setEmployees(employeesArray); // Cập nhật state với mảng người dùng
+  //     }
+  //   });
+  // }, []);
 
   useEffect(() => {
-    const employeesRef = ref(db, "users"); // Tham chiếu đến "users" trong Realtime Database
-    onValue(employeesRef, (snapshot) => {
+    const employeeRef = ref(db, "users"); // Reference to 'users' in Realtime Database
+    const unsubscribe = onValue(employeeRef, (snapshot) => {
       const data = snapshot.val();
+      setLoading(false); // Stop loading once data is fetched
       if (data) {
-        const employeesArray = Object.keys(data).map((key) => ({
+        const customerList = Object.keys(data).map((key) => ({
           id: key,
-          ...data[key], // Gán tất cả các thuộc tính của người dùng
+          ...data[key],
         }));
-        setEmployees(employeesArray); // Cập nhật state với mảng người dùng
+        setEmployees(customerList); // Save customer list in state
       }
+    }, (error) => {
+      setLoading(false); // Stop loading if there's an error
+      setError("Failed to fetch customers. Please try again."); // Set error message
     });
+
+    return () => unsubscribe(); // Clean up subscription on unmount
   }, []);
 
   const handleDelete = async (employeeId) => {
@@ -34,6 +56,10 @@ const Employees = () => {
       }
     }
   };
+
+  const handleMessageClick = (customerId) => {
+    navigate(`/chats/${customerId}`); // Điều hướng đến trang chat với ID khách hàng
+};
 
   return (
     <main className="flex-1 p-6 bg-gray-100">
@@ -64,7 +90,9 @@ const Employees = () => {
           </tr>
         </thead>
         <tbody>
-          {employees.filter((employee) => employee.role !== "customer").map((employee, index) => (
+
+          {employees.filter((employee)=>employee.role!=="customer").map((employee, index) => (
+
             <tr key={employee.id} className="bg-indigo-100">
             <td className="p-2">{index + 1}</td>
             <td className="p-2">{employee.name}</td>
@@ -78,7 +106,7 @@ const Employees = () => {
             </td>
             <td className="p-2">
               <div >
-                <button className="bg-success m-2 p-2 btn-action">
+                <button onClick={() => handleMessageClick(employee.id)} className="bg-success m-2 p-2 btn-action">
                   Nhắn tin
                 </button>
               </div>
