@@ -1,0 +1,829 @@
+{
+  "jobs": {
+    "Workdate": {
+      "-O9WPW3to4gpdT3OxAQq": {
+        "emId": "B4cXcrqxPUVQMNZcjJn3FgxoeDE3",
+        "serScheId": "-O9N7nX-zZ8Wsz5YShiM",
+        "status": "XONG",
+        "workDateId": "-O9WPW3to4gpdT3OxAQq"
+      },
+      "-O9gvFbS2UzL0ROOmsgp": {
+        "emId": "B4cXcrqxPUVQMNZcjJn3FgxoeDE3",
+        "serScheId": "-O9NAGOd2_sT3QastOS-",
+        "status": "XONG",
+        "workDateId": "-O9gvFbS2UzL0ROOmsgp"
+      },
+      "-O9gwUrE_8UuStLNNfTa": {
+        "serScheId": "-O98jhmQIqpwj3MUTgWB",
+        "status": "XONG",
+        "workDateId": "-O9gwUrE_8UuStLNNfTa"
+      },
+      "-OADEwTf6czo8lsWjRPO": {
+        "emId": "B4cXcrqxPUVQMNZcjJn3FgxoeDE3",
+        "serScheId": "-OADD_tUJ4eGinUC6Iqo",
+        "status": "XONG",
+        "workDateId": "-OADEwTf6czo8lsWjRPO"
+      },
+      "-OAGhEWWt1p5rSVS7fyd": {
+        "emId": "B4cXcrqxPUVQMNZcjJn3FgxoeDE3",
+        "serScheId": "-O9guqDgjXpkrAZQyRpn",
+        "status": "XONG",
+        "workDateId": "-OAGhEWWt1p5rSVS7fyd"
+      }
+    },
+    "payments": {
+      "-O98jhqmBae_C2Sf5gE8": {
+        "methodId": 1,
+        "payDay": "2024-09-15 13:37:17",
+        "serScheId": "-O98jhqmBae_C2Sf5gE8",
+        "serviceId": 2
+      },
+      "-O9N7T4_VHVzFWlgpEap": {
+        "methodId": 1,
+        "payDay": "2024-10-17 08:40:09",
+        "serScheId": "-O9N7T4_VHVzFWlgpEap",
+        "serviceId": 2
+      },
+      "-O9N7naDMnErK1ZBZvcl": {
+        "methodId": 1,
+        "payDay": "2024-10-17 08:41:37",
+        "serScheId": "-O9N7naDMnErK1ZBZvcl",
+        "serviceId": 1
+      },
+      "-O9NAGT8DPkCoZplQPMG": {
+        "methodId": 1,
+        "payDay": "2024-10-17 08:52:24",
+        "serScheId": "-O9NAGT8DPkCoZplQPMG",
+        "serviceId": 1
+      },
+      "-O9guqHlJ09fGtQb4QXW": {
+        "methodId": 6,
+        "payDay": "2024-10-21 09:32:42",
+        "serScheId": "-O9guqHlJ09fGtQb4QXW",
+        "serviceId": 2
+      },
+      "-OABG3QXlbvw4b9wks7m": {
+        "methodId": 1,
+        "payDay": "2024-10-27 11:37:44",
+        "serScheId": "-OABG3QXlbvw4b9wks7m",
+        "serviceId": 3
+      },
+      "-OADD_zHjK7ak2cNmdsQ": {
+        "methodId": 6,
+        "payDay": "2024-10-27 20:46:25",
+        "serScheId": "-OADD_zHjK7ak2cNmdsQ",
+        "serviceId": 1
+      },
+      "-OAGl3GuFls7BLp54Uyp": {
+        "methodId": 6,
+        "payDay": "2024-10-28 13:15:54",
+        "serScheId": "-OAGl3GuFls7BLp54Uyp",
+        "serviceId": 3
+      },
+      "-OARnRcgsoBK2uG4pKLx": {
+        "methodId": 6,
+        "payDay": "2024-10-30 16:42:05",
+        "serScheId": "-OARnRcgsoBK2uG4pKLx",
+        "serviceId": 1
+      },
+      "-OARnyu1yIZogWXqB_ZU": {
+        "methodId": 6,
+        "payDay": "2024-10-30 16:44:25",
+        "serScheId": "-OARnyu1yIZogWXqB_ZU",
+        "serviceId": 1
+      },
+      "-OARomFnNDVhqZCT0I5m": {
+        "methodId": 6,
+        "payDay": "2024-10-30 16:48:00",
+        "serScheId": "-OARomFnNDVhqZCT0I5m",
+        "serviceId": 1
+      },
+      "-OARp3LSSLfMae60ew4x": {
+        "methodId": 6,
+        "payDay": "2024-10-30 16:49:14",
+        "serScheId": "-OARp3LSSLfMae60ew4x",
+        "serviceId": 1
+      },
+      "-OATEljsA6IZkFfRgZ-B": {
+        "methodId": 6,
+        "payDay": "2024-10-30 23:25:30",
+        "serScheId": "-OATEljsA6IZkFfRgZ-B",
+        "serviceId": 1
+      },
+      "-OATFOKDBg3Or8jNfOc6": {
+        "methodId": 6,
+        "payDay": "2024-10-30 23:28:12",
+        "serScheId": "-OATFOKDBg3Or8jNfOc6",
+        "serviceId": 1
+      },
+      "ajsdfkjashdf": {
+        "methodId": 1,
+        "payDay": "2024-10-14 13:37:17",
+        "serScheId": "-O98jhqmBae_C2Sf5gE8",
+        "serviceId": 1
+      }
+    },
+    "schedules": {
+      "-O98jhmQIqpwj3MUTgWB": {
+        "customerId": "I70X0MjTSpPpg8FaeXHNr6svlVO2",
+        "date": {
+          "date": 14,
+          "day": 1,
+          "hours": 0,
+          "minutes": 0,
+          "month": 9,
+          "seconds": 0,
+          "time": 1728838800000,
+          "timezoneOffset": -420,
+          "year": 124
+        },
+        "dateString": "2024-10-14",
+        "id": "-O98jhmQIqpwj3MUTgWB",
+        "location": "475A Điện Biên Phủ, Phường 25, Bình Thạnh, Hồ Chí Minh, Vietnam",
+        "startTime": {
+          "date": 1,
+          "day": 4,
+          "hours": 13,
+          "minutes": 37,
+          "month": 0,
+          "seconds": 0,
+          "time": 23820000,
+          "timezoneOffset": -420,
+          "year": 70
+        },
+        "startTimeString": "13:37:00",
+        "startTimeTimestamp": 23820000,
+        "status": "XONG"
+      },
+      "-O9N7nX-zZ8Wsz5YShiM": {
+        "customerId": "HSp5XaCivBfer2qucySViLmc5Yr1",
+        "date": {
+          "date": 17,
+          "day": 4,
+          "hours": 0,
+          "minutes": 0,
+          "month": 9,
+          "seconds": 0,
+          "time": 1729098000000,
+          "timezoneOffset": -420,
+          "year": 124
+        },
+        "dateString": "2024-10-17",
+        "id": "-O9N7nX-zZ8Wsz5YShiM",
+        "location": "475A Điện Biên Phủ, Phường 25, Bình Thạnh, Hồ Chí Minh, Vietnam",
+        "startTime": {
+          "date": 1,
+          "day": 4,
+          "hours": 8,
+          "minutes": 41,
+          "month": 0,
+          "seconds": 0,
+          "time": 6060000,
+          "timezoneOffset": -420,
+          "year": 70
+        },
+        "startTimeString": "08:41:00",
+        "startTimeTimestamp": 6060000,
+        "status": "XONG"
+      },
+      "-O9NAGOd2_sT3QastOS-": {
+        "customerId": "HSp5XaCivBfer2qucySViLmc5Yr1",
+        "date": {
+          "date": 17,
+          "day": 4,
+          "hours": 0,
+          "minutes": 0,
+          "month": 9,
+          "seconds": 0,
+          "time": 1729098000000,
+          "timezoneOffset": -420,
+          "year": 124
+        },
+        "dateString": "2024-10-17",
+        "id": "-O9NAGOd2_sT3QastOS-",
+        "location": "10/80c Song Hành Xa Lộ Hà Nội, Phường Tân Phú, Quận 9, Hồ Chí Minh, Vietnam",
+        "startTime": {
+          "date": 1,
+          "day": 4,
+          "hours": 8,
+          "minutes": 52,
+          "month": 0,
+          "seconds": 0,
+          "time": 6720000,
+          "timezoneOffset": -420,
+          "year": 70
+        },
+        "startTimeString": "08:52:00",
+        "startTimeTimestamp": 6720000,
+        "status": "XONG"
+      },
+      "-O9guqDgjXpkrAZQyRpn": {
+        "customerId": "HSp5XaCivBfer2qucySViLmc5Yr1",
+        "date": {
+          "date": 21,
+          "day": 1,
+          "hours": 0,
+          "minutes": 0,
+          "month": 9,
+          "seconds": 0,
+          "time": 1729443600000,
+          "timezoneOffset": -420,
+          "year": 124
+        },
+        "dateString": "2024-10-21",
+        "id": "-O9guqDgjXpkrAZQyRpn",
+        "location": "215 Đường số 138, Phường Tân Phú, Quận 9, Hồ Chí Minh, Vietnam",
+        "startTime": {
+          "date": 1,
+          "day": 4,
+          "hours": 9,
+          "minutes": 32,
+          "month": 0,
+          "seconds": 0,
+          "time": 9120000,
+          "timezoneOffset": -420,
+          "year": 70
+        },
+        "startTimeString": "09:32:00",
+        "startTimeTimestamp": 9120000,
+        "status": "XONG"
+      },
+      "-OABG3Ku8QfVHB_vkksz": {
+        "customerId": "HSp5XaCivBfer2qucySViLmc5Yr1",
+        "date": {
+          "date": 27,
+          "day": 0,
+          "hours": 0,
+          "minutes": 0,
+          "month": 9,
+          "seconds": 0,
+          "time": 1729962000000,
+          "timezoneOffset": -420,
+          "year": 124
+        },
+        "dateString": "2024-10-27",
+        "id": "-OABG3Ku8QfVHB_vkksz",
+        "location": "10/80c Song Hành Xa Lộ Hà Nội, Phường Tân Phú, Quận 9, Hồ Chí Minh, Vietnam",
+        "startTime": {
+          "date": 1,
+          "day": 4,
+          "hours": 11,
+          "minutes": 33,
+          "month": 0,
+          "seconds": 0,
+          "time": 16380000,
+          "timezoneOffset": -420,
+          "year": 70
+        },
+        "startTimeString": "11:33:00",
+        "startTimeTimestamp": 16380000,
+        "status": "Đang chờ"
+      },
+      "-OADD_tUJ4eGinUC6Iqo": {
+        "customerId": "I70X0MjTSpPpg8FaeXHNr6svlVO2",
+        "date": {
+          "date": 12,
+          "day": 6,
+          "hours": 0,
+          "minutes": 0,
+          "month": 9,
+          "seconds": 0,
+          "time": 1728666000000,
+          "timezoneOffset": -420,
+          "year": 124
+        },
+        "dateString": "2024-10-12",
+        "id": "-OADD_tUJ4eGinUC6Iqo",
+        "location": "1 Lê Văn Việt, Tăng Nhơn Phú A, Quận 9, Hồ Chí Minh, Việt Nam",
+        "startTime": {
+          "date": 1,
+          "day": 4,
+          "hours": 20,
+          "minutes": 46,
+          "month": 0,
+          "seconds": 0,
+          "time": 45960000,
+          "timezoneOffset": -480,
+          "year": 70
+        },
+        "startTimeString": "20:46:00",
+        "startTimeTimestamp": 45960000,
+        "status": "XONG"
+      },
+      "-OAGl3AupTBAgajBwqf2": {
+        "customerId": "I70X0MjTSpPpg8FaeXHNr6svlVO2",
+        "date": {
+          "date": 28,
+          "day": 1,
+          "hours": 0,
+          "minutes": 0,
+          "month": 9,
+          "seconds": 0,
+          "time": 1730048400000,
+          "timezoneOffset": -420,
+          "year": 124
+        },
+        "dateString": "2024-10-28",
+        "id": "-OAGl3AupTBAgajBwqf2",
+        "location": "67 Đ. số 17, Phường Linh Trung, Thủ Đức, Hồ Chí Minh, Việt Nam",
+        "startTime": {
+          "date": 1,
+          "day": 4,
+          "hours": 13,
+          "minutes": 15,
+          "month": 0,
+          "seconds": 0,
+          "time": 18900000,
+          "timezoneOffset": -480,
+          "year": 70
+        },
+        "startTimeString": "13:15:00",
+        "startTimeTimestamp": 18900000,
+        "status": "Đang chờ"
+      },
+      "-OARnRZHMBmJ4K846PcS": {
+        "customerId": "HSp5XaCivBfer2qucySViLmc5Yr1",
+        "date": {
+          "date": 30,
+          "day": 3,
+          "hours": 0,
+          "minutes": 0,
+          "month": 9,
+          "seconds": 0,
+          "time": 1730221200000,
+          "timezoneOffset": -420,
+          "year": 124
+        },
+        "dateString": "2024-10-30",
+        "id": "-OARnRZHMBmJ4K846PcS",
+        "location": "10/80c Song Hành Xa Lộ Hà Nội, Phường Tân Phú, Quận 9, Hồ Chí Minh, Vietnam",
+        "startTime": {
+          "date": 1,
+          "day": 4,
+          "hours": 16,
+          "minutes": 41,
+          "month": 0,
+          "seconds": 0,
+          "time": 34860000,
+          "timezoneOffset": -420,
+          "year": 70
+        },
+        "startTimeString": "16:41:00",
+        "startTimeTimestamp": 34860000,
+        "status": "Đang chờ"
+      },
+      "-OARnypcv4pfMNZRiFw5": {
+        "customerId": "HSp5XaCivBfer2qucySViLmc5Yr1",
+        "date": {
+          "date": 30,
+          "day": 3,
+          "hours": 0,
+          "minutes": 0,
+          "month": 9,
+          "seconds": 0,
+          "time": 1730221200000,
+          "timezoneOffset": -420,
+          "year": 124
+        },
+        "dateString": "2024-10-30",
+        "id": "-OARnypcv4pfMNZRiFw5",
+        "location": "10/80c Song Hành Xa Lộ Hà Nội, Phường Tân Phú, Quận 9, Hồ Chí Minh, Vietnam",
+        "startTime": {
+          "date": 1,
+          "day": 4,
+          "hours": 16,
+          "minutes": 41,
+          "month": 0,
+          "seconds": 0,
+          "time": 34860000,
+          "timezoneOffset": -420,
+          "year": 70
+        },
+        "startTimeString": "16:41:00",
+        "startTimeTimestamp": 34860000,
+        "status": "Đang chờ"
+      },
+      "-OARomAblmN8v0d6nbaq": {
+        "customerId": "HSp5XaCivBfer2qucySViLmc5Yr1",
+        "date": {
+          "date": 30,
+          "day": 3,
+          "hours": 0,
+          "minutes": 0,
+          "month": 9,
+          "seconds": 0,
+          "time": 1730221200000,
+          "timezoneOffset": -420,
+          "year": 124
+        },
+        "dateString": "2024-10-30",
+        "id": "-OARomAblmN8v0d6nbaq",
+        "location": "10/80c Song Hành Xa Lộ Hà Nội, Phường Tân Phú, Quận 9, Hồ Chí Minh, Vietnam",
+        "startTime": {
+          "date": 1,
+          "day": 4,
+          "hours": 16,
+          "minutes": 47,
+          "month": 0,
+          "seconds": 0,
+          "time": 35220000,
+          "timezoneOffset": -420,
+          "year": 70
+        },
+        "startTimeString": "16:47:00",
+        "startTimeTimestamp": 35220000,
+        "status": "Đang chờ"
+      },
+      "-OARp3HbyIqvJoZKp_bc": {
+        "customerId": "HSp5XaCivBfer2qucySViLmc5Yr1",
+        "date": {
+          "date": 30,
+          "day": 3,
+          "hours": 0,
+          "minutes": 0,
+          "month": 9,
+          "seconds": 0,
+          "time": 1730221200000,
+          "timezoneOffset": -420,
+          "year": 124
+        },
+        "dateString": "2024-10-30",
+        "id": "-OARp3HbyIqvJoZKp_bc",
+        "location": "10/80c Song Hành Xa Lộ Hà Nội, Phường Tân Phú, Quận 9, Hồ Chí Minh, Vietnam",
+        "startTime": {
+          "date": 1,
+          "day": 4,
+          "hours": 16,
+          "minutes": 47,
+          "month": 0,
+          "seconds": 0,
+          "time": 35220000,
+          "timezoneOffset": -420,
+          "year": 70
+        },
+        "startTimeString": "16:47:00",
+        "startTimeTimestamp": 35220000,
+        "status": "Đang chờ"
+      },
+      "-OATElcqesQmxf5kHokJ": {
+        "customerId": "I70X0MjTSpPpg8FaeXHNr6svlVO2",
+        "date": {
+          "date": 30,
+          "day": 3,
+          "hours": 0,
+          "minutes": 0,
+          "month": 9,
+          "seconds": 0,
+          "time": 1730221200000,
+          "timezoneOffset": -420,
+          "year": 124
+        },
+        "dateString": "2024-10-30",
+        "id": "-OATElcqesQmxf5kHokJ",
+        "location": "C22/1/2 Lê Văn Việt, Tăng Nhơn Phú A, Quận 9, Hồ Chí Minh, Việt Nam",
+        "startTime": {
+          "date": 1,
+          "day": 4,
+          "hours": 23,
+          "minutes": 25,
+          "month": 0,
+          "seconds": 0,
+          "time": 55500000,
+          "timezoneOffset": -480,
+          "year": 70
+        },
+        "startTimeString": "23:25:00",
+        "startTimeTimestamp": 55500000,
+        "status": "Đang chờ"
+      },
+      "-OATFOGVJCCPZL2OA6G3": {
+        "customerId": "I70X0MjTSpPpg8FaeXHNr6svlVO2",
+        "date": {
+          "date": 30,
+          "day": 3,
+          "hours": 0,
+          "minutes": 0,
+          "month": 9,
+          "seconds": 0,
+          "time": 1730221200000,
+          "timezoneOffset": -420,
+          "year": 124
+        },
+        "dateString": "2024-10-30",
+        "id": "-OATFOGVJCCPZL2OA6G3",
+        "location": "C22/1/2 Lê Văn Việt, Tăng Nhơn Phú A, Quận 9, Hồ Chí Minh, Việt Nam",
+        "startTime": {
+          "date": 1,
+          "day": 4,
+          "hours": 23,
+          "minutes": 25,
+          "month": 0,
+          "seconds": 0,
+          "time": 55500000,
+          "timezoneOffset": -480,
+          "year": 70
+        },
+        "startTimeString": "23:25:00",
+        "startTimeTimestamp": 55500000,
+        "status": "Đang chờ"
+      }
+    },
+    "serviceSchedules": {
+      "-O98jhqmBae_C2Sf5gE8": {
+        "scheduleId": "-O98jhmQIqpwj3MUTgWB",
+        "serScheId": "-O98jhqmBae_C2Sf5gE8",
+        "serviceId": 1
+      },
+      "-O9N7T4_VHVzFWlgpEap": {
+        "scheduleId": "-O9N7T0ooyFcnfKr-sfC",
+        "serScheId": "-O9N7T4_VHVzFWlgpEap",
+        "serviceId": 2
+      },
+      "-O9N7naDMnErK1ZBZvcl": {
+        "scheduleId": "-O9N7nX-zZ8Wsz5YShiM",
+        "serScheId": "-O9N7naDMnErK1ZBZvcl",
+        "serviceId": 1
+      },
+      "-O9NAGT8DPkCoZplQPMG": {
+        "scheduleId": "-O9NAGOd2_sT3QastOS-",
+        "serScheId": "-O9NAGT8DPkCoZplQPMG",
+        "serviceId": 1
+      },
+      "-O9guqHlJ09fGtQb4QXW": {
+        "scheduleId": "-O9guqDgjXpkrAZQyRpn",
+        "serScheId": "-O9guqHlJ09fGtQb4QXW",
+        "serviceId": 2
+      },
+      "-OABG3QXlbvw4b9wks7m": {
+        "scheduleId": "-OABG3Ku8QfVHB_vkksz",
+        "serScheId": "-OABG3QXlbvw4b9wks7m",
+        "serviceId": 3
+      },
+      "-OADD_zHjK7ak2cNmdsQ": {
+        "scheduleId": "-OADD_tUJ4eGinUC6Iqo",
+        "serScheId": "-OADD_zHjK7ak2cNmdsQ",
+        "serviceId": 1
+      },
+      "-OAGl3GuFls7BLp54Uyp": {
+        "scheduleId": "-OAGl3AupTBAgajBwqf2",
+        "serScheId": "-OAGl3GuFls7BLp54Uyp",
+        "serviceId": 3
+      },
+      "-OARnRcgsoBK2uG4pKLx": {
+        "scheduleId": "-OARnRZHMBmJ4K846PcS",
+        "serScheId": "-OARnRcgsoBK2uG4pKLx",
+        "serviceId": 1
+      },
+      "-OARnyu1yIZogWXqB_ZU": {
+        "scheduleId": "-OARnypcv4pfMNZRiFw5",
+        "serScheId": "-OARnyu1yIZogWXqB_ZU",
+        "serviceId": 1
+      },
+      "-OARomFnNDVhqZCT0I5m": {
+        "scheduleId": "-OARomAblmN8v0d6nbaq",
+        "serScheId": "-OARomFnNDVhqZCT0I5m",
+        "serviceId": 1
+      },
+      "-OARp3LSSLfMae60ew4x": {
+        "scheduleId": "-OARp3HbyIqvJoZKp_bc",
+        "serScheId": "-OARp3LSSLfMae60ew4x",
+        "serviceId": 1
+      },
+      "-OATEljsA6IZkFfRgZ-B": {
+        "scheduleId": "-OATElcqesQmxf5kHokJ",
+        "serScheId": "-OATEljsA6IZkFfRgZ-B",
+        "serviceId": 1
+      },
+      "-OATFOKDBg3Or8jNfOc6": {
+        "scheduleId": "-OATFOGVJCCPZL2OA6G3",
+        "serScheId": "-OATFOKDBg3Or8jNfOc6",
+        "serviceId": 1
+      }
+    }
+  },
+  "messages": {
+    "B4cXcrqxPUVQMNZcjJn3FgxoeDE3_I70X0MjTSpPpg8FaeXHNr6svlVO2": {
+      "-O9f6nvMgY5E85UMAqa3": {
+        "content": "fjnfbfnc",
+        "receiverId": "B4cXcrqxPUVQMNZcjJn3FgxoeDE3",
+        "senderId": "I70X0MjTSpPpg8FaeXHNr6svlVO2",
+        "timestamp": 1729447803903
+      }
+    },
+    "D681H951hnQWS9kvUWQuP290q493_I70X0MjTSpPpg8FaeXHNr6svlVO2": {
+      "-O9f1-Y3o-61lTesqvIs": {
+        "content": "test",
+        "receiverId": "D681H951hnQWS9kvUWQuP290q493",
+        "senderId": "I70X0MjTSpPpg8FaeXHNr6svlVO2",
+        "timestamp": 1729446282757
+      },
+      "-O9f21GFv1wNoP5WPCRX": {
+        "content": "test 2",
+        "receiverId": "D681H951hnQWS9kvUWQuP290q493",
+        "timestamp": 1729446551946
+      },
+      "-O9f3Zzbu7s_DDwBAZ_u": {
+        "content": "???",
+        "receiverId": "D681H951hnQWS9kvUWQuP290q493",
+        "timestamp": 1729446956319
+      },
+      "-O9f3xTvFDQQ-UxENk6a": {
+        "content": "lah",
+        "receiverId": "D681H951hnQWS9kvUWQuP290q493",
+        "timestamp": 1729447056628
+      },
+      "-O9f4d-Y4MS9Ioe62jsh": {
+        "content": "kfng",
+        "receiverId": "D681H951hnQWS9kvUWQuP290q493",
+        "timestamp": 1729447234889
+      },
+      "-O9f6Vpb3FuBZDJuSzpU": {
+        "content": "test",
+        "receiverId": "D681H951hnQWS9kvUWQuP290q493",
+        "senderId": "I70X0MjTSpPpg8FaeXHNr6svlVO2",
+        "timestamp": 1729447725711
+      }
+    },
+    "D681H951hnQWS9kvUWQuP290q493_NyFNgfVfL3PXLTWXUETTn1h1Xak1": {
+      "-OAT5zyZjGQb9Wh-l_UT": {
+        "content": "xin chào ",
+        "receiverId": "D681H951hnQWS9kvUWQuP290q493",
+        "senderId": "NyFNgfVfL3PXLTWXUETTn1h1Xak1",
+        "timestamp": 1730303232498
+      }
+    },
+    "I70X0MjTSpPpg8FaeXHNr6svlVO2": {
+      "-O9JOvk8UEMkjzOs8Dbg": {
+        "content": "Hello",
+        "senderId": "VIQKx5ZUNwXyowaqAjbSCoGFLme2",
+        "timestamp": "2024-10-16T08:17:59.834Z"
+      },
+      "-OADKjGECWC0BP06cYeu": {
+        "content": "asdas",
+        "senderId": "B4cXcrqxPUVQMNZcjJn3FgxoeDE3",
+        "timestamp": "2024-10-27T14:17:23.704Z"
+      }
+    },
+    "I70X0MjTSpPpg8FaeXHNr6svlVO2_VrPVmts3zROvtr586evwql7KwCo2": {
+      "-O9f7j-WIpdi8a8Ti_qX": {
+        "content": "test",
+        "receiverId": "VrPVmts3zROvtr586evwql7KwCo2",
+        "senderId": "I70X0MjTSpPpg8FaeXHNr6svlVO2",
+        "timestamp": 1729448045911
+      }
+    },
+    "VrPVmts3zROvtr586evwql7KwCo2": {
+      "-O95f_TDsmVbxjtKvLXp": {
+        "content": "Chào",
+        "senderId": "D681H951hnQWS9kvUWQuP290q493",
+        "timestamp": "2024-10-13T16:20:23.193Z"
+      }
+    }
+  },
+  "roles": [
+    null,
+    {
+      "name": "admin"
+    },
+    {
+      "name": "employee"
+    },
+    {
+      "name": "customer"
+    }
+  ],
+  "services": {
+    "-O8PBUMSc3lQtN_avvWu": {
+      "serviceCost": 200000,
+      "serviceId": 1,
+      "serviceType": "Dọn dẹp nhỏ - Dưới 50m²"
+    },
+    "-O8PBUMXjFoGo4QHTdT2": {
+      "serviceCost": 300000,
+      "serviceId": 2,
+      "serviceType": "Dọn dẹp nhỏ - 50m² đến 100m²"
+    },
+    "-O8PBUMYnCH4emuDMQdf": {
+      "serviceCost": 400000,
+      "serviceId": 3,
+      "serviceType": "Dọn dẹp nhỏ - Trên 100m²"
+    },
+    "-O8PBUMZanZJZEcJs5iq": {
+      "serviceCost": 375000,
+      "serviceId": 4,
+      "serviceType": "Dọn dẹp lớn - Dưới 100m²"
+    },
+    "-O8PBUMZanZJZEcJs5ir": {
+      "serviceCost": 450000,
+      "serviceId": 5,
+      "serviceType": "Dọn dẹp lớn - 100m² đến 200m²"
+    },
+    "-O8PBUM_SYWKAqLVXyzD": {
+      "serviceCost": 500000,
+      "serviceId": 6,
+      "serviceType": "Dọn dẹp lớn - Trên 200m²"
+    }
+  },
+  "users": {
+    "B4cXcrqxPUVQMNZcjJn3FgxoeDE3": {
+      "email": "dlntranga1@gmail.com",
+      "name": "Ngoc Trang",
+      "phoneNumber": "0899905437",
+      "role": "employee",
+      "userId": "B4cXcrqxPUVQMNZcjJn3FgxoeDE3"
+    },
+    "D681H951hnQWS9kvUWQuP290q493": {
+      "email": "sieu3213@gmail.com",
+      "image": "https://firebasestorage.googleapis.com/v0/b/flexcleanhouse.appspot.com/o/images%2FD681H951hnQWS9kvUWQuP290q493%2Fprofile.jpg?alt=media&token=d2af40af-b19e-4f20-851a-04e00ac241b3",
+      "lock": true,
+      "name": "Nguyễn Thanh Siêu",
+      "password": "sieu123",
+      "phoneNumber": "0968832714",
+      "role": "admin",
+      "salary": 2000,
+      "userId": "D681H951hnQWS9kvUWQuP290q493"
+    },
+    "HSp5XaCivBfer2qucySViLmc5Yr1": {
+      "addresses": {
+        "-O93DTbroTIrdGr2gteg": "hutech"
+      },
+      "email": "ducteo@gmail.com",
+      "image": "https://firebasestorage.googleapis.com/v0/b/flexcleanhouse.appspot.com/o/images%2FD681H951hnQWS9kvUWQuP290q493%2Fprofile.jpg?alt=media&token=d2af40af-b19e-4f20-851a-04e00ac241b3",
+      "lock": false,
+      "name": "ducteo",
+      "phoneNumber": "0886542959",
+      "role": "customer",
+      "userId": "HSp5XaCivBfer2qucySViLmc5Yr1"
+    },
+    "I70X0MjTSpPpg8FaeXHNr6svlVO2": {
+      "email": "testuser@gmail.com",
+      "image": "https://firebasestorage.googleapis.com/v0/b/flexcleanhouse.appspot.com/o/images%2FI70X0MjTSpPpg8FaeXHNr6svlVO2%2Fprofile.jpg?alt=media&token=9c810cc0-f1df-4487-ab9c-37cd5c3ac7a4",
+      "name": "Testuser",
+      "phoneNumber": "0886542959",
+      "role": "customer",
+      "userId": "I70X0MjTSpPpg8FaeXHNr6svlVO2"
+    },
+    "Kh9BNX78RMcIMAovt8VpiNSXHY33": {
+      "email": "janedoe@example.com",
+      "name": "Jane Doe",
+      "phoneNumber": "0987654321",
+      "role": "customer",
+      "userId": "Kh9BNX78RMcIMAovt8VpiNSXHY33"
+    },
+    "NyFNgfVfL3PXLTWXUETTn1h1Xak1": {
+      "addresses": {
+        "-OAT63DRM0Wn4C68Tll4": "ân tín hoài ân"
+      },
+      "email": "sieusml03@gmail.com",
+      "name": "Nguyễn Thanh Siêu",
+      "phoneNumber": "0968832714",
+      "role": "customer",
+      "userId": "NyFNgfVfL3PXLTWXUETTn1h1Xak1"
+    },
+    "VrPVmts3zROvtr586evwql7KwCo2": {
+      "email": "dlntrang@gmail.com",
+      "image": "https://firebasestorage.googleapis.com/v0/b/flexcleanhouse.appspot.com/o/images%2FVrPVmts3zROvtr586evwql7KwCo2%2Fprofile.jpg?alt=media&token=44296411-2b2c-4d67-96ac-8f93ced4f714",
+      "name": "Ngoc Trang",
+      "password": "trang123",
+      "phoneNumber": "0899905437",
+      "role": "employee",
+      "salary": "2000",
+      "userId": "VrPVmts3zROvtr586evwql7KwCo2"
+    },
+    "aAKmxyjF5tRTxRD0tD8MwJ5ev302": {
+      "email": "tealwinzz@gmail.com",
+      "name": "n",
+      "phoneNumber": "947294729573",
+      "role": "customer",
+      "userId": "aAKmxyjF5tRTxRD0tD8MwJ5ev302"
+    },
+    "qF6RXU7oZgUz7rnzcf0Jq77Swos2": {
+      "email": "tealwinez@gmail.com",
+      "name": "tealwine",
+      "phoneNumber": "0355428058",
+      "role": "customer",
+      "userId": "qF6RXU7oZgUz7rnzcf0Jq77Swos2"
+    },
+    "qcwPix1vhkTncGZfDb0jIrNfUJb2": {
+      "email": "johndoetest2@example.com",
+      "name": "John Doe",
+      "phoneNumber": "0123456789",
+      "role": "customer",
+      "userId": "qcwPix1vhkTncGZfDb0jIrNfUJb2"
+    },
+    "v9GEfSqVIQQ5BPjmXPXQ0iKo5c52": {
+      "email": "johndoe@example.com",
+      "name": "John Doe",
+      "phoneNumber": "0123456789",
+      "role": "customer",
+      "userId": "v9GEfSqVIQQ5BPjmXPXQ0iKo5c52"
+    },
+    "vPQO1XWVIzN35ZP9heLr2RaeCLF3": {
+      "email": "johndoetest@example.com",
+      "name": "John Doe",
+      "phoneNumber": "0123456789",
+      "role": "customer",
+      "userId": "vPQO1XWVIzN35ZP9heLr2RaeCLF3"
+    }
+  }
+}
